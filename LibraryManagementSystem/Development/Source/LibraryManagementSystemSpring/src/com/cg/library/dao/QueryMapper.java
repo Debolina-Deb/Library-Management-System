@@ -7,4 +7,6 @@ public class QueryMapper {
 	static final String issueBook = "SELECT t FROM BookRegistration t WHERE t.registrationId=";
 	static final String updateIssueBook = "SELECT t FROM BookInventory t WHERE t.bookId=";
 	static final String returnBook = "SELECT t FROM BookTransaction t WHERE t.registrationId=";
+	static final String reqByStatus= "SELECT t FROM BookRegistration t WHERE t.status=:pstatus";
+	
 }

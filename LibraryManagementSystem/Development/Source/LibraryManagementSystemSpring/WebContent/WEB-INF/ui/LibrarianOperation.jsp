@@ -23,8 +23,8 @@
 	<div id="form">
 		<a href="display.htm?userName=${userName} ">Display All Books</a> <br>
 		<a href="addUpdate.htm">Add/Update Book</a> <br>
-		<a href="">View Pending Issue Requests</a> <br>
-		<a href="">Return Book</a>
+		<a href="pendingRequest.htm">View Pending Issue Requests</a> <br>
+		<a href="issuedRequest.htm">Return Book</a>
 		<h4>${message }</h4>
 		<h4 align="right">
 			<a href="">Logout</a>

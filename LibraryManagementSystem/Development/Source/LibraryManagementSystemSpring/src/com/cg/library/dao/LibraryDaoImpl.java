@@ -322,6 +322,25 @@ public class LibraryDaoImpl implements ILibraryDao {
 		entityManager.persist(user);
 		return user;
 	}
-	
+	/**
+	 * Method to get request by status
+	 * @throws LibraryException 
+	 */
+	@Override
+	public List<BookRegistration> getRequestByStatus(String status) throws LibraryException {
+		try{
+		TypedQuery<BookRegistration> query1 = entityManager.createQuery(
+				QueryMapper.reqByStatus, BookRegistration.class);
+		query1.setParameter("pstatus", status);
+		List<BookRegistration> requestList = query1.getResultList();
+		return requestList;
+		}
+		catch(NoResultException e)
+		{
+		logger.error(e.getMessage());
+		throw new LibraryException("No registration "+status);
+			
+		}
+	}
 	
 }
