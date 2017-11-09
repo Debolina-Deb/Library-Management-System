@@ -7,54 +7,89 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<style>
+#form {
+	border-radius: 25px;
+	border: 2px solid #73AD21;
+	padding: 20px;
+	margin-right: 270px;
+	margin-left: 250px;
+}
+
+th, td {
+	padding: 8px;
+	border-bottom: 1px solid #ddd;
+}
+</style>
 </head>
 <body>
-	<h1>Welcome to Library Management System(Add Book)</h1>
+	<h1 align="center">Welcome to Library Management System - Add Book</h1>
 	<hr>
 	<h4 align="right">
 		<%-- ${username } --%>
 		Librarian Name
 	</h4>
-	<form action="checkBook.htm">
-		Enter book Id:<input type="text" name="bookId" /> <input
-			type="submit" value="Add/update" />
-	</form>
-	<c:if test="${book ne null}">
-		<form:form action="onAdd.htm" modelAttribute="book" method="post">
-			<form:label path="bookId">Book Id:</form:label>
-			<form:input path="bookId" value="${book.bookId}" required="true" />
-			<br />
-			<form:label path="bookName">Book Name:</form:label>
-			<form:input path="bookName" value="${book.bookName}" required="true" />
-			<br />
-			<form:label path="author">Author 2:</form:label>
-			<form:input path="author" value="${book.author}" required="true" />
-			<br />
 
-			<form:label path="publisher">Publisher:</form:label>
-			<form:input path="publisher" value="${book.publisher}"
-				required="true" />
-			<br />
-
-			<form:label path="yearOfPublication">Year of Publication:</form:label>
-			<form:input path="yearOfPublication"
-				value="${book.yearOfPublication}" required="true" />
-			<br />
-
-			<form:label path="noOfBooks">No. Of Books:</form:label>
-			<form:input path="noOfBooks" value="${book.noOfBooks}"
-				required="true" />
-			<br />
-			<button type="submit">Add Book</button>
-
-		</form:form>
-
+	<c:if test="${bookId eq null }">
+		<div id="form">
+			<form action="checkBook.htm" method="post">
+				Enter book Id:<input type="text" name="bookId" /> <input
+					type="submit" value="Add/update" />
+			</form>
+		</div>
 	</c:if>
+
+
+	<c:if test="${book ne null}">
+		<div id="form">
+			<form:form action="onAdd.htm" modelAttribute="book" method="post">
+				<table align="center">
+					<form:hidden path="" />
+					<tr>
+						<td><form:label path="bookId">Book Id:</form:label>
+						<td><form:input path="bookId" value="${bookId}"
+								required="true" />
+					</tr>
+					<tr>
+						<td><form:label path="bookName">Book Name:</form:label>
+						<td><form:input path="bookName" value="${book.bookName}"
+								required="true" />
+					</tr>
+					<tr>
+						<td><form:label path="author">Author 2:</form:label>
+						<td><form:input path="author" value="${book.author}"
+								required="true" />
+					</tr>
+					<tr>
+						<td><form:label path="publisher">Publisher:</form:label>
+						<td><form:input path="publisher" value="${book.publisher}"
+								required="true" />
+					</tr>
+					<tr>
+						<td><form:label path="yearOfPublication">Year of Publication:</form:label>
+						<td><form:input path="yearOfPublication"
+								value="${book.yearOfPublication}" required="true" />
+					</tr>
+					<tr>
+						<td><form:label path="noOfBooks">No. Of Books:</form:label>
+						<td><form:input path="noOfBooks" value="${book.noOfBooks}"
+								required="true" />
+					</tr>
+					<tr>
+						<td colspan="2"><button type="submit">Add Book</button></td>
+					</tr>
+				</table>
+			</form:form>
+		</div>
+	</c:if>
+
+
 	<h4>
 		<a href="">Home</a>
 	</h4>
 	<h4 align="right">
 		<a href="">Logout</a>
 	</h4>
+
 </body>
 </html>

@@ -6,9 +6,7 @@ import java.time.Period;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -36,8 +34,9 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	private static Logger logger = Logger
 			.getLogger(com.cg.library.dao.LibraryDaoImpl.class);
+
 	static public Users user = new Users();
-	// This annotation is used to inject auto created entityManagerFactory
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -81,14 +80,10 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	@Override
 	public int getCountOfBooks(String bookId) throws LibraryException {
-		try {
 			TypedQuery<BookInventory> query1 = entityManager.createQuery(
 					QueryMapper.getCountOfBooks + bookId, BookInventory.class);
 			BookInventory booksInventory = query1.getSingleResult();
 			return booksInventory.getNoOfBooks();
-		} catch (Exception e) {
-			throw new LibraryException("Book doesn't exists");
-		}
 	}
 
 	/**
@@ -98,29 +93,16 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 * @param password
 	 */
 	@Override
-	public int validateUser(String userName, String password)
+	public Users validateUser(String userName, String password)
 			throws LibraryException {
-
-		try {
-			// String qStr =
-			// "SELECT u FROM Users u WHERE u.userName='"+userName+"' AND u.password='"+password+"'";
-			TypedQuery<Users> query = entityManager.createQuery(
-					QueryMapper.validateUser, Users.class);
-			query.setParameter("puserName", userName);
-			query.setParameter("ppassword", password);
-			Users user1 = query.getSingleResult();
-			user = user1;
-			logger.info("Valid User with user ID : " + user1.getUserId());
-			if (user1.isLibrarian().equals("true")) {
-				return 1;
-			} else {
-				return 0;
-			}
-		} catch (NoResultException e) {
-			logger.error(e.getMessage());
-			throw new LibraryException("User does not exists");
-		}
-
+		TypedQuery<Users> query = entityManager.createQuery(
+				QueryMapper.validateUser, Users.class);
+		query.setParameter("puserName", userName);
+		query.setParameter("ppassword", password);
+		Users user1 = query.getSingleResult();
+		user = user1;
+		logger.info("Valid User with user ID : " + user1.getUserId());
+		return user1;
 	}
 
 	/**
@@ -130,20 +112,14 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	@Override
 	public BookInventory insertBook(BookInventory book) throws LibraryException {
-		try {
-
-			BookInventory book1 = this.getBookById(book.getBookId());
-			if (book1 == null) {
-				entityManager.persist(book);
-				logger.info("Book Inserted with Book ID : " + book.getBookId());
-			} else {
-				this.updateBookQuan(book.getBookId(), book.getNoOfBooks());
-			}
-			return book;
-		} catch (PersistenceException pe) {
-			logger.error(pe.getMessage());
-			throw new LibraryException(pe.getMessage());
+		BookInventory book1 = this.getBookById(book.getBookId());
+		if (book1 == null) {
+			entityManager.persist(book);
+			logger.info("Book Inserted with Book ID : " + book.getBookId());
+		} else {
+			this.updateBookQuan(book.getBookId(), book.getNoOfBooks());
 		}
+		return book;
 	}
 
 	public Users getUserDetails() {
@@ -157,15 +133,10 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	@Override
 	public BookRegistration validRegId(int inpRegId) throws LibraryException {
-		try {
-			BookRegistration reg = entityManager.find(BookRegistration.class,
-					inpRegId);
-			logger.info("Valid Registration ID");
-			return reg;
-		} catch (NoResultException ne) {
-			logger.error(ne.getMessage());
-			throw new LibraryException("Invlid Registration Id");
-		}
+		BookRegistration reg = entityManager.find(BookRegistration.class,
+				inpRegId);
+		logger.info("Valid Registration ID");
+		return reg;
 	}
 
 	/**
@@ -176,15 +147,10 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public BookInventory deleteBookById(String bookId) throws LibraryException {
 		BookInventory book = null;
-		try {
-			book = entityManager.find(BookInventory.class, bookId);
-			entityManager.remove(book);
-			logger.info("Book with Id: " + bookId + " deleted successfully");
-			return book;
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			throw new LibraryException(e.getMessage());
-		}
+		book = entityManager.find(BookInventory.class, bookId);
+		entityManager.remove(book);
+		logger.info("Book with Id: " + bookId + " deleted successfully");
+		return book;
 	}
 
 	/**
@@ -196,18 +162,11 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public BookInventory updateBookQuan(String bookId, int updateBy)
 			throws LibraryException {
-		try {
-			BookInventory inv = this.getBookById(bookId);
-			inv.setNoOfBooks(inv.getNoOfBooks() + updateBy);
-			entityManager.getTransaction().begin();
-			entityManager.merge(inv);
-			entityManager.getTransaction().commit();
-			logger.info("Book with Id: " + bookId + " updated successfully");
-			return inv;
-		} catch (PersistenceException pe) {
-			logger.error(pe.getMessage());
-			throw new LibraryException(pe.getMessage());
-		}
+		BookInventory inv = this.getBookById(bookId);
+		inv.setNoOfBooks(inv.getNoOfBooks() + updateBy);
+		entityManager.merge(inv);
+		logger.info("Book with Id: " + bookId + " updated successfully");
+		return inv;
 	}
 
 	/**
@@ -217,41 +176,30 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	@Override
 	public void issueBook(int registrationId) throws LibraryException {
-		try {
-			// String qStr =
-			// "SELECT t FROM BookRegistration t WHERE t.registrationId="+registrationId;
-			TypedQuery<BookRegistration> query = entityManager.createQuery(
-					QueryMapper.issueBook + registrationId,
-					BookRegistration.class);
-			BookRegistration registration = query.getSingleResult();
-			BookTransaction bookTransaction = new BookTransaction();
-			bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
-			bookTransaction.setRegistrationId(registrationId);
-			// bookTransaction.setReturnDate(null);
+		// String qStr =
+		// "SELECT t FROM BookRegistration t WHERE t.registrationId="+registrationId;
+		TypedQuery<BookRegistration> query = entityManager.createQuery(
+				QueryMapper.issueBook + registrationId,
+				BookRegistration.class);
+		BookRegistration registration = query.getSingleResult();
+		BookTransaction bookTransaction = new BookTransaction();
+		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
+		bookTransaction.setRegistrationId(registrationId);
+		// bookTransaction.setReturnDate(null);
 
-			entityManager.getTransaction().begin();
-			entityManager.persist(bookTransaction);
-			entityManager.getTransaction().commit();
-			// qStr =
-			// "SELECT t FROM BookInventory t WHERE t.bookId="+registration.getBookId();
-			TypedQuery<BookInventory> query1 = entityManager.createQuery(
-					QueryMapper.updateIssueBook + registration.getBookId(),
-					BookInventory.class);
-			BookInventory booksInventory = query1.getSingleResult();
-			booksInventory.setNoOfBooks(booksInventory.getNoOfBooks() - 1);
-			entityManager.getTransaction().begin();
-			entityManager.merge(booksInventory);
-			entityManager.getTransaction().commit();
+		entityManager.persist(bookTransaction);
 
-			logger.info("Book issued with registration ID: " + registrationId);
+		// qStr =
+		// "SELECT t FROM BookInventory t WHERE t.bookId="+registration.getBookId();
+		TypedQuery<BookInventory> query1 = entityManager.createQuery(
+				QueryMapper.updateIssueBook + registration.getBookId(),
+				BookInventory.class);
+		BookInventory booksInventory = query1.getSingleResult();
+		booksInventory.setNoOfBooks(booksInventory.getNoOfBooks() - 1);
 
-		} catch (NoResultException e) {
-			logger.error(e.getMessage());
-			throw new LibraryException("No such registration Id available");
-		} catch (PersistenceException pe) {
-			logger.error(pe.getMessage());
-			throw new LibraryException(pe.getMessage());
-		}
+		entityManager.merge(booksInventory);
+
+		logger.info("Book issued with registration ID: " + registrationId);
 	}
 
 	/**
@@ -262,35 +210,23 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public int returnBook(int inpRegId) throws LibraryException {
 		int fine = -1;
-
-		try {
-			BookTransaction tran;
-			// String qStr =
-			// "SELECT t FROM BookTransaction t WHERE t.registrationId="+inpRegId;
-			TypedQuery<BookTransaction> query = entityManager.createQuery(
-					QueryMapper.returnBook + inpRegId, BookTransaction.class);
-			tran = query.getSingleResult();
-			fine = 0;
-			BookRegistration reg = this.validRegId(inpRegId);
-			LocalDate issue = tran.getIssueDate().toLocalDate();
-			LocalDate today = LocalDate.now();
-			LocalDate expReturn = issue.plusDays(15);
-			int chk = Period.between(expReturn, today).getDays();
-			if (chk > 0)
-				fine = chk * 10; // fine is 10rs per day*************
-
-			tran.setReturnDate(java.sql.Date.valueOf(today));
-			tran.setFine(fine);
-			entityManager.getTransaction().begin();
-			entityManager.merge(tran);
-			entityManager.getTransaction().commit();
-
-			this.updateBookQuan(reg.getBookId(), 1);
-			logger.info("Book returned with registration ID: " + inpRegId);
-		} catch (NoResultException e) {
-			logger.error(e.getMessage());
-			throw new LibraryException("No such registration Id available");
-		}
+		BookTransaction tran;
+		TypedQuery<BookTransaction> query = entityManager.createQuery(
+				QueryMapper.returnBook + inpRegId, BookTransaction.class);
+		tran = query.getSingleResult();
+		fine = 0;
+		BookRegistration reg = this.validRegId(inpRegId);
+		LocalDate issue = tran.getIssueDate().toLocalDate();
+		LocalDate today = LocalDate.now();
+		LocalDate expReturn = issue.plusDays(15);
+		int chk = Period.between(expReturn, today).getDays();
+		if (chk > 0)
+			fine = chk * 10; // fine is 10rs per day
+		tran.setReturnDate(java.sql.Date.valueOf(today));
+		tran.setFine(fine);
+		entityManager.merge(tran);
+		this.updateBookQuan(reg.getBookId(), 1);
+		logger.info("Book returned with registration ID: " + inpRegId);
 		return fine;
 	}
 
@@ -302,14 +238,9 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public BookRegistration requestBook(BookRegistration bookRequest)
 			throws LibraryException {
-		try {
 			entityManager.persist(bookRequest);
 			logger.info("Book requested for user ID" + bookRequest.getUserId());
 			return bookRequest;
-		} catch (PersistenceException pe) {
-			logger.error(pe.getMessage());
-			throw new LibraryException(pe.getMessage());
-		}
 	}
 
 	/**
@@ -322,6 +253,5 @@ public class LibraryDaoImpl implements ILibraryDao {
 		entityManager.persist(user);
 		return user;
 	}
-	
-	
+
 }

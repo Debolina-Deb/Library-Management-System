@@ -75,14 +75,16 @@ public class LibraryController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/checkBook")
+	@RequestMapping(value = "/checkBook", method=RequestMethod.POST)
 	public String addUpdate(@RequestParam("bookId") String bookId, Model model) {
 		try {
 			BookInventory book = service.getBookById(bookId);
 			if (book == null) {
+				model.addAttribute("bookId", bookId);
 				model.addAttribute("book", new BookInventory());
 				return "AddBook";
 			} else {
+				model.addAttribute("bookId", bookId);
 				model.addAttribute("book", book);
 				return "AddBook";
 			}
@@ -100,7 +102,6 @@ public class LibraryController {
 	 */
 	@RequestMapping(value = "addUpdate.htm")
 	public String addUpdateBook() {
-		// model.addAttribute("book",new BookInventory());
 		return "AddBook";
 	}
 

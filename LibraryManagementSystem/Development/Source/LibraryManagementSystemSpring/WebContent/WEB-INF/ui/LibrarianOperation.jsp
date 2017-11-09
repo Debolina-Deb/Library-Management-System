@@ -21,11 +21,11 @@
 	<hr>
 	<h4 align="right">Welcome ${userName }</h4>
 	<div id="form">
-		<a href="display.htm?userName=${userName} ">Display All Books</a> <br>
-		<a href="addUpdate.htm">Add/Update Book</a> <br>
-		<a href="">View Pending Issue Requests</a> <br>
-		<a href="">Return Book</a>
-		<h4>${message }</h4>
+		<h3><a href="display.htm?userName=${userName} ">Display All Books</a></h3>
+		<h3><a href="addUpdate.htm">Add/Update Book</a></h3>
+		<h3><a href="">View Pending Issue Requests</a></h3>
+		<h3><a href="">Return Book</a>	</h3>
+		<h3>${message }</h4>
 		<h4 align="right">
 			<a href="">Logout</a>
 		</h4>

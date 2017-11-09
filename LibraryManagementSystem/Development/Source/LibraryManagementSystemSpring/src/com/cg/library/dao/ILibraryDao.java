@@ -19,7 +19,7 @@ public interface ILibraryDao {
 	
 	public abstract List<BookInventory> getAllBooks() throws LibraryException;
 	
-	public abstract int validateUser(String userName, String password) throws LibraryException;
+	public abstract Users validateUser(String userName, String password) throws LibraryException;
 	
 	public abstract BookRegistration requestBook(BookRegistration bookRequest) throws LibraryException;
 
