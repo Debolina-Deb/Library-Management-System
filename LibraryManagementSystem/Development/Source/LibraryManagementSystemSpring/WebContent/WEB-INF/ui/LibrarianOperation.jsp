@@ -5,17 +5,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>LibrarianHome</title>
+<style>
+#form {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    position:absolute;
+    margin-right : 270px;
+    margin-left : 250px;
+}
+</style>
 </head>
 <body>
-	<h1>Welcome to Library Management System</h1>
-	<br>
+	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
-	<h3 align="right"> ${userName } </h3>
-	<br><a href="display.htm?userName=${userName} ">Display All Books</a> 
-	<br><a href="addUpdate.htm">Add/Update Book</a> 
-	<br><a href="">View Pending Issue Requests</a> 
-	<br><a href="">Return Book</a> 
-	<h4>${message }</h4>
-	<br><h4 align="right"><a href="">Logout</a></h4>
+	<h4 align="right">Welcome ${userName }</h4>
+	<div id="form">
+		<a href="display.htm?userName=${userName} ">Display All Books</a> <br>
+		<a href="addUpdate.htm">Add/Update Book</a> <br>
+		<a href="">View Pending Issue Requests</a> <br>
+		<a href="">Return Book</a>
+		<h4>${message }</h4>
+		<h4 align="right">
+			<a href="">Logout</a>
+		</h4>
+	</div>
 </body>
 </html>

@@ -10,21 +10,20 @@
 </head>
 <body>
 	<h1>Welcome to Library Management System(Add Book)</h1>
-	<br>
 	<hr>
-	<h3 align="right">
+	<h4 align="right">
 		<%-- ${username } --%>
 		Librarian Name
-	</h3>
+	</h4>
 	<form action="checkBook.htm">
-		Enter book Id:<input type="text" name="bookId" /> <input type="submit"
-			value="Add/update" />
+		Enter book Id:<input type="text" name="bookId" /> <input
+			type="submit" value="Add/update" />
 	</form>
 	<c:if test="${book ne null}">
 		<form:form action="onAdd.htm" modelAttribute="book" method="post">
 			<form:label path="bookId">Book Id:</form:label>
-			<form:input path="bookId" value="${book.bookId}" required="true"/>
-			<br/>
+			<form:input path="bookId" value="${book.bookId}" required="true" />
+			<br />
 			<form:label path="bookName">Book Name:</form:label>
 			<form:input path="bookName" value="${book.bookName}" required="true" />
 			<br />

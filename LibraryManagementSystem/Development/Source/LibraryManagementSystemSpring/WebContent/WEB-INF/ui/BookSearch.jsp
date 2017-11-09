@@ -8,48 +8,56 @@
 <title>Insert title here</title>
 <style>
 #form {
-    border-radius: 25px;
-    border: 2px solid #73AD21;
-    padding: 20px; 
-    horizontal-align:center; 
+	border-radius: 25px;
+	border: 2px solid #73AD21;
+	padding: 20px;
+	horizontal-align: center;
 }
 
 th, td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
+	padding: 8px;
+	border-bottom: 1px solid #ddd;
+	text-align: center;
 }
 </style>
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
-	<div id="form">
-	<c:if test="${bookList ne null }">
-		<table>
-			<tr>
-				<th>Book ID</th>
-				<th>Book Name</th>
-				<th>Book Author</th>
-				<th>Publisher</th>
-				<th>YOP</th>
-				<th>No of Books</th>
-				<th>
-			</tr>
-			
-				<c:forEach items="${bookList }" var="book">
+	<div id="form" align="center">
+		<h2 align="center">Book List</h2>
+		<c:if test="${bookList ne null }">
+			<table align="center">
 				<tr>
-					<td>${book.bookId }
-					<td>${book.bookName }
-					<td>${book.author }
-					<td>${book.publisher }
-					<td>${book.yearOfPublication }
-					<td>${book.noOfBooks }
-					<td><a href="requestBook.htm?bookId=${book.bookId}">Request Book</a>
+					<th>Book ID</th>
+					<th>Book Name</th>
+					<th>Book Author</th>
+					<th>Publisher</th>
+					<th>YOP</th>
+					<th>No of Books</th>
+					<th>
 				</tr>
+
+				<c:forEach items="${bookList }" var="book">
+					<tr>
+						<td>${book.bookId }
+						<td>${book.bookName }
+						<td>${book.author }
+						<td>${book.publisher }
+						<td>${book.yearOfPublication }
+						<td>${book.noOfBooks }
+						<td><a href="requestBook.htm?bookId=${book.bookId}">Request
+								Book</a>
+					</tr>
 				</c:forEach>
-		</table>
-	</c:if>
+			</table>
+		</c:if>
 	</div>
+	<h4>
+		<a href="">Home</a>
+	</h4>
+	<h4 align="right">
+		<a href="">Logout</a>
+	</h4>
 </body>
 </html>

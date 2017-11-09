@@ -10,5 +10,12 @@
 	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
 	<h3>${message}</h3>
+	
+		<h4>
+		<a href="">Home</a>
+	</h4>
+	<h4 align="right">
+		<a href="">Logout</a>
+	</h4>
 </body>
 </html>

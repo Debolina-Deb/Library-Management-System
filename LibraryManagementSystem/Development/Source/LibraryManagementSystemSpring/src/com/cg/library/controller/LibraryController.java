@@ -26,6 +26,13 @@ public class LibraryController {
 	@Autowired
 	ILibraryService service;
 
+	/**
+	 * Method used to display book
+	 * 
+	 * @param model
+	 * @param userName
+	 * @return
+	 */
 	@RequestMapping(value = "/display")
 	public String displayBook(Model model,
 			@RequestParam("userName") String userName) {
@@ -40,27 +47,34 @@ public class LibraryController {
 		return "DisplayBook";
 	}
 
-	@RequestMapping(value = "/redirect")
-	public String pageRedirect(@RequestParam("Page") String page,
-			@RequestParam("message") String message, Model model) {
-		model.addAttribute("message", message);
-		return page;
-	}
-
+	/**
+	 * Method used for deleting Book from Inventory
+	 * 
+	 * @param bookId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/delete.htm")
 	public String deleteBook(@RequestParam("bookId") String bookId, Model model) {
 		try {
 			BookInventory book = service.deleteBookById(bookId);
 			model.addAttribute("message",
 					"Book with book id:" + book.getBookId() + "deleted");
-			model.addAttribute("userName","parag");
+			model.addAttribute("userName", "parag");
 		} catch (LibraryException e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
 		return "LibrarianOperation";
 	}
-
+	
+	/**
+	 * Method used to check Whether Book existing
+	 * 
+	 * @param bookId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/checkBook")
 	public String addUpdate(@RequestParam("bookId") String bookId, Model model) {
 		try {
@@ -79,12 +93,24 @@ public class LibraryController {
 
 	}
 
+	/**
+	 * Method redirecting request to AddBook page
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "addUpdate.htm")
 	public String addUpdateBook() {
 		// model.addAttribute("book",new BookInventory());
 		return "AddBook";
 	}
 
+	/**
+	 * Method used to insert book in Book Inventory
+	 * 
+	 * @param book
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "onAdd")
 	public String onAdd(@ModelAttribute("book") BookInventory book, Model model) {
 		try {
@@ -173,23 +199,33 @@ public class LibraryController {
 		}
 
 	}
-	
+
+	/**
+	 * Method used for requesting book by student
+	 * 
+	 * @param model
+	 * @param bookId
+	 * @return
+	 */
 	@RequestMapping("/requestBook.htm")
-	public String requestBook(Model model,@RequestParam("bookId") String bookId){
-		
+	public String requestBook(Model model, @RequestParam("bookId") String bookId) {
+
 		try {
 			BookRegistration bookRequest = new BookRegistration();
 			bookRequest.setBookId(bookId);
 			bookRequest.setUserId(service.getUserDetails().getUserId());
 			bookRequest.setRegistrationDate(Date.valueOf(LocalDate.now()));
 			bookRequest = service.requestBook(bookRequest);
-			model.addAttribute("message","Book is requested with Registration id - "+bookRequest.getRegistrationId());
+			model.addAttribute(
+					"message",
+					"Book is requested with Registration id - "
+							+ bookRequest.getRegistrationId());
 			return "Success";
 		} catch (LibraryException e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
-		
+
 	}
 
 }
