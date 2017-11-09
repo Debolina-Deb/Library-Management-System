@@ -26,7 +26,7 @@
 					<td>${req.userId}</td>
 					<td>${req.registrationDate}</td>
 					<td>${req.status}</td>
-					<td><a href="">Issue</a></td>
+					<td><a href="issue.htm?regId=${req.registrationId}">Issue</a></td>
 				</tr>
 			</c:forEach>
 		</table>

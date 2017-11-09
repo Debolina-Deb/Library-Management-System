@@ -87,4 +87,9 @@ public class LibraryServiceImpl implements ILibraryService {
 
 		return dao.addUser(user);
 	}
+	@Override
+	public List<BookRegistration> getRequestByStatus(String status)
+			throws LibraryException {
+		return dao.getRequestByStatus(status);
+	}
 }

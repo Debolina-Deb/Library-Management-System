@@ -25,7 +25,7 @@
 		<h3><a href="addUpdate.htm">Add/Update Book</a></h3>
 		<h3><a href="">View Pending Issue Requests</a></h3>
 		<h3><a href="">Return Book</a>	</h3>
-		<h3>${message }</h4>
+		<h3>${message }</h3>
 		<h4 align="right">
 			<a href="">Logout</a>
 		</h4>

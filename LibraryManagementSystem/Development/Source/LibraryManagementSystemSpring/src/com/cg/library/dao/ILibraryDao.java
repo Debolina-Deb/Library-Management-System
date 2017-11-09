@@ -37,4 +37,7 @@ public interface ILibraryDao {
 
 	public abstract Users addUser(Users user) throws LibraryException;
 
+	public abstract List<BookRegistration> getRequestByStatus(String status)
+			throws LibraryException;
+
 }

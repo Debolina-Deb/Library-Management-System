@@ -228,5 +228,88 @@ public class LibraryController {
 		}
 
 	}
+	/**
+	 * Method used for viewing issue request of student by librarian
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/pendingRequest.htm")
+	public String pendingBook(Model model) {
+
+		try {
+			model.addAttribute("reqPList",
+					service.getRequestByStatus("pending"));
+			return "Issue";
+		} catch (LibraryException e) {
+			model.addAttribute("message", e.getMessage());
+			return "Error";
+		}
+
+	}
+
+	/**
+	 * Method used for viewing issued books registration details librarian
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/issuedRequest.htm")
+	public String issuedBook(Model model) {
+
+		try {
+			model.addAttribute("reqIList", service.getRequestByStatus("issued"));
+			return "Return";
+		} catch (LibraryException e) {
+			model.addAttribute("message", e.getMessage());
+			return "Error";
+		}
+
+	}
+
+	/**
+	 * Method used for issuing books
+	 * 
+	 * @param model
+	 * @param regId
+	 * @return
+	 */
+	@RequestMapping("issue.htm")
+	public String issueBook(Model model, @RequestParam("regId") int regId) {
+		try {
+			service.issueBook(regId);
+			model.addAttribute("message", "Book issued with registration id="
+					+ regId);
+			return "Success";
+		} catch (LibraryException e) {
+			model.addAttribute("message", e.getMessage());
+			return "Error";
+		}
+
+	}
+
+	/**
+	 * Method used for returning books
+	 * 
+	 * @param model
+	 * @param regId
+	 * @return
+	 */
+	@RequestMapping("return.htm")
+	public String returnBook(Model model, @RequestParam("regId") int regId) {
+		try {
+
+			int fine = service.returnBook(regId);
+			if (fine != -1) {
+				model.addAttribute("message", "Fine is Rs: " + fine
+						+ "\nBook Returned!!");
+			}
+			return "Success";
+		} catch (LibraryException e) {
+			model.addAttribute("message", e.getMessage());
+			return "Error";
+		}
+
+	}
 
 }

@@ -29,7 +29,7 @@
 				</c:forEach>
 			</table>
 		</c:if>
-<h4><a href="">Home</a></h4>
+<h4><a href="return.htm?regId=${req.registrationId}">Home</a></h4>
 <h4 align="right"><a href="">Logout</a></h4>
 </body>
 </html>
