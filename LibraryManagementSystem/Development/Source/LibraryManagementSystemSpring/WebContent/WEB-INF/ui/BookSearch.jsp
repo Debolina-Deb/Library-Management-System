@@ -12,6 +12,8 @@
 	border: 2px solid #73AD21;
 	padding: 20px;
 	horizontal-align: center;
+	margin-right: 10%;
+	margin-left: 10%;
 }
 
 th, td {

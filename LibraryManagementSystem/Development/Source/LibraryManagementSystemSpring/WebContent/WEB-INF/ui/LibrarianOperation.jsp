@@ -11,8 +11,8 @@
     border: 2px solid #73AD21;
     padding: 20px; 
     position:absolute;
-    margin-right : 270px;
-    margin-left : 250px;
+	margin-right: 25%;
+	margin-left: 20%;
 }
 </style>
 </head>

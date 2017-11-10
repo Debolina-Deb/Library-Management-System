@@ -10,5 +10,9 @@
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
 </listAttribute>
+<<<<<<< HEAD
 <stringAttribute key="server-id" value="WildFly 8.x1510227256757"/>
+=======
+<stringAttribute key="server-id" value="WildFly 8.x1510295609100"/>
+>>>>>>> 68b88526ad1f4281560fce40f9218760cd79a1f9
 </launchConfiguration>
