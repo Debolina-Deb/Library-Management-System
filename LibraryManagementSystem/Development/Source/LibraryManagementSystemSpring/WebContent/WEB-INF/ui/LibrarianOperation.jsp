@@ -5,14 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>LibrarianHome</title>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
 <style>
 #form {
     border-radius: 25px;
     border: 2px solid #73AD21;
     padding: 20px; 
-    position:absolute;
 	margin-right: 25%;
 	margin-left: 20%;
+}
+
+*{
+font-family: 'Libre Baskerville', serif;
 }
 </style>
 </head>
@@ -20,7 +24,7 @@
 	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
 	<h4 align="right">Welcome ${userName }</h4>
-	<div id="form">
+	<div id="form" align="center">
 		<h3><a href="display.htm?userName=${userName} ">Display All Books</a></h3>
 		<h3><a href="addUpdate.htm">Add/Update Book</a></h3>
 		<h3><a href="pendingRequest.htm">View Pending Issue Requests</a></h3>

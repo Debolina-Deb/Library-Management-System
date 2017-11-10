@@ -1,0 +1,32 @@
+package com.cg.library.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.cg.library.service.ILibraryService;
+
+@Controller
+public class StudentController {
+
+	@Autowired
+	ILibraryService studentService;
+	
+	/**
+	 * Method for handling show all book request
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/showAll.htm")
+	public String showAllBooks(Model model) {
+		try {
+			model.addAttribute("bookList", studentService.getAllBooks());
+			return "BookSearch";
+		} catch (Exception e) {
+			model.addAttribute("message", e.getMessage());
+			return "Error";
+		}
+	}
+}

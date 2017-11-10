@@ -6,9 +6,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Display Book</title>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+<style>
+*{
+font-family: 'Libre Baskerville', serif;
+}
+#form {
+	border-radius: 25px;
+	border: 2px solid #73AD21;
+	padding: 20px;
+	horizontal-align: center;
+	margin-right: 10%;
+	margin-left: 10%;
+}
+th, td {
+	padding: 8px;
+	border-bottom: 1px solid #ddd;
+	text-align: center;
+}
+</style>
 </head>
 <body>
-	<h1>Welcome to Library Management System - Display Books</h1>
+	<h1 align="center">Welcome to Library Management System - Display Books</h1>
 	<hr>
 	<h4 align="right">Welcome ${userName } (Librarian)</h4>
 	<table align="center">

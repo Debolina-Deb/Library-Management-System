@@ -6,11 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
 <style>
-* {
-	font-family: 'Spectral SC', serif;
+*{
+font-family: 'Libre Baskerville', serif;
 }
-
 #form {
 	border-radius: 25px;
 	border: 2px solid #73AD21;

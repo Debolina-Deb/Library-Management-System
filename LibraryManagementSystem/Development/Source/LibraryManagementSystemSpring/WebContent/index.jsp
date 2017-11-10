@@ -5,9 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
-<link
-	href="https://fonts.googleapis.com/css?family=Inconsolata|Indie+Flower|Open+Sans|Oswald|Spectral+SC|Titillium+Web|Vollkorn+SC"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
 <link rel="stylesheet" href="../css/form.css">
 <style>
 #formIndex {
@@ -17,8 +15,8 @@
 	margin-right: 20%;
 	margin-left: 30%;
 }
-* {
-	font-family: 'Spectral SC', serif;
+*{
+font-family: 'Libre Baskerville', serif;
 }
 th, td {
 	padding: 8px;

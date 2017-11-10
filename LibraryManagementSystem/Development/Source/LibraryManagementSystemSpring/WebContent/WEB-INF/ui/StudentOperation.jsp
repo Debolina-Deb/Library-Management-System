@@ -10,8 +10,8 @@
 	rel="stylesheet">
 <style>
 
-* {
-	font-family: 'Spectral SC', serif;
+*{
+font-family: 'Libre Baskerville', serif;
 }
 
 #form {
