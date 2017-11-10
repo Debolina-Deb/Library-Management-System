@@ -14,22 +14,27 @@ public interface ILibraryService {
 	public abstract Users getUserDetails() throws LibraryException;
 
 	public abstract BookInventory deleteBookById(String bookIdDelete) throws LibraryException;
-	
+
 	public abstract BookInventory insertBook(BookInventory book) throws LibraryException;
-	
+
 	public abstract List<BookInventory> getAllBooks() throws LibraryException;
-	
+
 	public abstract BookRegistration requestBook(BookRegistration bookRequest) throws LibraryException;
-	
+
 	public abstract int validateUser(String userName, String password) throws LibraryException;
 
 	public abstract int returnBook(int inpRegId) throws LibraryException;
-	
+
 	public abstract void issueBook(int registrationId) throws LibraryException;
-	
+
 	public abstract List<BookRegistration> getAllRequest() throws LibraryException;
-	
+
 	public abstract Users addUser(Users user) throws LibraryException;
-	
+
 	public abstract List<BookRegistration> getRequestByStatus(String status) throws LibraryException;
+
+	public List<BookInventory> searchBookByAuthor(String author);
+
+	public List<BookInventory> searchBookByName(String bookName);
+
 }

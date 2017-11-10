@@ -48,22 +48,26 @@ th, td {
 					<tr>
 						<td><form:label path="bookId">Book Id:</form:label>
 						<td><form:input path="bookId" value="${bookId}"
-								required="true" />
+								required="true" /> <form:errors path="bookId"
+								cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td><form:label path="bookName">Book Name:</form:label>
 						<td><form:input path="bookName" value="${book.bookName}"
-								required="true" />
+								required="true" /> <form:errors path="bookName"
+								cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td><form:label path="author">Author 2:</form:label>
 						<td><form:input path="author" value="${book.author}"
-								required="true" />
+								required="true" /> <form:errors path="author"
+								cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td><form:label path="publisher">Publisher:</form:label>
 						<td><form:input path="publisher" value="${book.publisher}"
-								required="true" />
+								required="true" /> <form:errors path="publisher"
+								cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td><form:label path="yearOfPublication">Year of Publication:</form:label>
@@ -73,7 +77,8 @@ th, td {
 					<tr>
 						<td><form:label path="noOfBooks">No. Of Books:</form:label>
 						<td><form:input path="noOfBooks" value="${book.noOfBooks}"
-								required="true" />
+								required="true" /> <form:errors path="noOfBooks"
+								cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td colspan="2"><button type="submit">Add Book</button></td>

@@ -39,5 +39,9 @@ public interface ILibraryDao {
 
 	public abstract List<BookRegistration> getRequestByStatus(String status)
 			throws LibraryException;
+	
+	public List<BookInventory> searchBookByAuthor(String author);
+	
+	public List<BookInventory> searchBookByName(String bookName);
 
 }

@@ -43,16 +43,20 @@ th, td {
 					<td><form:label path="userName">User Name : </form:label></td>
 					<td><form:input id="userName" path="userName"
 							placeholder="Enter UserName" required="true"></form:input></td>
+				<td><form:errors path="userName" cssStyle="color:red"/></td>
+				</tr>
+				
+				<tr>
+					<td><form:label path="password">Password : </form:label></td>
+					<td><form:password id="password" path="password"
+							placeholder="Enter Password" required="true"></form:password></td>
+				<td><form:errors path="password" cssStyle="color:red"/></td>
 				</tr>
 				<tr>
 					<td><form:label path="emailId">Email : </form:label></td>
 					<td><form:input id="emailId" path="emailId"
 							placeholder="Enter Email ID" required="true"></form:input></td>
-				</tr>
-				<tr>
-					<td><form:label path="password">Password : </form:label></td>
-					<td><form:password id="password" path="password"
-							placeholder="Enter Password" required="true"></form:password></td>
+				<td><form:errors path="emailId" cssStyle="color:red"/></td>
 				</tr>
 				<tr>
 					<td><form:label path="repeatPassword">Repeat Password : </form:label></td>

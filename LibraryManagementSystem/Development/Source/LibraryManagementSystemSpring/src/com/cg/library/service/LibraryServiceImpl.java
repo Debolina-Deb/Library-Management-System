@@ -92,4 +92,16 @@ public class LibraryServiceImpl implements ILibraryService {
 			throws LibraryException {
 		return dao.getRequestByStatus(status);
 	}
+
+	@Override
+	public List<BookInventory> searchBookByAuthor(String author) {
+     return dao.searchBookByAuthor(author);
+	
+	}
+
+	@Override
+	public List<BookInventory> searchBookByName(String bookName) {
+
+		return dao.searchBookByName(bookName);
+	}
 }

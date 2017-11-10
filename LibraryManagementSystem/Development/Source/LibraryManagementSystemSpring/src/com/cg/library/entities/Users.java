@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="users")
@@ -14,16 +17,22 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")
+	@NotNull(message="User Id is Mandatory")
 	private int userId;
 	@Column(name="user_name")
+	@NotNull(message="User Name is Mandatory")
+	@Pattern(regexp="[a-zA-Z]{10}",message="User Name maximum length can be of 10 characters")
 	private String userName;
 	@Column(name="password")
-	private String password;
-	
+	@NotNull(message="Password is Mandatory")
+	@Size(min=4,max=8,message="Minimum 5 and Maximum 8 characters required")
+	private String password;	
 	@Column(name="repeat_password")
 	private String repeatPassword;
-	
 	@Column(name="email_id")
+	//@Email(message="Please enter valid Email ID")
+	@NotNull(message="Email Id  is Mandatory")
+	@Pattern(regexp="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",message="Please enter valid Email ID")
 	private String emailId;
 	@Column(name="librarian")
 	private String librarian;
