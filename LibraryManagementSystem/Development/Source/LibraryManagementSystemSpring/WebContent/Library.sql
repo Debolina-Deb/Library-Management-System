@@ -18,7 +18,7 @@ CREATE TABLE Users
 
 CREATE TABLE BooksInventory
 (
-	book_id VARCHAR2(4) primary key, 
+	book_id Varchar2(4) primary key, 
 	book_name VARCHAR2(30), 
 	author VARCHAR2(30),
 	publisher VARCHAR2(20),

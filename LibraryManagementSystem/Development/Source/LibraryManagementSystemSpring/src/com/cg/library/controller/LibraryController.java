@@ -243,11 +243,10 @@ public class LibraryController {
 	}
 
 	@RequestMapping(value = "/authorSearch", method = RequestMethod.POST)
-	public String searchByAuthor(Model model) {
-
-		// model.addAttribute("bookList",service.searchByAuthor());
-
-		return "";
+	public String searchByAuthor(Model model,
+			@RequestParam("author") String author) throws Exception {
+		model.addAttribute("bookList", service.searchBookByAuthor(author));
+		return "BookSearch";
 	}
 
 	/**

@@ -11,13 +11,7 @@
 <style>
 
 * {
-	font-family: 'Open Sans', sans-serif;
-	font-family: 'Vollkorn SC', serif;
-	font-family: 'Oswald', sans-serif;
 	font-family: 'Spectral SC', serif;
-	font-family: 'Titillium Web', sans-serif;
-	font-family: 'Indie Flower', cursive;
-	font-family: 'Inconsolata', monospace;
 }
 
 #form {

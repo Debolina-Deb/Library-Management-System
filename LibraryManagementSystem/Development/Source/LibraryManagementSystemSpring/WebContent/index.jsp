@@ -9,7 +9,7 @@
 	href="https://fonts.googleapis.com/css?family=Inconsolata|Indie+Flower|Open+Sans|Oswald|Spectral+SC|Titillium+Web|Vollkorn+SC"
 	rel="stylesheet">
 <link rel="stylesheet" href="../css/form.css">
-<!-- <style>
+<style>
 #formIndex {
 	border-radius: 25px;
 	border: 2px solid #73AD21;
@@ -17,20 +17,14 @@
 	margin-right: 20%;
 	margin-left: 30%;
 }
-
 * {
-	font-family: 'Vollkorn SC', serif;
-	font-family: 'Oswald', sans-serif;
 	font-family: 'Spectral SC', serif;
-	font-family: 'Titillium Web', sans-serif;
-	font-family: 'Indie Flower', cursive;
 }
-
 th, td {
 	padding: 8px;
 	border-bottom: 1px solid #ddd;
 }
-</style> -->
+</style>
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>
