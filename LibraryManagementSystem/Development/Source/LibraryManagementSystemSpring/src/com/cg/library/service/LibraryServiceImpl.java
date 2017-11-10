@@ -92,4 +92,10 @@ public class LibraryServiceImpl implements ILibraryService {
 			throws LibraryException {
 		return dao.getRequestByStatus(status);
 	}
+
+	@Override
+	public List<BookInventory> searchByAuthor(String author)
+			throws LibraryException {
+		return null;
+	}
 }

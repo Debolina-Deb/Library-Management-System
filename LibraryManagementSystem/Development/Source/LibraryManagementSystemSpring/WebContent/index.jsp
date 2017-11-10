@@ -8,14 +8,14 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Inconsolata|Indie+Flower|Open+Sans|Oswald|Spectral+SC|Titillium+Web|Vollkorn+SC"
 	rel="stylesheet">
-<link rel="stylesheet" href="/WEB-INF/css/form.css">
-<style>
+<link rel="stylesheet" href="WEB-INF/css/form.css">
+<!-- <style>
 #formIndex {
 	border-radius: 25px;
 	border: 2px solid #73AD21;
 	padding: 20px;
-	margin-right: 270px;
-	margin-left: 250px;
+	margin-right: 20%;
+	margin-left: 30%;
 }
 
 * {
@@ -30,15 +30,15 @@ th, td {
 	padding: 8px;
 	border-bottom: 1px solid #ddd;
 }
-</style>
+</style> -->
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
 	<br>
-	<div id="formIndex">
+	<div id="formIndex" align="center">
 		<form action="login.htm" method="post">
-			<table align="center">
+			<table>
 				<tr>
 					<td>Username</td>
 					<td><input type="text" name="userName"></td>

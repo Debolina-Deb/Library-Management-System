@@ -67,7 +67,7 @@ public class LibraryController {
 		}
 		return "LibrarianOperation";
 	}
-	
+
 	/**
 	 * Method used to check Whether Book existing
 	 * 
@@ -75,7 +75,7 @@ public class LibraryController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/checkBook", method=RequestMethod.POST)
+	@RequestMapping(value = "/checkBook", method = RequestMethod.POST)
 	public String addUpdate(@RequestParam("bookId") String bookId, Model model) {
 		try {
 			BookInventory book = service.getBookById(bookId);
@@ -118,11 +118,12 @@ public class LibraryController {
 			book = service.insertBook(book);
 			model.addAttribute("message",
 					"Book with bookId:" + book.getBookId() + " updated");
+			return "Success";
 		} catch (LibraryException e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
-		return "Success";
+
 	}
 
 	/**
@@ -228,6 +229,20 @@ public class LibraryController {
 		}
 
 	}
+
+	@RequestMapping("/searchByAuthor")
+	public String searchBYAuthor() {
+		return "SearchByAuthor";
+	}
+
+	@RequestMapping(value = "/authorSearch", method = RequestMethod.POST)
+	public String searchByAuthor(Model model) {
+
+		// model.addAttribute("bookList",service.searchByAuthor());
+
+		return "";
+	}
+
 	/**
 	 * Method used for viewing issue request of student by librarian
 	 * 

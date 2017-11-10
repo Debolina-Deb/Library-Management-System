@@ -24,9 +24,10 @@
 	border-radius: 25px;
 	border: 2px solid #73AD21;
 	padding: 20px;
-	margin-right: 270px;
 	horizontal-align: center;
-	margin-left: 250px;
+	margin-right: 20%;
+	margin-left: 30%;
+
 }
 </style>
 </head>

@@ -31,5 +31,7 @@ public interface ILibraryService {
 	
 	public abstract Users addUser(Users user) throws LibraryException;
 	
+	public abstract List<BookInventory> searchByAuthor(String author) throws LibraryException;
+	
 	public abstract List<BookRegistration> getRequestByStatus(String status) throws LibraryException;
 }
