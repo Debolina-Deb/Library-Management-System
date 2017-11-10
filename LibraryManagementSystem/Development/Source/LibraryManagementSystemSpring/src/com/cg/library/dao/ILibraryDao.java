@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
+import com.cg.library.entities.BookTransaction;
 import com.cg.library.entities.Users;
 
 public interface ILibraryDao {
@@ -13,11 +14,9 @@ public interface ILibraryDao {
 
 	public abstract Users getUserDetails() throws Exception;
 
-	public abstract BookInventory deleteBookById(String bookId)
-			throws Exception;
-
-	public abstract BookInventory insertBook(BookInventory book)
-			throws Exception;
+	public abstract BookTransaction returnBookTransaction(int inpRegId) throws Exception;
+	
+	public abstract void issueBook(BookTransaction bookTransaction) throws Exception;
 
 	public abstract List<BookInventory> getAllBooks() throws Exception;
 
@@ -52,5 +51,14 @@ public interface ILibraryDao {
 
 	public abstract List<BookInventory> searchBookByName(String bookName)
 			throws Exception;
+
+	public abstract void updateBookTransaction(BookTransaction tran) throws Exception;
+
+	public abstract void updateBookRegistration(BookRegistration registration)
+			throws Exception;
+
+	public abstract BookInventory deleteBookById(String bookId) throws Exception;
+
+	BookInventory insertBook(BookInventory book) throws Exception;
 
 }

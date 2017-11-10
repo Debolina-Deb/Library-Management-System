@@ -1,5 +1,8 @@
 package com.cg.library.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cg.library.dao.ILibraryDao;
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
+import com.cg.library.entities.BookTransaction;
 import com.cg.library.entities.Users;
 
 @Service
@@ -69,12 +73,36 @@ public class LibraryServiceImpl implements ILibraryService {
 
 	@Override
 	public int returnBook(int inpRegId) throws Exception {
-		return dao.returnBook(inpRegId);
+		int fine = -1;
+		BookTransaction tran=dao.returnBookTransaction(inpRegId);
+		fine = 0;
+		BookRegistration reg = dao.validRegId(inpRegId);
+		LocalDate issue = tran.getIssueDate().toLocalDate();
+		LocalDate today = LocalDate.now();
+		LocalDate expReturn = issue.plusDays(15);
+		int chk = Period.between(expReturn, today).getDays();
+		if (chk > 0)
+			fine = chk * 10; // fine is 10rs per day
+		tran.setReturnDate(java.sql.Date.valueOf(today));
+		tran.setFine(fine);
+		reg.setStatus("returned");
+		dao.updateBookTransaction(tran);
+		dao.updateBookQuan(reg.getBookId(), 1);
+		dao.updateBookRegistration(reg);
+		return fine;
 	}
 
 	@Override
 	public void issueBook(int registrationId) throws Exception {
-		dao.issueBook(registrationId);
+		
+		BookRegistration registration =dao.validRegId(registrationId);
+		registration.setStatus("issued");
+		BookTransaction bookTransaction = new BookTransaction();
+		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
+		bookTransaction.setRegistrationId(registrationId);
+		dao.issueBook(bookTransaction);
+		dao.updateBookQuan(registration.getBookId(), -1);
+		dao.updateBookRegistration(registration);
 	}
 
 	@Override

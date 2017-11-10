@@ -238,7 +238,8 @@ public class LibraryController {
 	}
 
 	@RequestMapping("/searchByAuthor")
-	public String searchBookByAuthor() {
+	public String searchBookByAuthor(Model model) {
+		model.addAttribute("input","0");
 		return "SearchByAuthor";
 	}
 
@@ -246,6 +247,18 @@ public class LibraryController {
 	public String searchByAuthor(Model model,
 			@RequestParam("author") String author) throws Exception {
 		model.addAttribute("bookList", service.searchBookByAuthor(author));
+		return "BookSearch";
+	}
+	
+	@RequestMapping("/searchByName")
+	public String searchBookByName() {
+		return "SearchByAuthor";
+	}
+
+	@RequestMapping(value = "/bookSearch", method = RequestMethod.POST)
+	public String searchByBook(Model model,
+			@RequestParam("bookName") String bookName) throws Exception {
+		model.addAttribute("bookList", service.searchBookByName(bookName));
 		return "BookSearch";
 	}
 

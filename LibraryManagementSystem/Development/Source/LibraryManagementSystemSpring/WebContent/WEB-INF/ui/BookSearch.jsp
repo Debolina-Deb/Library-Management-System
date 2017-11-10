@@ -44,7 +44,7 @@ th, td {
 					<th>
 				</tr>
 
-				<c:forEach items="${bookList }" var="book">
+				<c:forEach items="${bookList}" var="book">
 					<tr>
 						<td>${book.bookId }
 						<td>${book.bookName }

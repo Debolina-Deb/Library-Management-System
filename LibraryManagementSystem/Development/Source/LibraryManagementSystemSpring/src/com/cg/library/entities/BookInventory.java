@@ -6,8 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
@@ -109,7 +107,7 @@ public class BookInventory {
 	@Override
 	public String toString() {
 		return "Book Id : " + bookId + ", Book Name : " + bookName
-				+ ", Author1 : " + author
+				+ ", Author : " + author
 				+ ", Publisher : " + publisher + ", Year of Publication : "
 				+ yearOfPublication + ", No of Books : " + noOfBooks;
 	}

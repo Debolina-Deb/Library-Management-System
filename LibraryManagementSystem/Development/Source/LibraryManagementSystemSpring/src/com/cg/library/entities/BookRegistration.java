@@ -31,6 +31,8 @@ public class BookRegistration {
 	private int userId;
 	@Column(name="registration_date")
 	private Date registrationDate;
+	@Column(name="status")
+	private String status = "pending";
 	
 	public int getRegistrationId() {
 		return registrationId;
@@ -64,12 +66,23 @@ public class BookRegistration {
 		this.registrationDate = registrationDate;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "Registration Id : " + registrationId
-				+ ", Book Id : " + bookId + ", User ID : " + userId
-				+ ", Registration Date : " + registrationDate;
+		return "BookRegistration [registrationId=" + registrationId
+				+ ", bookId=" + bookId + ", userId=" + userId
+				+ ", registrationDate=" + registrationDate + ", status="
+				+ status + "]";
 	}
+
+	
 	
 	
 	
