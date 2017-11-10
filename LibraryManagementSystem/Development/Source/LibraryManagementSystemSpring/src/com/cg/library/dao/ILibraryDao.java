@@ -5,53 +5,52 @@ import java.util.List;
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
 import com.cg.library.entities.Users;
-import com.cg.library.exception.LibraryException;
 
 public interface ILibraryDao {
 
 	public abstract BookInventory getBookById(String id)
-			throws LibraryException;
+			throws Exception;
 
-	public abstract Users getUserDetails() throws LibraryException;
+	public abstract Users getUserDetails() throws Exception;
 
 	public abstract BookInventory deleteBookById(String bookId)
-			throws LibraryException;
+			throws Exception;
 
 	public abstract BookInventory insertBook(BookInventory book)
-			throws LibraryException;
+			throws Exception;
 
-	public abstract List<BookInventory> getAllBooks() throws LibraryException;
+	public abstract List<BookInventory> getAllBooks() throws Exception;
 
 	public abstract Users validateUser(String userName, String password)
-			throws LibraryException;
+			throws Exception;
 
 	public abstract BookRegistration requestBook(BookRegistration bookRequest)
-			throws LibraryException;
+			throws Exception;
 
 	public abstract BookRegistration validRegId(int inpRegId)
-			throws LibraryException;
+			throws Exception;
 
-	public abstract int returnBook(int inpRegId) throws LibraryException;
+	public abstract int returnBook(int inpRegId) throws Exception;
 
 	public abstract BookInventory updateBookQuan(String bookId, int updateBy)
-			throws LibraryException;
+			throws Exception;
 
-	public abstract void issueBook(int registrationId) throws LibraryException;
+	public abstract void issueBook(int registrationId) throws Exception;
 
-	public abstract int getCountOfBooks(String bookId) throws LibraryException;
+	public abstract int getCountOfBooks(String bookId) throws Exception;
 
 	public abstract List<BookRegistration> getAllRequest()
-			throws LibraryException;
+			throws Exception;
 
-	public abstract Users addUser(Users user) throws LibraryException;
+	public abstract Users addUser(Users user) throws Exception;
 
 	public abstract List<BookRegistration> getRequestByStatus(String status)
-			throws LibraryException;
+			throws Exception;
 
 	public abstract List<BookInventory> searchBookByAuthor(String author)
-			throws LibraryException;
+			throws Exception;
 
 	public abstract List<BookInventory> searchBookByName(String bookName)
-			throws LibraryException;
+			throws Exception;
 
 }

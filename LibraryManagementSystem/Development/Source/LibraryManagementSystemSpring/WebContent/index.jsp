@@ -8,7 +8,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Inconsolata|Indie+Flower|Open+Sans|Oswald|Spectral+SC|Titillium+Web|Vollkorn+SC"
 	rel="stylesheet">
-<link rel="stylesheet" href="WEB-INF/css/form.css">
+<link rel="stylesheet" href="../css/form.css">
 <!-- <style>
 #formIndex {
 	border-radius: 25px;

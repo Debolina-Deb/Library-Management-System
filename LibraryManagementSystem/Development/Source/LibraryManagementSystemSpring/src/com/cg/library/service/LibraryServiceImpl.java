@@ -9,7 +9,6 @@ import com.cg.library.dao.ILibraryDao;
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
 import com.cg.library.entities.Users;
-import com.cg.library.exception.LibraryException;
 
 @Service
 public class LibraryServiceImpl implements ILibraryService {
@@ -18,7 +17,7 @@ public class LibraryServiceImpl implements ILibraryService {
 	private ILibraryDao dao;
 
 	@Override
-	public BookInventory getBookById(String id) throws LibraryException {
+	public BookInventory getBookById(String id) throws Exception {
 		return dao.getBookById(id);
 	}
 
@@ -27,13 +26,13 @@ public class LibraryServiceImpl implements ILibraryService {
 	 */
 	
 	@Override
-	public List<BookInventory> getAllBooks() throws LibraryException {
+	public List<BookInventory> getAllBooks() throws Exception {
 		return dao.getAllBooks();
 	}
 
 	@Override
 	public int validateUser(String userName, String password)
-			throws LibraryException {
+			throws Exception {
 		Users user1 = dao.validateUser(userName, password);
 		if (user1.isLibrarian().equals("true")) {
 			return 1;
@@ -43,23 +42,23 @@ public class LibraryServiceImpl implements ILibraryService {
 	}
 
 	@Override
-	public BookInventory insertBook(BookInventory book) throws LibraryException {
+	public BookInventory insertBook(BookInventory book) throws Exception {
 		return dao.insertBook(book);
 	}
 
 	@Override
-	public BookInventory deleteBookById(String bookId) throws LibraryException {
+	public BookInventory deleteBookById(String bookId) throws Exception {
 		return dao.deleteBookById(bookId);
 	}
 
 	@Override
-	public Users getUserDetails() throws LibraryException {
+	public Users getUserDetails() throws Exception {
 		return dao.getUserDetails();
 	}
 
 	@Override
 	public BookRegistration requestBook(BookRegistration bookRequest)
-			throws LibraryException {
+			throws Exception {
 		if (dao.getBookById(bookRequest.getBookId()) == null) {
 			return null;
 		} else if (dao.getCountOfBooks(bookRequest.getBookId()) == 0) {
@@ -69,42 +68,42 @@ public class LibraryServiceImpl implements ILibraryService {
 	}
 
 	@Override
-	public int returnBook(int inpRegId) throws LibraryException {
+	public int returnBook(int inpRegId) throws Exception {
 		return dao.returnBook(inpRegId);
 	}
 
 	@Override
-	public void issueBook(int registrationId) throws LibraryException {
+	public void issueBook(int registrationId) throws Exception {
 		dao.issueBook(registrationId);
 	}
 
 	@Override
-	public List<BookRegistration> getAllRequest() throws LibraryException {
+	public List<BookRegistration> getAllRequest() throws Exception {
 		return dao.getAllRequest();
 	}
 
 	@Override
-	public Users addUser(Users user) throws LibraryException {
+	public Users addUser(Users user) throws Exception {
 
 		return dao.addUser(user);
 	}
 
 	@Override
 	public List<BookRegistration> getRequestByStatus(String status)
-			throws LibraryException {
+			throws Exception {
 		return dao.getRequestByStatus(status);
 	}
 
 	@Override
 	public List<BookInventory> searchBookByAuthor(String author)
-			throws LibraryException {
+			throws Exception {
 		return dao.searchBookByAuthor(author);
 
 	}
 
 	@Override
 	public List<BookInventory> searchBookByName(String bookName)
-			throws LibraryException {
+			throws Exception {
 		return dao.searchBookByName(bookName);
 	}
 }

@@ -10,17 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
-
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.cg.library.entities.Users;
-import com.cg.library.exception.LibraryException;
 import com.cg.library.service.ILibraryService;
 
 @Controller
@@ -43,7 +40,7 @@ public class LibraryController {
 			List<BookInventory> allBook = service.getAllBooks();
 			model.addAttribute("allBook", allBook);
 			model.addAttribute("userName", userName);
-		} catch (LibraryException le) {
+		} catch (Exception le) {
 			model.addAttribute("message", le.getMessage());
 			return "Error";
 		}
@@ -64,7 +61,7 @@ public class LibraryController {
 			model.addAttribute("message",
 					"Book with book id:" + book.getBookId() + "deleted");
 			model.addAttribute("userName", "parag");
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -91,7 +88,7 @@ public class LibraryController {
 				model.addAttribute("book", book);
 				return "AddBook";
 			}
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -122,7 +119,7 @@ public class LibraryController {
 			model.addAttribute("message",
 					"Book with bookId:" + book.getBookId() + " updated");
 			return "Success";
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -147,7 +144,7 @@ public class LibraryController {
 				return "StudentOperation";
 			else
 				return "LibrarianOperation";
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -164,7 +161,7 @@ public class LibraryController {
 		try {
 			model.addAttribute("bookList", service.getAllBooks());
 			return "BookSearch";
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -205,7 +202,7 @@ public class LibraryController {
 						+ user.getUserId());
 				return "Success";
 			}
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -233,7 +230,7 @@ public class LibraryController {
 					"Book is requested with Registration id - "
 							+ bookRequest.getRegistrationId());
 			return "Success";
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -266,7 +263,7 @@ public class LibraryController {
 			model.addAttribute("reqPList",
 					service.getRequestByStatus("pending"));
 			return "Issue";
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -285,7 +282,7 @@ public class LibraryController {
 		try {
 			model.addAttribute("reqIList", service.getRequestByStatus("issued"));
 			return "Return";
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -306,7 +303,7 @@ public class LibraryController {
 			model.addAttribute("message", "Book issued with registration id="
 					+ regId);
 			return "Success";
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
@@ -330,7 +327,7 @@ public class LibraryController {
 						+ "\nBook Returned!!");
 			}
 			return "Success";
-		} catch (LibraryException e) {
+		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
 		}
