@@ -169,65 +169,35 @@ public class LibraryDaoImpl implements ILibraryDao {
 		return inv;
 	}
 
-	/**
-	 * Method used to issue book with regId
-	 * 
-	 * @param registrationId
-	 */
+	
 	@Override
-	public void issueBook(int registrationId) throws LibraryException {
-		// String qStr =
-		// "SELECT t FROM BookRegistration t WHERE t.registrationId="+registrationId;
-		TypedQuery<BookRegistration> query = entityManager.createQuery(
-				QueryMapper.issueBook + registrationId,
-				BookRegistration.class);
-		BookRegistration registration = query.getSingleResult();
-		BookTransaction bookTransaction = new BookTransaction();
-		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
-		bookTransaction.setRegistrationId(registrationId);
-		// bookTransaction.setReturnDate(null);
-
+	public void issueBook(BookTransaction bookTransaction) throws LibraryException {
 		entityManager.persist(bookTransaction);
-
-		// qStr =
-		// "SELECT t FROM BookInventory t WHERE t.bookId="+registration.getBookId();
-		TypedQuery<BookInventory> query1 = entityManager.createQuery(
-				QueryMapper.updateIssueBook + registration.getBookId(),
-				BookInventory.class);
-		BookInventory booksInventory = query1.getSingleResult();
-		booksInventory.setNoOfBooks(booksInventory.getNoOfBooks() - 1);
-
-		entityManager.merge(booksInventory);
-
-		logger.info("Book issued with registration ID: " + registrationId);
+		logger.info("Book issued with registration ID: " + bookTransaction.getRegistrationId());
 	}
 
-	/**
-	 * Method used to return book
-	 * 
-	 * @param inpRegId
-	 */
+	
 	@Override
-	public int returnBook(int inpRegId) throws LibraryException {
-		int fine = -1;
+	public BookTransaction returnBookTransaction(int inpRegId) throws LibraryException {
 		BookTransaction tran;
 		TypedQuery<BookTransaction> query = entityManager.createQuery(
 				QueryMapper.returnBook + inpRegId, BookTransaction.class);
 		tran = query.getSingleResult();
-		fine = 0;
-		BookRegistration reg = this.validRegId(inpRegId);
-		LocalDate issue = tran.getIssueDate().toLocalDate();
-		LocalDate today = LocalDate.now();
-		LocalDate expReturn = issue.plusDays(15);
-		int chk = Period.between(expReturn, today).getDays();
-		if (chk > 0)
-			fine = chk * 10; // fine is 10rs per day
-		tran.setReturnDate(java.sql.Date.valueOf(today));
-		tran.setFine(fine);
+		
+		return tran;
+	}
+	
+	
+	@Override
+	public void updateBookTransaction(BookTransaction tran) throws LibraryException {
 		entityManager.merge(tran);
-		this.updateBookQuan(reg.getBookId(), 1);
-		logger.info("Book returned with registration ID: " + inpRegId);
-		return fine;
+		logger.info("Book returned with registration ID: " + tran.getRegistrationId());
+	}
+	
+	@Override
+	public void updateBookRegistration(BookRegistration registration) throws LibraryException {
+		entityManager.merge(registration);
+		logger.info("Book registration merged with registration ID: " + registration.getRegistrationId());
 	}
 
 	/**
