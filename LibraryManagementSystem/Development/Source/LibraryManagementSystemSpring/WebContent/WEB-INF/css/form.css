@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+#formIndex {
+	border-radius: 25px;
+	border: 2px solid #73AD21;
+	padding: 20px;
+	margin-right: 270px;
+	margin-left: 250px;
+}
+
+* {
+	font-family: 'Open Sans', sans-serif;
+	font-family: 'Vollkorn SC', serif;
+	font-family: 'Oswald', sans-serif;
+	font-family: 'Spectral SC', serif;
+	font-family: 'Titillium Web', sans-serif;
+	font-family: 'Indie Flower', cursive;
+	font-family: 'Inconsolata', monospace;
+}
+
+th, td {
+	padding: 8px;
+	border-bottom: 1px solid #ddd;
+}

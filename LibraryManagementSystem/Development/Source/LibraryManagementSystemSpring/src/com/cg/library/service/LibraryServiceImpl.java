@@ -21,20 +21,24 @@ public class LibraryServiceImpl implements ILibraryService {
 	public BookInventory getBookById(String id) throws LibraryException {
 		return dao.getBookById(id);
 	}
-/*
-	@Override
-	public Long getBookCount() {
-		return dao.getBookCount();
-	}
-*/
+
+	/*
+	 * @Override public Long getBookCount() { return dao.getBookCount(); }
+	 */
 	@Override
 	public List<BookInventory> getAllBooks() throws LibraryException {
 		return dao.getAllBooks();
 	}
-	
+
 	@Override
-	public int validateUser(String userName, String password) throws LibraryException {
-		return dao.validateUser(userName, password);
+	public int validateUser(String userName, String password)
+			throws LibraryException {
+		Users user1 = dao.validateUser(userName, password);
+		if (user1.isLibrarian().equals("true")) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -53,17 +57,18 @@ public class LibraryServiceImpl implements ILibraryService {
 	}
 
 	@Override
-	public BookRegistration requestBook(BookRegistration bookRequest) throws LibraryException {
-		if(dao.getBookById(bookRequest.getBookId()) == null){
+	public BookRegistration requestBook(BookRegistration bookRequest)
+			throws LibraryException {
+		if (dao.getBookById(bookRequest.getBookId()) == null) {
 			return null;
-		}else if(dao.getCountOfBooks(bookRequest.getBookId()) == 0){
+		} else if (dao.getCountOfBooks(bookRequest.getBookId()) == 0) {
 			return null;
 		}
 		return dao.requestBook(bookRequest);
 	}
+
 	@Override
-	public int returnBook(int inpRegId) throws LibraryException
-	{
+	public int returnBook(int inpRegId) throws LibraryException {
 		return dao.returnBook(inpRegId);
 	}
 
@@ -76,9 +81,10 @@ public class LibraryServiceImpl implements ILibraryService {
 	public List<BookRegistration> getAllRequest() throws LibraryException {
 		return dao.getAllRequest();
 	}
+
 	@Override
 	public Users addUser(Users user) throws LibraryException {
-		
+
 		return dao.addUser(user);
 	}
 	@Override

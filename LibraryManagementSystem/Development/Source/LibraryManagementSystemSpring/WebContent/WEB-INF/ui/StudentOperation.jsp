@@ -5,7 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link
+	href="https://fonts.googleapis.com/css?family=Inconsolata|Indie+Flower|Open+Sans|Oswald|Spectral+SC|Titillium+Web|Vollkorn+SC"
+	rel="stylesheet">
 <style>
+
+* {
+	font-family: 'Open Sans', sans-serif;
+	font-family: 'Vollkorn SC', serif;
+	font-family: 'Oswald', sans-serif;
+	font-family: 'Spectral SC', serif;
+	font-family: 'Titillium Web', sans-serif;
+	font-family: 'Indie Flower', cursive;
+	font-family: 'Inconsolata', monospace;
+}
+
 #form {
 	border-radius: 25px;
 	border: 2px solid #73AD21;
