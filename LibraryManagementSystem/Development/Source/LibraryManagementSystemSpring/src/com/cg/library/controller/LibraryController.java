@@ -4,9 +4,12 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -189,12 +192,19 @@ public class LibraryController {
 	 * @return
 	 */
 	@RequestMapping(value = "/signUp.htm", method = RequestMethod.POST)
-	public String signUp(Model model, @ModelAttribute("user") Users user) {
+	public String signUp(Model model,
+			@ModelAttribute("user") @Valid Users user, BindingResult result) {
 		try {
-			user = service.addUser(user);
-			model.addAttribute("message",
-					"User added with user Id = " + user.getUserId());
-			return "Success";
+			if (result.hasErrors()) {
+				model.addAttribute("librarian", new String[] { "Please select",
+						"true", "false" });
+				return "SignUp";
+			} else {
+				user = service.addUser(user);
+				model.addAttribute("message", "User added with user Id = "
+						+ user.getUserId());
+				return "Success";
+			}
 		} catch (LibraryException e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
@@ -231,7 +241,7 @@ public class LibraryController {
 	}
 
 	@RequestMapping("/searchByAuthor")
-	public String searchBYAuthor() {
+	public String searchBookByAuthor() {
 		return "SearchByAuthor";
 	}
 

@@ -80,10 +80,10 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	@Override
 	public int getCountOfBooks(String bookId) throws LibraryException {
-			TypedQuery<BookInventory> query1 = entityManager.createQuery(
-					QueryMapper.getCountOfBooks + bookId, BookInventory.class);
-			BookInventory booksInventory = query1.getSingleResult();
-			return booksInventory.getNoOfBooks();
+		TypedQuery<BookInventory> query1 = entityManager.createQuery(
+				QueryMapper.getCountOfBooks + bookId, BookInventory.class);
+		BookInventory booksInventory = query1.getSingleResult();
+		return booksInventory.getNoOfBooks();
 	}
 
 	/**
@@ -122,6 +122,11 @@ public class LibraryDaoImpl implements ILibraryDao {
 		return book;
 	}
 
+	/**
+	 * Method used to get user details
+	 * 
+	 * @return user
+	 */
 	public Users getUserDetails() {
 		return user;
 	}
@@ -179,8 +184,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 		// String qStr =
 		// "SELECT t FROM BookRegistration t WHERE t.registrationId="+registrationId;
 		TypedQuery<BookRegistration> query = entityManager.createQuery(
-				QueryMapper.issueBook + registrationId,
-				BookRegistration.class);
+				QueryMapper.issueBook + registrationId, BookRegistration.class);
 		BookRegistration registration = query.getSingleResult();
 		BookTransaction bookTransaction = new BookTransaction();
 		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
@@ -238,9 +242,9 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public BookRegistration requestBook(BookRegistration bookRequest)
 			throws LibraryException {
-			entityManager.persist(bookRequest);
-			logger.info("Book requested for user ID" + bookRequest.getUserId());
-			return bookRequest;
+		entityManager.persist(bookRequest);
+		logger.info("Book requested for user ID" + bookRequest.getUserId());
+		return bookRequest;
 	}
 
 	/**
@@ -256,15 +260,53 @@ public class LibraryDaoImpl implements ILibraryDao {
 
 	/**
 	 * Method to get request by status
-	 * @throws LibraryException 
+	 * 
+	 * @throws LibraryException
 	 */
 	@Override
-	public List<BookRegistration> getRequestByStatus(String status) throws LibraryException {
+	public List<BookRegistration> getRequestByStatus(String status)
+			throws LibraryException {
 		TypedQuery<BookRegistration> query1 = entityManager.createQuery(
 				QueryMapper.reqByStatus, BookRegistration.class);
 		query1.setParameter("pstatus", status);
 		List<BookRegistration> requestList = query1.getResultList();
 		return requestList;
 	}
-	
+
+	/**
+	 * Method used to search book by author name
+	 * 
+	 * @param author
+	 * @return books
+	 */
+	@Override
+	public List<BookInventory> searchBookByAuthor(String author) {
+		String qstr = "SELECT l FROM BookInventory l WHERE l.author='" + author
+				+ "'";
+		TypedQuery<BookInventory> query = entityManager.createQuery(qstr,
+				BookInventory.class);
+		List<BookInventory> books = query.getResultList();
+		return books;
+
+	}
+
+	/**
+	 * Method used to search book by name
+	 * 
+	 * @param bookName
+	 * @return books
+	 * @throws LibraryException
+	 */
+	@Override
+	public List<BookInventory> searchBookByName(String bookName)
+			throws LibraryException {
+		String qstr = "SELECT l FROM BookInventory l WHERE l.bookName LIKE :bookName";// '%bookName%'
+		TypedQuery<BookInventory> query = entityManager.createQuery(qstr,
+				BookInventory.class);
+		query.setParameter("bookName", bookName);
+		List<BookInventory> books = query.getResultList();
+		return books;
+
+	}
+
 }

@@ -25,6 +25,7 @@ public class LibraryServiceImpl implements ILibraryService {
 	/*
 	 * @Override public Long getBookCount() { return dao.getBookCount(); }
 	 */
+	
 	@Override
 	public List<BookInventory> getAllBooks() throws LibraryException {
 		return dao.getAllBooks();
@@ -87,6 +88,7 @@ public class LibraryServiceImpl implements ILibraryService {
 
 		return dao.addUser(user);
 	}
+
 	@Override
 	public List<BookRegistration> getRequestByStatus(String status)
 			throws LibraryException {
@@ -94,8 +96,15 @@ public class LibraryServiceImpl implements ILibraryService {
 	}
 
 	@Override
-	public List<BookInventory> searchByAuthor(String author)
+	public List<BookInventory> searchBookByAuthor(String author)
 			throws LibraryException {
-		return null;
+		return dao.searchBookByAuthor(author);
+
+	}
+
+	@Override
+	public List<BookInventory> searchBookByName(String bookName)
+			throws LibraryException {
+		return dao.searchBookByName(bookName);
 	}
 }
