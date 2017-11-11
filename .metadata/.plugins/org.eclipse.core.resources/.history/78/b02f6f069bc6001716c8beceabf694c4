@@ -29,9 +29,13 @@ public interface ILibraryDao {
 	public abstract BookRegistration validRegId(int inpRegId)
 			throws Exception;
 
+	public abstract int returnBook(int inpRegId) throws Exception;
+
 	public abstract BookInventory updateBookQuan(String bookId, int updateBy)
 			throws Exception;
-	
+
+	public abstract void issueBook(int registrationId) throws Exception;
+
 	public abstract int getCountOfBooks(String bookId) throws Exception;
 
 	public abstract List<BookRegistration> getAllRequest()

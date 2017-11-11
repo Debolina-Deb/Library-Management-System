@@ -31,7 +31,7 @@ CREATE TABLE BooksRegistration
 	registration_id Number(4) primary key, 
 	book_id VARCHAR2(4), 
 	user_id VARCHAR2(4), 
-	registration_date DATE default sysdate,
+	registration_date DATE default sysdate
 	status VARCHAR2()
 );
 

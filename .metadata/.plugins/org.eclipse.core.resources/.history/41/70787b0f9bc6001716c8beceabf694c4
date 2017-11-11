@@ -277,4 +277,17 @@ public class LibraryDaoImpl implements ILibraryDao {
 
 	}
 
+	@Override
+	public int returnBook(int inpRegId) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void issueBook(int registrationId) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }
