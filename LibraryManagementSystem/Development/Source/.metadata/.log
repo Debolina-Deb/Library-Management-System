@@ -989,3 +989,84 @@ Binding(CTRL+F5,
 !MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
 !SUBENTRY 3 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-10 19:31:57.473
 !MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 1644298246 2017-11-11 10:22:25.531
+!MESSAGE Unable to delete module
+!SUBENTRY 1 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 10:22:25.531
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war. May be locked by another process.
+!SUBENTRY 2 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 10:22:25.531
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+!SUBENTRY 3 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 10:22:25.531
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 1644298246 2017-11-11 10:27:42.267
+!MESSAGE Unable to delete module
+!SUBENTRY 1 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 10:27:42.267
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war. May be locked by another process.
+!SUBENTRY 2 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 10:27:42.267
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+!SUBENTRY 3 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 10:27:42.267
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2017-11-11 10:33:31.045
+!MESSAGE The server "WildFly 8.x" requires a JDK to run properly. The VM used to launch this server is not recognized as a valid JDK. C:\Program Files (x86)\Java\jre1.8.0_25 
+
+!ENTRY org.eclipse.ui 4 4 2017-11-11 10:34:03.831
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.disable.grammar.constraints
+
+!ENTRY org.eclipse.ui 4 4 2017-11-11 10:34:03.831
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.reload.dependencies
+
+!ENTRY org.eclipse.ui 4 4 2017-11-11 10:34:03.832
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.disable.grammar.constraints
+
+!ENTRY org.eclipse.ui 4 4 2017-11-11 10:34:03.833
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.reload.dependencies
+
+!ENTRY org.eclipse.ui 4 4 2017-11-11 10:34:03.834
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.disable.grammar.constraints
+
+!ENTRY org.eclipse.ui 4 4 2017-11-11 10:34:03.834
+!MESSAGE Could not retrieve EHandlerService or ICommandService from context evaluation context fororg.eclipse.wst.xml.ui.reload.dependencies
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2017-11-11 10:40:04.258
+!MESSAGE The server "WildFly 8.x" requires a JDK to run properly. The VM used to launch this server is not recognized as a valid JDK. C:\Program Files (x86)\Java\jre1.8.0_25 
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 1644298246 2017-11-11 11:01:07.947
+!MESSAGE Unable to delete module
+!SUBENTRY 1 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:01:07.947
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war. May be locked by another process.
+!SUBENTRY 2 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:01:07.947
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+!SUBENTRY 3 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:01:07.947
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 1644298246 2017-11-11 11:03:23.335
+!MESSAGE Unable to delete module
+!SUBENTRY 1 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:03:23.335
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war. May be locked by another process.
+!SUBENTRY 2 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:03:23.335
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+!SUBENTRY 3 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:03:23.335
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2017-11-11 11:13:06.253
+!MESSAGE The server "WildFly 8.x" requires a JDK to run properly. The VM used to launch this server is not recognized as a valid JDK. C:\Program Files (x86)\Java\jre1.8.0_25 
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 1644298246 2017-11-11 11:14:45.127
+!MESSAGE Unable to delete module
+!SUBENTRY 1 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:14:45.127
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war. May be locked by another process.
+!SUBENTRY 2 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:14:45.127
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+!SUBENTRY 3 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:14:45.128
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 1644298246 2017-11-11 11:17:05.161
+!MESSAGE Unable to delete module
+!SUBENTRY 1 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:17:05.161
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war. May be locked by another process.
+!SUBENTRY 2 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:17:05.161
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.
+!SUBENTRY 3 org.jboss.ide.eclipse.as.wtp.core 4 1644298251 2017-11-11 11:17:05.161
+!MESSAGE Could not delete D:\Users\parpatid\Desktop\PDF\Module3\Servlet3.0\WildFly8.1.0\standalone\deployments\LibraryManagementSystemSpring.war\WEB-INF. May be locked by another process.

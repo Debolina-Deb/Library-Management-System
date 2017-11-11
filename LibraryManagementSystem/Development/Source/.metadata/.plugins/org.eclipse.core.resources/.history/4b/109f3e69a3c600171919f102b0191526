@@ -7,13 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script>
 	function validateform() {
-		
 		var error1 = document.getElementById("passwordError");
 		var error2 = document.getElementById("confirmPasswordError");
-		var password = document.getElementById("password").value;
+		var password = form["password"].value;
 		error1.innerHTML = "";
 		error2.innerHTML = "";
-		var confirmPassword = document.getElementById("repeatPassword").value;
+
+		var confirmPassword = form["repeatPassword"].value;
 
 		if (password != confirmPassword) {
 			error2.innerHTML = "Password Does Not Match"
