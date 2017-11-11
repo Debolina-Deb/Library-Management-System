@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Book List</title>
+<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
+</head>
+<body>
+	<h1 align="center">Welcome to Library Management System</h1>
+	<hr>
+	<div id="form" align="center">
+		<h2 align="center">Book List</h2>
+		<c:if test="${bookList ne null }">
+			<table align="center">
+				<tr>
+					<th>Book ID</th>
+					<th>Book Name</th>
+					<th>Book Author</th>
+					<th>Publisher</th>
+					<th>YOP</th>
+					<th>No of Books</th>
+					<th>
+				</tr>
+
+				<c:forEach items="${bookList}" var="book">
+					<tr>
+						<td>${book.bookId }
+						<td>${book.bookName }
+						<td>${book.author }
+						<td>${book.publisher }
+						<td>${book.yearOfPublication }
+						<td>${book.noOfBooks }
+						<td><a href="requestBook.htm?bookId=${book.bookId}">Request
+								Book</a>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:if>
+	</div>
+	<h4>
+		<a id="home" href="studentHome.htm">Home</a>
+		<a id="logout" href="">Logout</a>
+	</h4>
+</body>
+</html>

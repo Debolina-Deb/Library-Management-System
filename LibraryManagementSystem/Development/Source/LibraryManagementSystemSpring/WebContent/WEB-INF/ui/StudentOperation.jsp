@@ -4,47 +4,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<link
-	href="https://fonts.googleapis.com/css?family=Inconsolata|Indie+Flower|Open+Sans|Oswald|Spectral+SC|Titillium+Web|Vollkorn+SC"
-	rel="stylesheet">
-<style>
-
-*{
-font-family: 'Libre Baskerville', serif;
-}
-
-#form {
-	border-radius: 25px;
-	border: 2px solid #73AD21;
-	padding: 20px;
-	horizontal-align: center;
-	margin-right: 20%;
-	margin-left: 30%;
-
-}
-</style>
+<title>Student Home</title>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
 	<h4 align="right">Welcome ${userName }</h4>
-	<div id="form" align="center">
-		<h4>
+	<div id="formOperation" align="center">
+		<h3>
 			<a href="searchByName.htm">Search Book by Name</a>
-		</h4>
-		<h4>
+		</h3>
+		<h3>
 			<a href="searchByAuthor.htm">Search Book by Author</a>
-		</h4>
-		<h4>
+		</h3>
+		<h3>
 			<a href="showAll.htm">Show all Books</a>
-		</h4>
+		</h3>
 	</div>
 	<h4>
-		<a href="">Home</a>
-	</h4>
-	<h4 align="right">
-		<a href="">Logout</a>
+		<a id="home" href="studentHome.htm">Home</a>
+		<a id="logout" href="">Logout</a>
 	</h4>
 </body>
 </html>

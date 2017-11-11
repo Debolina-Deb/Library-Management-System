@@ -1,0 +1,11 @@
+/**
+ * Validation for Book Details
+ */
+function validate(){
+	var book = document.getElementById("bookForm")
+	
+	
+	
+	
+	
+}

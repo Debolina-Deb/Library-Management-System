@@ -6,21 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<style>
-#form {
-	border-radius: 25px;
-	border: 2px solid #73AD21;
-	padding: 20px;
-	margin-right: 270px;
-	margin-left: 250px;
-}
-
-th, td {
-	padding: 8px;
-	border-bottom: 1px solid #ddd;
-}
-</style>
+<title>Add/Update Book</title>
+<link href="https://fonts.googleapis.com/css?family=Slabo+27px"
+	rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System - Add Book</h1>
@@ -31,7 +20,7 @@ th, td {
 	</h4>
 
 	<c:if test="${bookId eq null }">
-		<div id="form">
+		<div id="formIndex">
 			<form action="checkBook.htm" method="post">
 				Enter book Id:<input type="text" name="bookId" /> <input
 					type="submit" value="Add/update" />
@@ -39,46 +28,49 @@ th, td {
 		</div>
 	</c:if>
 
-
 	<c:if test="${book ne null}">
-		<div id="form">
-			<form:form action="onAdd.htm" modelAttribute="book" method="post">
+		<div id="formIndex">
+			<form:form id="bookForm" action="onAdd.htm" modelAttribute="book"
+				method="post">
 				<table align="center">
-					<form:hidden path="" />
 					<tr>
 						<td><form:label path="bookId">Book Id:</form:label>
-						<td><form:input path="bookId" value="${bookId}"
-								required="true" /> <form:errors path="bookId"
-								cssStyle="color:red" />
+						<td><form:input path="bookId" pattern="[0-9]{4}"
+								title="Book Id should be of 4 digits (1111 or 9999)"
+								value="${bookId}" required="true" />
+						<td><form:errors path="bookId" cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td><form:label path="bookName">Book Name:</form:label>
 						<td><form:input path="bookName" value="${book.bookName}"
-								required="true" /> <form:errors path="bookName"
-								cssStyle="color:red" />
+								required="true" />
+						<td><form:errors path="bookName" cssStyle="color:red" />
 					</tr>
 					<tr>
-						<td><form:label path="author">Author 2:</form:label>
+						<td><form:label path="author">Author:</form:label>
 						<td><form:input path="author" value="${book.author}"
-								required="true" /> <form:errors path="author"
-								cssStyle="color:red" />
+								required="true" />
+						<td><form:errors path="author" cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td><form:label path="publisher">Publisher:</form:label>
 						<td><form:input path="publisher" value="${book.publisher}"
-								required="true" /> <form:errors path="publisher"
-								cssStyle="color:red" />
+								required="true" />
+						<td><form:errors path="publisher" cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td><form:label path="yearOfPublication">Year of Publication:</form:label>
-						<td><form:input path="yearOfPublication"
+						<td><form:input path="yearOfPublication" pattern="[0-9]{4}"
+								title="YOP should be in format YYYY"
 								value="${book.yearOfPublication}" required="true" />
+						<td><form:errors path="yearOfPublication"
+								cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td><form:label path="noOfBooks">No. Of Books:</form:label>
 						<td><form:input path="noOfBooks" value="${book.noOfBooks}"
-								required="true" /> <form:errors path="noOfBooks"
-								cssStyle="color:red" />
+								required="true" />
+						<td><form:errors path="noOfBooks" cssStyle="color:red" />
 					</tr>
 					<tr>
 						<td colspan="2"><button type="submit">Add Book</button></td>
@@ -87,11 +79,8 @@ th, td {
 			</form:form>
 		</div>
 	</c:if>
-
-
 	<h4>
-		<a href="">Home</a>
-		<a href="">Logout</a>
+		<a id="home" href="librarianHome.htm">Home</a> <a id="logout" href="">Logout</a>
 	</h4>
 
 </body>

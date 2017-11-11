@@ -5,27 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<style>
-* {
-	font-family: 'Spectral SC', serif;
-}
-
-#form {
-	border-radius: 25px;
-	border: 2px solid #73AD21;
-	padding: 20px;
-	horizontal-align: center;
-	margin-right: 10%;
-	margin-left: 10%;
-}
-
-th, td {
-	padding: 8px;
-	border-bottom: 1px solid #ddd;
-	text-align: center;
-}
-</style>
+<title>Search By Author</title>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville"
+	rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>
@@ -64,5 +47,8 @@ th, td {
 			</div>
 		</c:otherwise>
 	</c:choose>
+	<h4>
+		<a id="home" href="studentHome.htm">Home</a> <a id="logout" href="">Logout</a>
+	</h4>
 </body>
 </html>

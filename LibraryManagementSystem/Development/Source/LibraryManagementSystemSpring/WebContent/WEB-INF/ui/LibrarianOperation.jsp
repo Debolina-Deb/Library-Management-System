@@ -6,33 +6,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>LibrarianHome</title>
 <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
-<style>
-#form {
-    border-radius: 25px;
-    border: 2px solid #73AD21;
-    padding: 20px; 
-	margin-right: 25%;
-	margin-left: 20%;
-}
-
-*{
-font-family: 'Libre Baskerville', serif;
-}
-</style>
+<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
 	<h4 align="right">Welcome ${userName }</h4>
-	<div id="form" align="center">
-		<h3><a href="display.htm?userName=${userName} ">Display All Books</a></h3>
-		<h3><a href="addUpdate.htm">Add/Update Book</a></h3>
-		<h3><a href="pendingRequest.htm">View Pending Issue Requests</a></h3>
-		<h3><a href="issuedRequest.htm">Return Book</a>	</h3>
-		<h3>${message }</h3>
-		<h4 align="right">
-			<a href="">Logout</a>
-		</h4>
+	<div id="formOperation" align="center">
+		<h3>
+			<a href="display.htm?userName=${userName} ">Display All Books</a>
+		</h3>
+		<h3>
+			<a href="addUpdate.htm">Add/Update Book</a>
+		</h3>
+		<h3>
+			<a href="pendingRequest.htm">View Pending Issue Requests</a>
+		</h3>
+		<h3>
+			<a href="issuedRequest.htm">Return Book</a>
+		</h3>
 	</div>
+	<h3>${message }</h3>
+	<h4>
+		<a id="home" href="librarianHome.htm">Home</a>
+		<a id="logout" href="">Logout</a>
+	</h4>
 </body>
 </html>

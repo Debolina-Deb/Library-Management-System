@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.Users;
 import com.cg.library.service.ILibraryService;
+
 /**
  * Librarian Controller controls functionalities of librarian
  * 
@@ -183,12 +184,18 @@ public class LibrarianController {
 	 * @return
 	 */
 	@RequestMapping(value = "onAdd")
-	public String onAdd(@ModelAttribute("book") BookInventory book, Model model) {
+	public String onAdd(@ModelAttribute("book") @Valid BookInventory book,
+			BindingResult result, Model model) {
 		try {
-			book = librarianService.insertBook(book);
-			model.addAttribute("message",
-					"Book with bookId:" + book.getBookId() + " updated");
-			return "Success";
+			if (result.hasErrors()) {
+				model.addAttribute("bookId", book.getBookId());
+				return "AddBook";
+			} else {
+				book = librarianService.insertBook(book);
+				model.addAttribute("message",
+						"Book with bookId:" + book.getBookId() + " updated");
+				return "Success";
+			}
 		} catch (Exception e) {
 			model.addAttribute("message", e.getMessage());
 			return "Error";
@@ -243,7 +250,7 @@ public class LibrarianController {
 	 * @param regId
 	 * @return
 	 */
-	@RequestMapping("issue.htm")
+	@RequestMapping("/issue.htm")
 	public String issueBook(Model model, @RequestParam("regId") int regId) {
 		try {
 			librarianService.issueBook(regId);
@@ -264,7 +271,7 @@ public class LibrarianController {
 	 * @param regId
 	 * @return
 	 */
-	@RequestMapping("return.htm")
+	@RequestMapping("/return.htm")
 	public String returnBook(Model model, @RequestParam("regId") int regId) {
 		try {
 
@@ -279,6 +286,16 @@ public class LibrarianController {
 			return "Error";
 		}
 
+	}
+
+	/**
+	 * Method used to redirect to librarian home page
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/librarianHome.htm")
+	public String studentHome() {
+		return "StudentOperation";
 	}
 
 }

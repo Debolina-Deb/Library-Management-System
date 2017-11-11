@@ -5,24 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
-<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
-<link href="../css/form.css" rel="stylesheet">
-<style>
-#formIndex {
-	border-radius: 25px;
-	border: 2px solid #73AD21;
-	padding: 20px;
-	margin-right: 20%;
-	margin-left: 30%;
-}
-*{
-font-family: 'Libre Baskerville', serif;
-}
-th, td {
-	padding: 8px;
-	border-bottom: 1px solid #ddd;
-}
-</style>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville"
+	rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>

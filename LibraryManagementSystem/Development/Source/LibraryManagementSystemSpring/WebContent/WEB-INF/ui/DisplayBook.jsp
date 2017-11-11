@@ -6,56 +6,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Display Book</title>
-<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
-<style>
-*{
-font-family: 'Libre Baskerville', serif;
-}
-#form {
-	border-radius: 25px;
-	border: 2px solid #73AD21;
-	padding: 20px;
-	horizontal-align: center;
-	margin-right: 10%;
-	margin-left: 10%;
-}
-th, td {
-	padding: 8px;
-	border-bottom: 1px solid #ddd;
-	text-align: center;
-}
-</style>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville"
+	rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Display Books</h1>
+	<h1 align="center">Welcome to Library Management System - Display
+		Books</h1>
 	<hr>
 	<h4 align="right">Welcome ${userName } (Librarian)</h4>
-	<table align="center">
-		<tr>
-			<th>Book Id
-			<th>Book Name
-			<th>Author
-			<th>Publisher
-			<th>Year of Publication
-			<th>Quantity 
-		</tr>
-				<c:forEach items="${allBook }" var="book">
-					<tr>
-						<td>${book.bookId}
-						<td>${book.bookName}
-						<td>${book.author}
-						<td>${book.publisher}
-						<td>${book.yearOfPublication}
-						<td>${book.noOfBooks}
-						<td><a href="delete.htm?bookId=${book.bookId}">Delete</a>
-					</tr>
-				</c:forEach>
-	</table>
+	<div id="form" align="center">
+		<table align="center" style="text-align: center">
+			<tr>
+				<th>Book Id
+				<th>Book Name
+				<th>Author
+				<th>Publisher
+				<th>Year of Publication
+				<th>Quantity
+			</tr>
+			<c:forEach items="${allBook }" var="book">
+				<tr>
+					<td>${book.bookId}
+					<td>${book.bookName}
+					<td>${book.author}
+					<td>${book.publisher}
+					<td>${book.yearOfPublication}
+					<td>${book.noOfBooks}
+					<td><a href="delete.htm?bookId=${book.bookId}">Delete</a>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 	<h4>
-		<a href="">Home</a>
-	</h4>
-	<h4 align="right">
-		<a href="">Logout</a>
+		<a id="home" href="">Home</a> <a id="logout" href="">Logout</a>
 	</h4>
 </body>
 </html>

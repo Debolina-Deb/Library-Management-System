@@ -4,15 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Error!</title>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System</h1>
+	<h1 align="center">Welcome to Library Management System - Error</h1>
 	<hr>
-	<h3>${message}</h3>
-	
+	<div id="form" align="center">
+	<h4>${message}</h4>
+	</div>
 		<h4>
-		<a href="">Home</a>
+		<a href="home.htm">Home</a>
 	</h4>
 	<h4 align="right">
 		<a href="">Logout</a>

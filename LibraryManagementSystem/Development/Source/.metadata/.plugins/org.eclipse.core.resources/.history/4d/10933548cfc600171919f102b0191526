@@ -1,0 +1,20 @@
+/**
+ * Validation for Book Details
+ */
+function validate() {
+	var book = document.getElementById("bookForm")
+
+	var validBookId = validateBookId(book)
+	var validYOP = validateYOP(book)
+
+	if (validBookId == false || validYOP == false) {
+			return false;		
+	}
+	else return true;
+}
+
+function validateBookId(book){
+	
+	
+	
+}

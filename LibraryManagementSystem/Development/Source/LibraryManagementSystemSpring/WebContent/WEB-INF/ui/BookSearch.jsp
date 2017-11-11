@@ -5,27 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
-<style>
-*{
-font-family: 'Libre Baskerville', serif;
-}
-#form {
-	border-radius: 25px;
-	border: 2px solid #73AD21;
-	padding: 20px;
-	horizontal-align: center;
-	margin-right: 10%;
-	margin-left: 10%;
-}
-
-th, td {
-	padding: 8px;
-	border-bottom: 1px solid #ddd;
-	text-align: center;
-}
-</style>
+<title>Book List</title>
+<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>
@@ -33,7 +15,7 @@ th, td {
 	<div id="form" align="center">
 		<h2 align="center">Book List</h2>
 		<c:if test="${bookList ne null }">
-			<table align="center">
+			<table align="center" style="text-align: center">
 				<tr>
 					<th>Book ID</th>
 					<th>Book Name</th>
@@ -60,10 +42,8 @@ th, td {
 		</c:if>
 	</div>
 	<h4>
-		<a href="">Home</a>
-	</h4>
-	<h4 align="right">
-		<a href="">Logout</a>
+		<a id="home" href="studentHome.htm">Home</a>
+		<a id="logout" href="">Logout</a>
 	</h4>
 </body>
 </html>

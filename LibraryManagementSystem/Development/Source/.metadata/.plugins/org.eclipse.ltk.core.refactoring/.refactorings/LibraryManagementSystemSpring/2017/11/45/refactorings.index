@@ -2,3 +2,6 @@
 1510321910452	Rename type 'LibraryController'
 1510322901424	Infer generic type arguments
 1510323715712	Delete element
+1510385600258	Move 'css' to 'WebContent'
+1510395391360	Move 'js' to 'WebContent'
+1510397926661	Delete element

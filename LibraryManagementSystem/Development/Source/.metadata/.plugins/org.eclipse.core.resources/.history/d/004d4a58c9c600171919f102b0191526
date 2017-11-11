@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
+<script type="text/javascript" "js/userForm.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 align="center">Welcome to Library Management System</h1>
+	<hr>
+	<div id="formIndex" align="center">
+		<form:form id="signUpForm" action="signUp.htm" modelAttribute="user"
+			method="post">
+			<table align="center">
+				<tr>
+					<td><form:label path="userName">User Name : </form:label></td>
+					<td><form:input id="userName" path="userName"
+							placeholder="Enter UserName" required="true"></form:input></td>
+					<td><form:errors path="userName" cssStyle="color:red" /></td>
+				</tr>
+				<tr>
+					<td><form:label path="emailId">Email : </form:label></td>
+					<td><form:input id="emailId" path="emailId"
+							placeholder="Enter Email ID" required="true"></form:input></td>
+					<td><form:errors path="emailId" cssStyle="color:red" /></td>
+				</tr>
+				<tr>
+					<td><form:label path="password">Password : </form:label></td>
+					<td><form:password id="password" path="password"
+							placeholder="Enter Password" required="true"></form:password></td>
+					<td><form:errors path="password" cssStyle="color:red" /><font
+						id="passwordError" style="color: red;">${passwordError} </font></td>
+				</tr>
+				<tr>
+					<td><form:label path="repeatPassword">Repeat Password : </form:label></td>
+					<td><form:password id="repeatPassword" path="repeatPassword"
+							placeholder="Repeat Password" required="true"></form:password></td>
+					<td><font id="confirmPasswordError" style="color: red;"></font></td>
+				</tr>
+				<tr>
+					<td><form:label path="librarian">Librarian(True/False) : </form:label>
+					<td><form:select path="librarian" required="true">
+							<form:options items="${librarian}" />
+						</form:select>
+				</tr>
+				<tr>
+					<td colspan="2">By creating an account you agree to our <a
+						href="">Terms & Privacy</a>.
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right"><input type="submit"
+						onclick="return validateform()" value="Sign Up" /></td>
+				</tr>
+			</table>
+		</form:form>
+	</div>
+</body>
+</html>

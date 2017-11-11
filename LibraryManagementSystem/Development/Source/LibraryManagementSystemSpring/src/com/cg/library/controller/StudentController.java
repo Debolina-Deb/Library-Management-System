@@ -138,4 +138,14 @@ public class StudentController {
 		}
 		return "BookSearch";
 	}
+	
+	/**
+	 * Method used to redirect to Student operation page
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/studentHome")
+	public String studentHome(){
+		return "StudentOperation";
+	}
 }

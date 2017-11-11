@@ -6,12 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Issue/return</title>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System</h1>
+	<h1 align="center">Welcome to Library Management System - Issue Book Requests</h1>
 	<hr>
+	<div id="form" align="center">
 	<c:if test="${reqPList ne null}">
-		<table border="1">
+		<table align="center">
 			<tr>
 				<th>Registration Id</th>
 				<th>Book Id</th>
@@ -31,6 +34,7 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	</div>
 	<h4>
 		<a href="">Home</a>
 	</h4>
