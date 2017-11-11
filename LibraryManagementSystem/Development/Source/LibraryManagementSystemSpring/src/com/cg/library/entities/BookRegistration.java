@@ -5,14 +5,11 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +19,7 @@ public class BookRegistration {
 
 	@Id
 	@Column(name="registration_id")
-	@SequenceGenerator(name="reg_id_seq", initialValue = 1000)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="reg_id_seq")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int registrationId;
 	@Column(name="book_id")
 	private String bookId;

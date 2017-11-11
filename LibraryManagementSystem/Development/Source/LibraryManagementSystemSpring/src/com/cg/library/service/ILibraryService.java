@@ -27,7 +27,7 @@ public interface ILibraryService {
 	public abstract int validateUser(String userName, String password)
 			throws Exception;
 
-	public abstract int returnBook(int inpRegId) throws Exception;
+	public abstract int returnBook(int registrationId) throws Exception;
 
 	public abstract void issueBook(int registrationId) throws Exception;
 
@@ -46,3 +46,40 @@ public interface ILibraryService {
 			throws Exception;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

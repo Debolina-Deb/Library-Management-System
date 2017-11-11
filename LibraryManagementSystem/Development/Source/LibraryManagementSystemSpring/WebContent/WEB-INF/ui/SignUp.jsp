@@ -7,13 +7,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script>
 	function validateform() {
-		var p1 = document.signUpForm.password.value;
-		var p2 = document.signUpForm.repeatPassword.value;
+		
+		var error1 = document.getElementById("passwordError");
+		var error2 = document.getElementById("confirmPasswordError");
+		var password = document.getElementById("password").value;
+		error1.innerHTML = "";
+		error2.innerHTML = "";
+		var confirmPassword = document.getElementById("repeatPassword").value;
 
-		if (p1 != p2) {
-			alert("Passwords do not match!!");
-			return false;
+		if (password != confirmPassword) {
+			error2.innerHTML = "Password Does Not Match"
 		}
+		if (error1.innerHTML.length > 0 || error2.innerHTML.length > 0)
+			return false;
+		else
+			return true;
+
 	}
 </script>
 <title>Insert title here</title>
@@ -37,20 +46,13 @@ th, td {
 	<hr>
 	<div id="form">
 		<form:form id="signUpForm" action="signUp.htm" modelAttribute="user"
-			method="post" onsubmit="return validateform()">
+			method="post">
 			<table align="center">
 				<tr>
 					<td><form:label path="userName">User Name : </form:label></td>
 					<td><form:input id="userName" path="userName"
 							placeholder="Enter UserName" required="true"></form:input></td>
 					<td><form:errors path="userName" cssStyle="color:red" /></td>
-				</tr>
-
-				<tr>
-					<td><form:label path="password">Password : </form:label></td>
-					<td><form:password id="password" path="password"
-							placeholder="Enter Password" required="true"></form:password></td>
-					<td><form:errors path="password" cssStyle="color:red" /></td>
 				</tr>
 				<tr>
 					<td><form:label path="emailId">Email : </form:label></td>
@@ -59,9 +61,17 @@ th, td {
 					<td><form:errors path="emailId" cssStyle="color:red" /></td>
 				</tr>
 				<tr>
+					<td><form:label path="password">Password : </form:label></td>
+					<td><form:password id="password" path="password"
+							placeholder="Enter Password" required="true"></form:password></td>
+					<td><form:errors path="password" cssStyle="color:red" /><font
+						id="passwordError" style="color: red;">${passwordError} </font></td>
+				</tr>
+				<tr>
 					<td><form:label path="repeatPassword">Repeat Password : </form:label></td>
 					<td><form:password id="repeatPassword" path="repeatPassword"
 							placeholder="Repeat Password" required="true"></form:password></td>
+					<td><font id="confirmPasswordError" style="color: red;"></font></td>
 				</tr>
 				<tr>
 					<td><form:label path="librarian">Librarian(True/False) : </form:label>
@@ -75,7 +85,8 @@ th, td {
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="right"><form:button type="submit">Save</form:button></td>
+					<td colspan="2" align="right"><input type="submit"
+						onclick="return validateform()" value="Sign Up" /></td>
 				</tr>
 			</table>
 		</form:form>

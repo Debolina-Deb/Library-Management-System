@@ -9,10 +9,9 @@ import com.cg.library.entities.Users;
 
 public interface ILibraryDao {
 
-	public abstract BookInventory getBookById(String id)
-			throws Exception;
+	public abstract BookInventory getBookById(String id);
 
-	public abstract Users getUserDetails() throws Exception;
+	public abstract Users getUserDetails();
 
 	public abstract BookTransaction returnBookTransaction(int inpRegId) throws Exception;
 	
@@ -31,7 +30,7 @@ public interface ILibraryDao {
 
 	public abstract BookInventory updateBookQuan(String bookId, int updateBy)
 			throws Exception;
-	
+
 	public abstract int getCountOfBooks(String bookId) throws Exception;
 
 	public abstract List<BookRegistration> getAllRequest()

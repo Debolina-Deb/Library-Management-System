@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,8 +14,7 @@ import javax.persistence.Table;
 public class BookTransaction {
 	@Id
 	@Column(name="transaction_id")
-	@SequenceGenerator(name="trn_id_seq", initialValue = 100)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="trn_id_seq")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int transactionId;
 	@Column(name="registration_id")
 	private int registrationId;

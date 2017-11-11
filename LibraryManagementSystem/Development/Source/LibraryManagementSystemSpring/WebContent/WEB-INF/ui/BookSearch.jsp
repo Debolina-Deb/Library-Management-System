@@ -6,7 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
 <style>
+*{
+font-family: 'Libre Baskerville', serif;
+}
 #form {
 	border-radius: 25px;
 	border: 2px solid #73AD21;
@@ -40,7 +44,7 @@ th, td {
 					<th>
 				</tr>
 
-				<c:forEach items="${bookList }" var="book">
+				<c:forEach items="${bookList}" var="book">
 					<tr>
 						<td>${book.bookId }
 						<td>${book.bookName }
