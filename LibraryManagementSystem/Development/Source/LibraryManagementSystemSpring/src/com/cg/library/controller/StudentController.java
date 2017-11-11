@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
 import com.cg.library.service.ILibraryService;
+import com.cg.library.util.Constants;
 /**
  * Student Controller controls functionalities of student
  * 
@@ -40,7 +41,7 @@ public class StudentController {
 			model.addAttribute("bookList", studentService.getAllBooks());
 			return "BookSearch";
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 	}
@@ -61,13 +62,11 @@ public class StudentController {
 			bookRequest.setUserId(studentService.getUserDetails().getUserId());
 			bookRequest.setRegistrationDate(Date.valueOf(LocalDate.now()));
 			bookRequest = studentService.requestBook(bookRequest);
-			model.addAttribute(
-					"message",
-					"Book is requested with Registration id - "
+			model.addAttribute(Constants.M,Constants.M6
 							+ bookRequest.getRegistrationId());
 			return "Success";
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 
@@ -102,7 +101,7 @@ public class StudentController {
 			model.addAttribute("bookList", books);
 			return "BookSearch";
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 
@@ -114,7 +113,7 @@ public class StudentController {
 	 * @return
 	 */
 	@RequestMapping("/searchByName")
-	public String searchBookByName() throws Exception {
+	public String searchBookByName() {
 		return "SearchByAuthor";
 	}
 
@@ -132,11 +131,12 @@ public class StudentController {
 		try {
 			List<BookInventory> books = studentService.searchBookByName(bookName);
 			model.addAttribute("bookList", books);
+			return "BookSearch";
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			model.addAttribute(Constants.M, e.getMessage());
+			return "Error";
 		}
-		return "BookSearch";
+		
 	}
 	
 	/**

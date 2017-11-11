@@ -92,7 +92,4 @@ public class Users {
 				+ ", librarian=" + librarian + "]";
 	}
 	
-	
-
-	
 }

@@ -76,7 +76,7 @@ public class LibraryServiceImpl implements ILibraryService {
 		int fine = -1;
 		BookTransaction tran=dao.returnBookTransaction(inpRegId);
 		fine = 0;
-		BookRegistration reg = dao.validRegId(inpRegId);
+		BookRegistration reg = dao.getBookRegistration(inpRegId);
 		LocalDate issue = tran.getIssueDate().toLocalDate();
 		LocalDate today = LocalDate.now();
 		LocalDate expReturn = issue.plusDays(15);
@@ -95,7 +95,7 @@ public class LibraryServiceImpl implements ILibraryService {
 	@Override
 	public void issueBook(int registrationId) throws Exception {
 		
-		BookRegistration registration =dao.validRegId(registrationId);
+		BookRegistration registration =dao.getBookRegistration(registrationId);
 		registration.setStatus("issued");
 		BookTransaction bookTransaction = new BookTransaction();
 		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
