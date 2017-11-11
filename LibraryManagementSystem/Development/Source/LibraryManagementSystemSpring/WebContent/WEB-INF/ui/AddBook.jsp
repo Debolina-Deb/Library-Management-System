@@ -58,7 +58,7 @@ th, td {
 								cssStyle="color:red" />
 					</tr>
 					<tr>
-						<td><form:label path="author">Author 2:</form:label>
+						<td><form:label path="author">Author :</form:label>
 						<td><form:input path="author" value="${book.author}"
 								required="true" /> <form:errors path="author"
 								cssStyle="color:red" />

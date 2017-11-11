@@ -15,6 +15,7 @@ import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
 import com.cg.library.entities.BookTransaction;
 import com.cg.library.entities.Users;
+import com.cg.library.util.Constants;
 
 /**
  * Extraction of data from database takes place in this layer
@@ -54,7 +55,9 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public List<BookInventory> getAllBooks() {
 		Query query = entityManager.createNamedQuery("getAllBooks");
+		logger.info(Constants.M14);
 		return query.getResultList();
+		
 	}
 
 	/**
@@ -98,7 +101,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 		query.setParameter("ppassword", password);
 		Users user1 = query.getSingleResult();
 		user = user1;
-		logger.info("Valid User with user ID : " + user1.getUserId());
+		logger.info(Constants.M7 + user1.getUserId());
 		return user1;
 	}
 
@@ -113,9 +116,10 @@ public class LibraryDaoImpl implements ILibraryDao {
 		BookInventory book1 = this.getBookById(book.getBookId());
 		if (book1 == null) {
 			entityManager.persist(book);
-			logger.info("Book Inserted with Book ID : " + book.getBookId());
+			logger.info(Constants.M8 + book.getBookId());
 		} else {
 			entityManager.merge(book);
+			logger.info(Constants.M2 + book.getBookId());
 		}
 		return book;
 	}
@@ -137,10 +141,10 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 * @throws Exception
 	 */
 	@Override
-	public BookRegistration validRegId(int inpRegId) throws Exception {
+	public BookRegistration getBookRegistration(int inpRegId) throws Exception {
 		BookRegistration reg = entityManager.find(BookRegistration.class,
 				inpRegId);
-		logger.info("Valid Registration ID");
+		logger.info(Constants.M9+inpRegId);
 		return reg;
 	}
 
@@ -155,7 +159,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 		BookInventory book = null;
 		book = entityManager.find(BookInventory.class, bookId);
 		entityManager.remove(book);
-		logger.info("Book with Id: " + bookId + " deleted successfully");
+		logger.info(Constants.M5 + bookId );
 		return book;
 	}
 
@@ -173,8 +177,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 		inv.setNoOfBooks(inv.getNoOfBooks() + updateBy);
 		entityManager.merge(inv);
 		entityManager.flush();
-		logger.info("Book with Id: " + inv.getBookId()
-				+ " updated successfully");
+		logger.info(Constants.M2+ inv.getBookId());
 		return inv;
 	}
 
@@ -187,7 +190,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public void issueBook(BookTransaction bookTransaction) throws Exception {
 		entityManager.persist(bookTransaction);
-		logger.info("Book issued with registration ID: "
+		logger.info(Constants.M3
 				+ bookTransaction.getRegistrationId());
 	}
 
@@ -205,7 +208,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 		TypedQuery<BookTransaction> query = entityManager.createQuery(
 				QueryMapper.returnBook + inputRegId, BookTransaction.class);
 		transaction = query.getSingleResult();
-
+        logger.info(Constants.M12+inputRegId);
 		return transaction;
 	}
 
@@ -218,7 +221,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public void updateBookTransaction(BookTransaction tran) throws Exception {
 		entityManager.merge(tran);
-		logger.info("Book returned with registration ID: "
+		logger.info(Constants.M10
 				+ tran.getRegistrationId());
 	}
 
@@ -232,7 +235,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	public void updateBookRegistration(BookRegistration registration)
 			throws Exception {
 		entityManager.merge(registration);
-		logger.info("Book registration merged with registration ID: "
+		logger.info(Constants.M11
 				+ registration.getRegistrationId());
 	}
 
@@ -245,7 +248,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	public BookRegistration requestBook(BookRegistration bookRequest)
 			throws Exception {
 		entityManager.persist(bookRequest);
-		logger.info("Book requested for user ID" + bookRequest.getUserId());
+		logger.info(Constants.M6+ bookRequest.getRegistrationId());
 		return bookRequest;
 	}
 
@@ -257,6 +260,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public Users addUser(Users user) throws Exception {
 		entityManager.persist(user);
+		logger.info(Constants.M7+user.getUserId());
 		return user;
 	}
 
@@ -272,6 +276,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 				QueryMapper.reqByStatus, BookRegistration.class);
 		query1.setParameter("pstatus", status);
 		List<BookRegistration> requestList = query1.getResultList();
+		logger.info(Constants.M13);
 		return requestList;
 	}
 
@@ -283,12 +288,11 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	@Override
 	public List<BookInventory> searchBookByAuthor(String author) {
-		String qstr = "SELECT l FROM BookInventory l WHERE lower(l.author) LIKE :author";
-		TypedQuery<BookInventory> query = entityManager.createQuery(qstr,
+		TypedQuery<BookInventory> query = entityManager.createQuery(QueryMapper.bookByAuthor,
 				BookInventory.class);
 		query.setParameter("author", "%" + author + "%");
 		List<BookInventory> books = query.getResultList();
-		logger.info("List being generated as " + books);
+		logger.info(Constants.M14);
 		return books;
 
 	}
@@ -303,11 +307,11 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public List<BookInventory> searchBookByName(String bookName)
 			throws Exception {
-		String qstr = "SELECT l FROM BookInventory l WHERE lower(l.bookName) LIKE :bookName";// '%bookName%'
-		TypedQuery<BookInventory> query = entityManager.createQuery(qstr,
+		TypedQuery<BookInventory> query = entityManager.createQuery(QueryMapper.bookByName,
 				BookInventory.class);
 		query.setParameter("bookName", "%" + bookName + "%");
 		List<BookInventory> books = query.getResultList();
+		logger.info(Constants.M14);
 		return books;
 
 	}

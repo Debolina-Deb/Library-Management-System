@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.Users;
 import com.cg.library.service.ILibraryService;
+import com.cg.library.util.Constants;
 /**
  * Librarian Controller controls functionalities of librarian
  * 
@@ -49,7 +50,7 @@ public class LibrarianController {
 			else
 				return "LibrarianOperation";
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 	}
@@ -63,8 +64,7 @@ public class LibrarianController {
 	@RequestMapping("signUp.htm")
 	public String newUser(Model model) {
 		model.addAttribute("user", new Users());
-		model.addAttribute("librarian", new String[] { "Please select", "true",
-				"false" });
+		model.addAttribute("librarian", Constants.isLibrarianList);
 		return "SignUp";
 	}
 
@@ -80,17 +80,16 @@ public class LibrarianController {
 			@ModelAttribute("user") @Valid Users user, BindingResult result) {
 		try {
 			if (result.hasErrors()) {
-				model.addAttribute("librarian", new String[] { "Please select",
-						"true", "false" });
+				model.addAttribute("librarian",Constants.isLibrarianList);
 				return "SignUp";
 			} else {
 				user = librarianService.addUser(user);
-				model.addAttribute("message", "User added with user Id = "
+				model.addAttribute(Constants.M,Constants.M1
 						+ user.getUserId());
 				return "Success";
 			}
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 
@@ -111,7 +110,7 @@ public class LibrarianController {
 			model.addAttribute("allBook", allBook);
 			model.addAttribute("userName", userName);
 		} catch (Exception le) {
-			model.addAttribute("message", le.getMessage());
+			model.addAttribute(Constants.M, le.getMessage());
 			return "Error";
 		}
 		return "DisplayBook";
@@ -128,11 +127,11 @@ public class LibrarianController {
 	public String deleteBook(@RequestParam("bookId") String bookId, Model model) {
 		try {
 			BookInventory book = librarianService.deleteBookById(bookId);
-			model.addAttribute("message",
-					"Book with book id:" + book.getBookId() + "deleted");
+			model.addAttribute(Constants.M,
+					Constants.M5 + book.getBookId());
 			model.addAttribute("userName", "parag");
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 		return "LibrarianOperation";
@@ -159,7 +158,7 @@ public class LibrarianController {
 				return "AddBook";
 			}
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 
@@ -186,11 +185,11 @@ public class LibrarianController {
 	public String onAdd(@ModelAttribute("book") BookInventory book, Model model) {
 		try {
 			book = librarianService.insertBook(book);
-			model.addAttribute("message",
-					"Book with bookId:" + book.getBookId() + " updated");
+			model.addAttribute(Constants.M,
+					Constants.M2 + book.getBookId());
 			return "Success";
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 
@@ -210,7 +209,7 @@ public class LibrarianController {
 					librarianService.getRequestByStatus("pending"));
 			return "Issue";
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 
@@ -230,7 +229,7 @@ public class LibrarianController {
 					librarianService.getRequestByStatus("issued"));
 			return "Return";
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 
@@ -247,11 +246,10 @@ public class LibrarianController {
 	public String issueBook(Model model, @RequestParam("regId") int regId) {
 		try {
 			librarianService.issueBook(regId);
-			model.addAttribute("message", "Book issued with registration id="
-					+ regId);
+			model.addAttribute(Constants.M, Constants.M3+ regId);
 			return "Success";
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 
@@ -270,12 +268,11 @@ public class LibrarianController {
 
 			int fine = librarianService.returnBook(regId);
 			if (fine != -1) {
-				model.addAttribute("message", "Fine is Rs: " + fine
-						+ "\nBook Returned!!");
+				model.addAttribute(Constants.M, Constants.M4 + fine);
 			}
 			return "Success";
 		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
+			model.addAttribute(Constants.M, e.getMessage());
 			return "Error";
 		}
 

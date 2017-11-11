@@ -1,0 +1,15 @@
+package com.cg.library.util;
+
+public class Constants
+{
+	static String[] isLibrarianList= { "Please select", "true","false" };
+	static String M1="User added with user Id = ";
+	static String M2="Book updated with bookId: ";
+	static String M="message";
+	static String M3="Book issued with registration id=";
+	static String M4="Book Returned!!\nFine is Rs: ";
+	static String
+	static String
+	static String
+	
+}
