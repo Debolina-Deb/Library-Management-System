@@ -1,6 +1,6 @@
 package com.cg.library.service;
 
-import java.sql.Date;
+import java.sql.Date.valueOf;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -80,7 +80,7 @@ public class LibraryServiceImpl implements ILibraryService {
 		int chk = Period.between(expReturn, today).getDays();
 		if (chk > 0)
 			fine = chk * 10; // fine is 10rs per day
-		tran.setReturnDate(Date.valueOf(today));
+		tran.setReturnDate(java.sql.Date.valueOf(today));
 		tran.setFine(fine);
 		reg.setStatus("returned");
 		dao.updateBookTransaction(tran);
