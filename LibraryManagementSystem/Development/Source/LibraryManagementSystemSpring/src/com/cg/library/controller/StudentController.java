@@ -15,6 +15,8 @@ import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
 import com.cg.library.service.ILibraryService;
 import com.cg.library.util.Constants;
+import com.cg.library.util.RequestPage;
+
 /**
  * Student Controller controls functionalities of student
  * 
@@ -39,10 +41,10 @@ public class StudentController {
 	public String showAllBooks(Model model) {
 		try {
 			model.addAttribute("bookList", studentService.getAllBooks());
-			return Constants.pgBookS;
+			return RequestPage.pgBookS;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return Constants.pgError;
+			return RequestPage.pgError;
 		}
 	}
 
@@ -62,12 +64,12 @@ public class StudentController {
 			bookRequest.setUserId(studentService.getUserDetails().getUserId());
 			bookRequest.setRegistrationDate(Date.valueOf(LocalDate.now()));
 			bookRequest = studentService.requestBook(bookRequest);
-			model.addAttribute(Constants.M,Constants.M6
-							+ bookRequest.getRegistrationId());
-			return Constants.pgSuccess;
+			model.addAttribute(Constants.M,
+					Constants.M6 + bookRequest.getRegistrationId());
+			return RequestPage.pgSuccess;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return Constants.pgError;
+			return RequestPage.pgError;
 		}
 
 	}
@@ -81,7 +83,7 @@ public class StudentController {
 	@RequestMapping("/searchByAuthor")
 	public String searchBookByAuthor(Model model) {
 		model.addAttribute("input", "0");
-		return Constants.pgSByAuth;
+		return RequestPage.pgSByAuth;
 	}
 
 	/**
@@ -99,10 +101,10 @@ public class StudentController {
 			List<BookInventory> books = studentService
 					.searchBookByAuthor(author);
 			model.addAttribute("bookList", books);
-			return Constants.pgBookS;
+			return RequestPage.pgBookS;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return Constants.pgError;
+			return RequestPage.pgError;
 		}
 
 	}
@@ -114,7 +116,7 @@ public class StudentController {
 	 */
 	@RequestMapping("/searchByName")
 	public String searchBookByName() {
-		return Constants.pgSByAuth;
+		return RequestPage.pgSByAuth;
 	}
 
 	/**
@@ -129,23 +131,24 @@ public class StudentController {
 	public String searchByBook(Model model,
 			@RequestParam("bookName") String bookName) {
 		try {
-			List<BookInventory> books = studentService.searchBookByName(bookName);
+			List<BookInventory> books = studentService
+					.searchBookByName(bookName);
 			model.addAttribute("bookList", books);
-			return Constants.pgBookS;
+			return RequestPage.pgBookS;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return Constants.pgError;
+			return RequestPage.pgError;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Method used to redirect to Student operation page
 	 * 
 	 * @return
 	 */
 	@RequestMapping("/studentHome")
-	public String studentHome(){
-		return Constants.pgStdOp;
+	public String studentHome() {
+		return RequestPage.pgStdOp;
 	}
 }
