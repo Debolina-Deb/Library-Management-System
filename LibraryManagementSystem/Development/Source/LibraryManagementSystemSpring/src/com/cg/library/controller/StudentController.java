@@ -39,10 +39,10 @@ public class StudentController {
 	public String showAllBooks(Model model) {
 		try {
 			model.addAttribute("bookList", studentService.getAllBooks());
-			return "BookSearch";
+			return Constants.pgBookS;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 	}
 
@@ -64,10 +64,10 @@ public class StudentController {
 			bookRequest = studentService.requestBook(bookRequest);
 			model.addAttribute(Constants.M,Constants.M6
 							+ bookRequest.getRegistrationId());
-			return "Success";
+			return Constants.pgSuccess;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 
 	}
@@ -81,7 +81,7 @@ public class StudentController {
 	@RequestMapping("/searchByAuthor")
 	public String searchBookByAuthor(Model model) {
 		model.addAttribute("input", "0");
-		return "SearchByAuthor";
+		return Constants.pgSByAuth;
 	}
 
 	/**
@@ -99,10 +99,10 @@ public class StudentController {
 			List<BookInventory> books = studentService
 					.searchBookByAuthor(author);
 			model.addAttribute("bookList", books);
-			return "BookSearch";
+			return Constants.pgBookS;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 
 	}
@@ -114,7 +114,7 @@ public class StudentController {
 	 */
 	@RequestMapping("/searchByName")
 	public String searchBookByName() {
-		return "SearchByAuthor";
+		return Constants.pgSByAuth;
 	}
 
 	/**
@@ -131,10 +131,10 @@ public class StudentController {
 		try {
 			List<BookInventory> books = studentService.searchBookByName(bookName);
 			model.addAttribute("bookList", books);
-			return "BookSearch";
+			return Constants.pgBookS;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 		
 	}
@@ -146,6 +146,6 @@ public class StudentController {
 	 */
 	@RequestMapping("/studentHome")
 	public String studentHome(){
-		return "StudentOperation";
+		return Constants.pgStdOp;
 	}
 }

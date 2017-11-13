@@ -30,7 +30,6 @@ public class Users {
 	@Column(name="repeat_password")
 	private String repeatPassword;
 	@Column(name="email_id")
-	//@Email(message="Please enter valid Email ID")
 	@NotNull(message="Email Id  is Mandatory")
 	@Pattern(regexp="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,6}$",message="Please enter valid Email ID (abc@xyz.com)")
 	private String emailId;

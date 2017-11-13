@@ -10,7 +10,7 @@
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System</h1>
+	<h1 align="center">Welcome to Library Management System - Home</h1>
 	<hr>
 	<br>
 	<div id="formIndex" align="center">

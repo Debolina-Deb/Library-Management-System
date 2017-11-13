@@ -24,10 +24,6 @@ public class LibraryServiceImpl implements ILibraryService {
 	public BookInventory getBookById(String id) throws Exception {
 		return dao.getBookById(id);
 	}
-
-	/*
-	 * @Override public Long getBookCount() { return dao.getBookCount(); }
-	 */
 	
 	@Override
 	public List<BookInventory> getAllBooks() throws Exception {
@@ -65,7 +61,7 @@ public class LibraryServiceImpl implements ILibraryService {
 			throws Exception {
 		if (dao.getBookById(bookRequest.getBookId()) == null) {
 			return null;
-		} else if (dao.getCountOfBooks(bookRequest.getBookId()) == 0) {
+		} else if (dao.getBookById(bookRequest.getBookId()).getNoOfBooks() == 0) {
 			return null;
 		}
 		return dao.requestBook(bookRequest);
