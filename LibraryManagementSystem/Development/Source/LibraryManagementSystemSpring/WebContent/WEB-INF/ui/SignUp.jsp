@@ -11,7 +11,7 @@
 <title>Sign Up</title>
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System</h1>
+	<h1 align="center">Welcome to Library Management System - SignUp</h1>
 	<hr>
 	<div id="formIndex" align="center">
 		<form:form id="signUpForm" action="signUp.htm" modelAttribute="user"

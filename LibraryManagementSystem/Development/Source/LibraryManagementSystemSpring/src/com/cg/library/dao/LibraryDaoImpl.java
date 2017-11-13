@@ -16,6 +16,7 @@ import com.cg.library.entities.BookRegistration;
 import com.cg.library.entities.BookTransaction;
 import com.cg.library.entities.Users;
 import com.cg.library.util.Constants;
+import com.cg.library.util.QueryMapper;
 
 /**
  * Extraction of data from database takes place in this layer
@@ -36,8 +37,6 @@ public class LibraryDaoImpl implements ILibraryDao {
 	private static Logger logger = Logger
 			.getLogger(com.cg.library.dao.LibraryDaoImpl.class);
 
-	static public Users user = new Users();
-
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -47,8 +46,9 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 * @param id
 	 */
 	@Override
-	public BookInventory getBookById(String id) {
-		BookInventory book = entityManager.find(BookInventory.class, id);
+	public BookInventory getBookById(String bookId) {
+		BookInventory book = entityManager.find(BookInventory.class, bookId);
+		logger.info(Constants.M15 + bookId);
 		return book;
 	}
 
@@ -69,24 +69,12 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	@Override
 	public List<BookRegistration> getAllRequest() {
-		Query query = entityManager.createNamedQuery(QueryMapper.getAllRequests);
+		Query query = entityManager
+				.createNamedQuery(QueryMapper.getAllRequests);
 		@SuppressWarnings("unchecked")
 		List<BookRegistration> requestList = query.getResultList();
+		logger.info(Constants.M13);
 		return requestList;
-	}
-
-	/**
-	 * Method to get count of books in inventory
-	 * 
-	 * @param bookId
-	 * @throws Exception
-	 */
-	@Override
-	public int getCountOfBooks(String bookId) throws Exception {
-		TypedQuery<BookInventory> query1 = entityManager.createQuery(
-				QueryMapper.getCountOfBooks + bookId, BookInventory.class);
-		BookInventory booksInventory = query1.getSingleResult();
-		return booksInventory.getNoOfBooks();
 	}
 
 	/**
@@ -104,7 +92,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 		query.setParameter("puserName", userName);
 		query.setParameter("ppassword", password);
 		Users user1 = query.getSingleResult();
-		user = user1;
+		QueryMapper.user = user1;
 		logger.info(Constants.M7 + user1.getUserId());
 		return user1;
 	}
@@ -135,7 +123,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 * @throws Exception
 	 */
 	public Users getUserDetails() {
-		return user;
+		return QueryMapper.user;
 	}
 
 	/**
@@ -268,6 +256,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	/**
 	 * Method to get request by status
 	 * 
+	 * @param status
 	 * @throws Exception
 	 */
 	@Override
@@ -316,20 +305,5 @@ public class LibraryDaoImpl implements ILibraryDao {
 		return books;
 
 	}
-	
-	public static Logger getLogger() {
-		return logger;
-	}
 
-	public static void setLogger(Logger logger) {
-		LibraryDaoImpl.logger = logger;
-	}
-
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
-
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
 }

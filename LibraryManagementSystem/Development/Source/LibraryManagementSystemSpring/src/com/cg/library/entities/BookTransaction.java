@@ -1,6 +1,7 @@
 package com.cg.library.entities;
 
 import java.sql.Date;
+import java.util.Comparator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "booksTransaction")
-public class BookTransaction {
+public class BookTransaction implements Comparator<BookTransaction>{
 	@Id
 	@Column(name="transaction_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,25 +25,25 @@ public class BookTransaction {
 	private Date returnDate;
 	@Column(name="fine")
 	private Integer fine;
-	
-	
-	
+
+
+
 	public Date getIssueDate() {
 		return issueDate;
 	}
-	
+
 	public void setIssueDate(Date issueDate) {
 		this.issueDate = issueDate;
 	}
-	
+
 	public Date getReturnDate() {
 		return returnDate;
 	}
-	
+
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
-	
+
 	public int getFine() {
 		return fine;
 	}
@@ -75,8 +76,16 @@ public class BookTransaction {
 				+ issueDate + ", returnDate=" + returnDate + ", fine=" + fine
 				+ "]";
 	}
+
+	@Override
+	public int compare(BookTransaction o1, BookTransaction o2) {
+		if(o1.getTransactionId() == o2.getTransactionId())
+			return 1;
+		return 0;
 	}
 	
-	
+}
+
+
 
 

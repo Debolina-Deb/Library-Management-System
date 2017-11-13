@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System - Return
-		Book Requests</h1>
+		Book Issued</h1>
 	<hr>
 	<div id="form" align="center">
 		<c:if test="${reqIList ne null}">

@@ -2,6 +2,7 @@ package com.cg.library.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,19 +41,20 @@ public class LibrarianController {
 	 * @param password
 	 * @return
 	 */
+	
 	@RequestMapping(value = "/login.htm", method = RequestMethod.POST)
 	public String login(Model model, @RequestParam("userName") String userName,
-			@RequestParam("password") String password) {
+			@RequestParam("password") String password,HttpServletRequest request) {
 		try {
 			int i = librarianService.validateUser(userName, password);
 			model.addAttribute("userName", userName);
 			if (i == 0)
-				return "StudentOperation";
+				return Constants.pgStdOp;
 			else
-				return "LibrarianOperation";
+				return Constants.pgLibOp;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 	}
 
@@ -66,7 +68,7 @@ public class LibrarianController {
 	public String newUser(Model model) {
 		model.addAttribute("user", new Users());
 		model.addAttribute("librarian", Constants.isLibrarianList);
-		return "SignUp";
+		return Constants.pgSignUp;
 	}
 
 	/**
@@ -82,16 +84,16 @@ public class LibrarianController {
 		try {
 			if (result.hasErrors()) {
 				model.addAttribute("librarian",Constants.isLibrarianList);
-				return "SignUp";
+				return Constants.pgSignUp;
 			} else {
 				user = librarianService.addUser(user);
 				model.addAttribute(Constants.M,Constants.M1
 						+ user.getUserId());
-				return "Success";
+				return Constants.pgSuccess;
 			}
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 
 	}
@@ -110,11 +112,11 @@ public class LibrarianController {
 			List<BookInventory> allBook = librarianService.getAllBooks();
 			model.addAttribute("allBook", allBook);
 			model.addAttribute("userName", userName);
-		} catch (Exception le) {
-			model.addAttribute(Constants.M, le.getMessage());
-			return "Error";
+		} catch (Exception e) {
+			model.addAttribute(Constants.M, e.getMessage());
+			return Constants.pgError;
 		}
-		return "DisplayBook";
+		return Constants.pgDispB;
 	}
 
 	/**
@@ -130,12 +132,11 @@ public class LibrarianController {
 			BookInventory book = librarianService.deleteBookById(bookId);
 			model.addAttribute(Constants.M,
 					Constants.M5 + book.getBookId());
-			model.addAttribute("userName", "parag");
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
-		return "LibrarianOperation";
+		return Constants.pgLibOp;
 	}
 
 	/**
@@ -152,15 +153,15 @@ public class LibrarianController {
 			if (book == null) {
 				model.addAttribute("bookId", bookId);
 				model.addAttribute("book", new BookInventory());
-				return "AddBook";
+				return Constants.pgAddBook;
 			} else {
 				model.addAttribute("bookId", bookId);
 				model.addAttribute("book", book);
-				return "AddBook";
+				return Constants.pgAddBook;
 			}
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 
 	}
@@ -172,7 +173,7 @@ public class LibrarianController {
 	 */
 	@RequestMapping(value = "addUpdate.htm")
 	public String addUpdateBook() {
-		return "AddBook";
+		return Constants.pgAddBook;
 	}
 
 	/**
@@ -188,16 +189,16 @@ public class LibrarianController {
 		try {
 			if (result.hasErrors()) {
 				model.addAttribute("bookId", book.getBookId());
-				return "AddBook";
+				return Constants.pgAddBook;
 			} else {
 				book = librarianService.insertBook(book);
 				model.addAttribute(Constants.M,
 						Constants.M2 + book.getBookId());
-				return "Success";
+				return Constants.pgSuccess;
 			}
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 
 	}
@@ -213,11 +214,11 @@ public class LibrarianController {
 
 		try {
 			model.addAttribute("reqPList",
-					librarianService.getRequestByStatus("pending"));
-			return "Issue";
+					librarianService.getRequestByStatus(Constants.pending));
+			return Constants.pgIssue;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 
 	}
@@ -233,11 +234,11 @@ public class LibrarianController {
 
 		try {
 			model.addAttribute("reqIList",
-					librarianService.getRequestByStatus("issued"));
-			return "Return";
+					librarianService.getRequestByStatus(Constants.issued));
+			return Constants.pgReturn;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 
 	}
@@ -254,10 +255,10 @@ public class LibrarianController {
 		try {
 			librarianService.issueBook(regId);
 			model.addAttribute(Constants.M, Constants.M3+ regId);
-			return "Success";
+			return Constants.pgSuccess;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 
 	}
@@ -277,10 +278,10 @@ public class LibrarianController {
 			if (fine != -1) {
 				model.addAttribute(Constants.M, Constants.M4 + fine);
 			}
-			return "Success";
+			return Constants.pgSuccess;
 		} catch (Exception e) {
 			model.addAttribute(Constants.M, e.getMessage());
-			return "Error";
+			return Constants.pgError;
 		}
 
 	}
@@ -291,8 +292,8 @@ public class LibrarianController {
 	 * @return
 	 */
 	@RequestMapping("/librarianHome.htm")
-	public String studentHome() {
-		return "StudentOperation";
+	public String librarianHome() {
+		return Constants.pgLibOp;
 	}
 
 }
