@@ -54,6 +54,6 @@ public interface ILibraryDao {
 
 	public abstract BookInventory deleteBookById(String bookId) throws Exception;
 
-	BookInventory insertBook(BookInventory book) throws Exception;
+	public abstract BookInventory insertBook(BookInventory book) throws Exception;
 
 }

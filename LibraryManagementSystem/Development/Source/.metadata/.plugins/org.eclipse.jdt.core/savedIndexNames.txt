@@ -1,7 +1,6 @@
 INDEX VERSION 1.127+D:\lms\LibraryManagementSystem\Development\Source\.metadata\.plugins\org.eclipse.jdt.core
 1021028560.index
 169913375.index
-1635158221.index
 3648537774.index
 402866746.index
 1566162125.index

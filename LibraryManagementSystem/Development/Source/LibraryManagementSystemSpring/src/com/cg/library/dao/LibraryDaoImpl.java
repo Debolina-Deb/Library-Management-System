@@ -22,6 +22,10 @@ import com.cg.library.util.Constants;
  * 
  * @author parpatid
  */
+/**
+ * @author vinay raj
+ *
+ */
 @Repository
 @Transactional
 public class LibraryDaoImpl implements ILibraryDao {
@@ -312,5 +316,20 @@ public class LibraryDaoImpl implements ILibraryDao {
 		return books;
 
 	}
+	
+	public static Logger getLogger() {
+		return logger;
+	}
 
+	public static void setLogger(Logger logger) {
+		LibraryDaoImpl.logger = logger;
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 }
