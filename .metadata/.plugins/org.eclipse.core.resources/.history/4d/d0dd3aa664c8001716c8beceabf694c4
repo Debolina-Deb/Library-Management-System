@@ -59,10 +59,9 @@ public class LibraryServiceImpl implements ILibraryService {
 	@Override
 	public BookRegistration requestBook(BookRegistration bookRequest)
 			throws Exception {
-		BookInventory bookInventory = dao.getBookById(bookRequest.getBookId());
-		if (bookInventory == null) {
+		if (dao.getBookById(bookRequest.getBookId()) == null) {
 			return null;
-		} else if (bookInventory.getNoOfBooks() == 0) {
+		} else if (dao.getBookById(bookRequest.getBookId()).getNoOfBooks() == 0) {
 			return null;
 		}
 		return dao.requestBook(bookRequest);

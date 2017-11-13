@@ -62,7 +62,7 @@ public class LibraryServiceImpl implements ILibraryService {
 		BookInventory bookInventory = dao.getBookById(bookRequest.getBookId());
 		if (bookInventory == null) {
 			return null;
-		} else if (bookInventory.getNoOfBooks() == 0) {
+		} else if (dao.getBookById(bookRequest.getBookId()).getNoOfBooks() == 0) {
 			return null;
 		}
 		return dao.requestBook(bookRequest);
