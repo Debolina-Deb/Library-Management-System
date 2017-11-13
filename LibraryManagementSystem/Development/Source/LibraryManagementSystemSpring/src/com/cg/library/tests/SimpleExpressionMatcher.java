@@ -12,7 +12,6 @@ public class SimpleExpressionMatcher extends ArgumentMatcher<SimpleExpression> {
 
     @Override
     public boolean matches(Object argument) {
-        @SuppressWarnings({"unchecked", "rawtypes"})
         SimpleExpression otherSimpleExpression = (SimpleExpression) argument;
         // somehow compare the SimpleExpressions, possibly like this:
         return this.simpleExpression.toString().equals(otherSimpleExpression.toString());
