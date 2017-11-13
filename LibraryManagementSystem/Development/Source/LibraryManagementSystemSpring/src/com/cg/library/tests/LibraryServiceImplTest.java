@@ -135,7 +135,6 @@ public class LibraryServiceImplTest {
 		BookInventory bookInventory = new BookInventory();
 		bookInventory.setBookId("123");
 		bookInventory.setNoOfBooks(12);
-		stub(libraryDao.getCountOfBooks(Mockito.anyString())).toReturn(12);
 		stub(libraryDao.getBookById(Mockito.anyString())).toReturn(
 				bookInventory);
 		stub(libraryDao.requestBook(bookRegistration)).toReturn(
@@ -144,7 +143,6 @@ public class LibraryServiceImplTest {
 		assertEquals(bookRegistration,
 				libraryServiceImpl.requestBook(bookRegistration));
 		verify(libraryDao).requestBook(bookRegistration);
-		verify(libraryDao).getCountOfBooks(Mockito.anyString());
 		verify(libraryDao).getBookById(Mockito.anyString());
 	}
 

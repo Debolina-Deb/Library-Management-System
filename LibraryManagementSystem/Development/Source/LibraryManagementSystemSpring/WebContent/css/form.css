@@ -29,23 +29,6 @@ th, td {
 	border-bottom: 1px solid #ddd;
 }
 
-a:link, a:visited {
-    background-color: #D9FDB5;
-    color: darkgrey;
-    padding: 14px 25px;
-    text-align: center;
-    font-size: 22px;
-    text-decoration: none;
-    display: inline-block;
-    height: 50px;
-    width: 200px; 
-}
-
-a:hover, a:active {
-    background-color: #DA0505;
-    color: white;
-}
-
 #home{
 	text-align: left;
 }
