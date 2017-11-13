@@ -14,26 +14,27 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cg.library.dao.ILibraryDao;
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
+import com.cg.library.entities.BookTransaction;
 import com.cg.library.entities.Users;
 import com.cg.library.service.ILibraryService;
 import com.cg.library.service.LibraryServiceImpl;
-
 
 @RunWith(MockitoJUnitRunner.class)
 public class LibraryServiceImplTest {
 
 	@Mock
 	private ILibraryDao libraryDao;
-	
+
 	@InjectMocks
 	private ILibraryService libraryServiceImpl = new LibraryServiceImpl();
-	
+
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
@@ -45,7 +46,7 @@ public class LibraryServiceImplTest {
 		BookInventory bookInventory = new BookInventory();
 		bookInventory.setBookId(bookId);
 		stub(libraryDao.getBookById(bookId)).toReturn(bookInventory);
-		
+
 		assertEquals(bookInventory, libraryServiceImpl.getBookById(bookId));
 		verify(libraryDao).getBookById(bookId);
 	}
@@ -59,9 +60,11 @@ public class LibraryServiceImplTest {
 		book1.setBookId("123");
 		book2.setBookId("1234");
 		book3.setBookId("345");
-		
+		bookInventories.add(book1);
+		bookInventories.add(book2);
+		bookInventories.add(book3);
 		stub(libraryDao.getAllBooks()).toReturn(bookInventories);
-		
+
 		assertEquals(bookInventories, libraryServiceImpl.getAllBooks());
 		verify(libraryDao).getAllBooks();
 	}
@@ -74,9 +77,9 @@ public class LibraryServiceImplTest {
 		users.setUserName(userName);
 		users.setPassword(password);
 		users.setLibrarian("true");
-		
+
 		stub(libraryDao.validateUser(userName, password)).toReturn(users);
-		
+
 		assertEquals(1, libraryServiceImpl.validateUser(userName, password));
 		verify(libraryDao).validateUser(userName, password);
 	}
@@ -86,10 +89,11 @@ public class LibraryServiceImplTest {
 		BookInventory bookInventory = new BookInventory();
 		String bookId = "123";
 		bookInventory.setBookId(bookId);
-		
+
 		stub(libraryDao.insertBook(bookInventory)).toReturn(bookInventory);
-		
-		assertEquals(bookInventory, libraryServiceImpl.insertBook(bookInventory));
+
+		assertEquals(bookInventory,
+				libraryServiceImpl.insertBook(bookInventory));
 		verify(libraryDao).insertBook(bookInventory);
 	}
 
@@ -98,9 +102,9 @@ public class LibraryServiceImplTest {
 		BookInventory bookInventory = new BookInventory();
 		String bookId = "123";
 		bookInventory.setBookId(bookId);
-		
+
 		stub(libraryDao.deleteBookById(bookId)).toReturn(bookInventory);
-		
+
 		assertEquals(bookInventory, libraryServiceImpl.deleteBookById(bookId));
 		verify(libraryDao).deleteBookById(bookId);
 	}
@@ -113,9 +117,9 @@ public class LibraryServiceImplTest {
 		users.setUserName(userName);
 		users.setPassword(password);
 		users.setLibrarian("true");
-		
+
 		stub(libraryDao.getUserDetails()).toReturn(users);
-		
+
 		assertEquals(users, libraryServiceImpl.getUserDetails());
 		verify(libraryDao).getUserDetails();
 	}
@@ -130,46 +134,152 @@ public class LibraryServiceImplTest {
 		bookRegistration.setUserId(1234);
 		BookInventory bookInventory = new BookInventory();
 		bookInventory.setBookId("123");
-		stub(libraryDao.getBookById(bookRegistration.getBookId())).toReturn(bookInventory);
-		stub(libraryDao.requestBook(bookRegistration)).toReturn(bookRegistration);
-		
-		assertEquals(bookRegistration, libraryServiceImpl.requestBook(bookRegistration));
+		bookInventory.setNoOfBooks(12);
+		stub(libraryDao.getCountOfBooks(Mockito.anyString())).toReturn(12);
+		stub(libraryDao.getBookById(Mockito.anyString())).toReturn(
+				bookInventory);
+		stub(libraryDao.requestBook(bookRegistration)).toReturn(
+				bookRegistration);
+
+		assertEquals(bookRegistration,
+				libraryServiceImpl.requestBook(bookRegistration));
 		verify(libraryDao).requestBook(bookRegistration);
-	}
-/*
-	@Test
-	public void testReturnBook() {
-		fail("Not yet implemented");
+		verify(libraryDao).getCountOfBooks(Mockito.anyString());
+		verify(libraryDao).getBookById(Mockito.anyString());
 	}
 
 	@Test
-	public void testIssueBook() {
-		fail("Not yet implemented");
+	public void testReturnBook() throws Exception {
+		BookTransaction bookTransaction = new BookTransaction();
+		bookTransaction.setRegistrationId(1234);
+		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
+		BookRegistration bookRegistration = new BookRegistration();
+		bookRegistration.setRegistrationId(1234);
+
+		stub(libraryDao.returnBookTransaction(Mockito.anyInt())).toReturn(
+				bookTransaction);
+		stub(libraryDao.getBookRegistration(Mockito.anyInt())).toReturn(
+				bookRegistration);
+		assertEquals(0, libraryServiceImpl.returnBook(Mockito.anyInt()));
+		verify(libraryDao).updateBookTransaction(bookTransaction);
+		verify(libraryDao)
+		.updateBookQuan(Mockito.anyString(), Mockito.anyInt());
+		verify(libraryDao).updateBookRegistration(bookRegistration);
 	}
 
 	@Test
-	public void testGetAllRequest() {
-		fail("Not yet implemented");
+	public void testIssueBook() throws Exception {
+		BookRegistration bookRegistration = new BookRegistration();
+		bookRegistration.setRegistrationId(1234);
+		stub(libraryDao.getBookRegistration(Mockito.anyInt())).toReturn(
+				bookRegistration);
+
+		BookTransaction bookTransaction = new BookTransaction();
+		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
+		bookTransaction.setRegistrationId(1234);
+		libraryServiceImpl.issueBook(1234);
+		verify(libraryDao, Mockito.times(1)).updateBookQuan(
+				Mockito.anyString(), Mockito.anyInt());
+		verify(libraryDao, Mockito.times(1)).updateBookRegistration(
+				bookRegistration);
 	}
 
 	@Test
-	public void testAddUser() {
-		fail("Not yet implemented");
+	public void testGetAllRequest() throws Exception {
+		List<BookRegistration> bookRegistrations = new ArrayList<BookRegistration>();
+		BookRegistration bookRegistration1 = new BookRegistration();
+		BookRegistration bookRegistration2 = new BookRegistration();
+
+		bookRegistration1.setRegistrationId(123);
+		bookRegistration2.setRegistrationId(321);
+		bookRegistrations.add(bookRegistration1);
+		bookRegistrations.add(bookRegistration2);
+		stub(libraryDao.getAllRequest()).toReturn(bookRegistrations);
+
+		assertEquals(bookRegistrations, libraryServiceImpl.getAllRequest());
+		verify(libraryDao).getAllRequest();
 	}
 
 	@Test
-	public void testGetRequestByStatus() {
-		fail("Not yet implemented");
+	public void testAddUser() throws Exception {
+		Users users = new Users();
+		String userName = "username";
+		String password = "password";
+		users.setUserName(userName);
+		users.setPassword(password);
+		users.setLibrarian("true");
+
+		stub(libraryDao.addUser(users)).toReturn(users);
+		assertEquals(users, libraryServiceImpl.addUser(users));
+		verify(libraryDao).addUser(users);
 	}
 
 	@Test
-	public void testSearchBookByAuthor() {
-		fail("Not yet implemented");
+	public void testGetRequestByStatus() throws Exception {
+		List<BookRegistration> bookRegistrations = new ArrayList<BookRegistration>();
+		BookRegistration bookRegistration1 = new BookRegistration();
+		BookRegistration bookRegistration2 = new BookRegistration();
+
+		bookRegistration1.setRegistrationId(123);
+		bookRegistration1.setStatus("issued");
+		bookRegistration2.setRegistrationId(321);
+		bookRegistration2.setStatus("issued");
+		bookRegistrations.add(bookRegistration1);
+		bookRegistrations.add(bookRegistration2);
+
+		stub(libraryDao.getRequestByStatus(Mockito.anyString())).toReturn(
+				bookRegistrations);
+		assertEquals(bookRegistrations,
+				libraryServiceImpl.getRequestByStatus(Mockito.anyString()));
+		verify(libraryDao).getRequestByStatus(Mockito.anyString());
 	}
 
 	@Test
-	public void testSearchBookByName() {
-		fail("Not yet implemented");
+	public void testSearchBookByAuthor() throws Exception {
+		List<BookInventory> bookInventories = new ArrayList<BookInventory>();
+		BookInventory book1 = new BookInventory();
+		BookInventory book2 = new BookInventory();
+		BookInventory book3 = new BookInventory();
+		book1.setBookId("123");
+		book1.setAuthor("author");
+		book2.setBookId("1234");
+		book2.setAuthor("author");
+		book3.setBookId("345");
+		book3.setAuthor("author");
+		bookInventories.add(book1);
+		bookInventories.add(book2);
+		bookInventories.add(book3);
+
+		stub(libraryDao.searchBookByAuthor(Mockito.anyString())).toReturn(
+				bookInventories);
+		assertEquals(bookInventories,
+				libraryServiceImpl.searchBookByAuthor(Mockito.anyString()));
+		verify(libraryDao).searchBookByAuthor(Mockito.anyString());
 	}
-*/
+
+	@Test
+	public void testSearchBookByName() throws Exception {
+		List<BookInventory> bookInventories = new ArrayList<BookInventory>();
+		BookInventory book1 = new BookInventory();
+		BookInventory book2 = new BookInventory();
+		BookInventory book3 = new BookInventory();
+		book1.setBookId("123");
+		book1.setAuthor("author");
+		book1.setBookName("book1");
+		book2.setBookId("1234");
+		book2.setAuthor("author");
+		book1.setBookName("book2");
+		book3.setBookId("345");
+		book3.setAuthor("author");
+		book3.setBookName("book1");
+		bookInventories.add(book1);
+		bookInventories.add(book2);
+		bookInventories.add(book3);
+
+		stub(libraryDao.searchBookByName(Mockito.anyString())).toReturn(
+				bookInventories);
+		assertEquals(bookInventories,
+				libraryServiceImpl.searchBookByName(Mockito.anyString()));
+		verify(libraryDao).searchBookByName(Mockito.anyString());
+	}
 }
