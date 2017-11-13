@@ -54,10 +54,10 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BookInventory> getAllBooks() {
-		Query query = entityManager.createNamedQuery(QueryMapper.getAllBooks);
+		Query query = entityManager.createNamedQuery("getAllBooks");
 		logger.info(Constants.M14);
 		return query.getResultList();
-
+		
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	@Override
 	public List<BookRegistration> getAllRequest() {
-		Query query = entityManager.createNamedQuery(QueryMapper.getAllRequests);
+		Query query = entityManager.createNamedQuery("getAllRequests");
 		@SuppressWarnings("unchecked")
 		List<BookRegistration> requestList = query.getResultList();
 		return requestList;
@@ -144,7 +144,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	public BookRegistration getBookRegistration(int inpRegId) throws Exception {
 		BookRegistration reg = entityManager.find(BookRegistration.class,
 				inpRegId);
-		logger.info(Constants.M9 + inpRegId);
+		logger.info(Constants.M9+inpRegId);
 		return reg;
 	}
 
@@ -159,7 +159,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 		BookInventory book = null;
 		book = entityManager.find(BookInventory.class, bookId);
 		entityManager.remove(book);
-		logger.info(Constants.M5 + bookId);
+		logger.info(Constants.M5 + bookId );
 		return book;
 	}
 
@@ -177,7 +177,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 		inv.setNoOfBooks(inv.getNoOfBooks() + updateBy);
 		entityManager.merge(inv);
 		entityManager.flush();
-		logger.info(Constants.M2 + inv.getBookId());
+		logger.info(Constants.M2+ inv.getBookId());
 		return inv;
 	}
 
@@ -190,7 +190,8 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public void issueBook(BookTransaction bookTransaction) throws Exception {
 		entityManager.persist(bookTransaction);
-		logger.info(Constants.M3 + bookTransaction.getRegistrationId());
+		logger.info(Constants.M3
+				+ bookTransaction.getRegistrationId());
 	}
 
 	/**
@@ -207,7 +208,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 		TypedQuery<BookTransaction> query = entityManager.createQuery(
 				QueryMapper.returnBook + inputRegId, BookTransaction.class);
 		transaction = query.getSingleResult();
-		logger.info(Constants.M12 + inputRegId);
+        logger.info(Constants.M12+inputRegId);
 		return transaction;
 	}
 
@@ -220,7 +221,8 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public void updateBookTransaction(BookTransaction tran) throws Exception {
 		entityManager.merge(tran);
-		logger.info(Constants.M10 + tran.getRegistrationId());
+		logger.info(Constants.M10
+				+ tran.getRegistrationId());
 	}
 
 	/**
@@ -233,7 +235,8 @@ public class LibraryDaoImpl implements ILibraryDao {
 	public void updateBookRegistration(BookRegistration registration)
 			throws Exception {
 		entityManager.merge(registration);
-		logger.info(Constants.M11 + registration.getRegistrationId());
+		logger.info(Constants.M11
+				+ registration.getRegistrationId());
 	}
 
 	/**
@@ -245,7 +248,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	public BookRegistration requestBook(BookRegistration bookRequest)
 			throws Exception {
 		entityManager.persist(bookRequest);
-		logger.info(Constants.M6 + bookRequest.getRegistrationId());
+		logger.info(Constants.M6+ bookRequest.getRegistrationId());
 		return bookRequest;
 	}
 
@@ -257,7 +260,7 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public Users addUser(Users user) throws Exception {
 		entityManager.persist(user);
-		logger.info(Constants.M7 + user.getUserId());
+		logger.info(Constants.M7+user.getUserId());
 		return user;
 	}
 
@@ -285,8 +288,8 @@ public class LibraryDaoImpl implements ILibraryDao {
 	 */
 	@Override
 	public List<BookInventory> searchBookByAuthor(String author) {
-		TypedQuery<BookInventory> query = entityManager.createQuery(
-				QueryMapper.bookByAuthor, BookInventory.class);
+		TypedQuery<BookInventory> query = entityManager.createQuery(QueryMapper.bookByAuthor,
+				BookInventory.class);
 		query.setParameter("author", "%" + author + "%");
 		List<BookInventory> books = query.getResultList();
 		logger.info(Constants.M14);
@@ -304,8 +307,8 @@ public class LibraryDaoImpl implements ILibraryDao {
 	@Override
 	public List<BookInventory> searchBookByName(String bookName)
 			throws Exception {
-		TypedQuery<BookInventory> query = entityManager.createQuery(
-				QueryMapper.bookByName, BookInventory.class);
+		TypedQuery<BookInventory> query = entityManager.createQuery(QueryMapper.bookByName,
+				BookInventory.class);
 		query.setParameter("bookName", "%" + bookName + "%");
 		List<BookInventory> books = query.getResultList();
 		logger.info(Constants.M14);

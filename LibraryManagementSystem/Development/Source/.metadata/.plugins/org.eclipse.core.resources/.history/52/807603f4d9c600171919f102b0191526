@@ -85,10 +85,6 @@ public class Users {
 		this.repeatPassword = repeatPassword;
 	}
 
-	public String getLibrarian(){
-		return librarian;
-	}
-	
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", userName=" + userName

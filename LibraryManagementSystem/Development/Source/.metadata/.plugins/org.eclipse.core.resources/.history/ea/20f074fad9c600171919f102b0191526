@@ -86,7 +86,7 @@ public class Users {
 	}
 
 	public String getLibrarian(){
-		return librarian;
+		return Librarian;
 	}
 	
 	@Override

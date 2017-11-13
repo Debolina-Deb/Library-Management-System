@@ -28,7 +28,6 @@ th, td {
 	padding: 8px;
 	border-bottom: 1px solid #ddd;
 }
-
 a:link, a:visited {
     background-color: #D9FDB5;
     color: darkgrey;

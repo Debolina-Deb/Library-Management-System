@@ -9,5 +9,5 @@ public class QueryMapper {
 	static final String bookByAuthor = "SELECT l FROM BookInventory l WHERE lower(l.author) LIKE :author";
 	static final String bookByName = "SELECT l FROM BookInventory l WHERE lower(l.bookName) LIKE :bookName";// '%bookName%'
 	static final String getAllBooks = "getAllBooks";
-	static final String getAllRequests = "getAllRequests";
+
 }
