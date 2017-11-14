@@ -25,6 +25,7 @@ import com.cg.library.entities.BookTransaction;
 import com.cg.library.entities.Users;
 import com.cg.library.service.ILibraryService;
 import com.cg.library.service.LibraryServiceImpl;
+import com.cg.library.util.Constants;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LibraryServiceImplTest {
@@ -130,7 +131,7 @@ public class LibraryServiceImplTest {
 		bookRegistration.setBookId("123");
 		bookRegistration.setRegistrationDate(Date.valueOf(LocalDate.now()));
 		bookRegistration.setRegistrationId(12);
-		bookRegistration.setStatus("pending");
+		bookRegistration.setStatus(Constants.pending);
 		bookRegistration.setUserId(1234);
 		BookInventory bookInventory = new BookInventory();
 		bookInventory.setBookId("123");

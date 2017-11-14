@@ -274,3 +274,13 @@
 
 !ENTRY org.jboss.ide.eclipse.as.core 1 0 2017-11-13 15:34:58.137
 !MESSAGE Module LibraryManagementSystemSpring on WildFly 8.x not yet fully deployed. Waiting...
+!SESSION 
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2017-11-13 17:16:36.176
+!MESSAGE The server "WildFly 8.x" requires a JDK to run properly. The VM used to launch this server is not recognized as a valid JDK. C:\Program Files (x86)\Java\jre1.8.0_25 
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 0 2017-11-13 17:16:56.534
+!MESSAGE Module LibraryManagementSystemSpring on WildFly 8.x not yet fully deployed. Waiting...
+
+!ENTRY org.jboss.ide.eclipse.as.core 2 0 2017-11-13 17:17:12.751
+!MESSAGE Module LibraryManagementSystemSpring on WildFly 8.x still not ready to be shown in browser. Aborting delay.

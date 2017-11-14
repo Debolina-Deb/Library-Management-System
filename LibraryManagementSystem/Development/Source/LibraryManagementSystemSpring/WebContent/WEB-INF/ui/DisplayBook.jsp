@@ -11,7 +11,8 @@
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Book List</h1>
+	<h1 align="center">Welcome to Library Management System - Display
+		Books</h1>
 	<hr>
 	<h4 align="right">Welcome ${userName } (Librarian)</h4>
 	<div id="form" align="center">
