@@ -18,12 +18,12 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.cg.library.dao.ILibraryDao;
+import com.cg.library.dao.LibraryDao;
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
 import com.cg.library.entities.BookTransaction;
-import com.cg.library.entities.Users;
-import com.cg.library.service.ILibraryService;
+import com.cg.library.entities.User;
+import com.cg.library.service.LibraryService;
 import com.cg.library.service.LibraryServiceImpl;
 import com.cg.library.util.Constants;
 
@@ -31,10 +31,10 @@ import com.cg.library.util.Constants;
 public class LibraryServiceImplTest {
 
 	@Mock
-	private ILibraryDao libraryDao;
+	private LibraryDao libraryDao;
 
 	@InjectMocks
-	private ILibraryService libraryServiceImpl = new LibraryServiceImpl();
+	private LibraryService libraryServiceImpl = new LibraryServiceImpl();
 
 	@Before
 	public void setUp() throws Exception {
@@ -72,7 +72,7 @@ public class LibraryServiceImplTest {
 
 	@Test
 	public void testValidateUser() throws Exception {
-		Users users = new Users();
+		User users = new User();
 		String userName = "username";
 		String password = "password";
 		users.setUserName(userName);
@@ -112,7 +112,7 @@ public class LibraryServiceImplTest {
 
 	@Test
 	public void testGetUserDetails() throws Exception {
-		Users users = new Users();
+		User users = new User();
 		String userName = "username";
 		String password = "password";
 		users.setUserName(userName);
@@ -138,7 +138,8 @@ public class LibraryServiceImplTest {
 		bookInventory.setNoOfBooks(12);
 		stub(libraryDao.getBookById(Mockito.anyString())).toReturn(
 				bookInventory);
-		stub(libraryDao.requestBook(bookRegistration)).toReturn(bookRegistration);
+		stub(libraryDao.requestBook(bookRegistration)).toReturn(
+				bookRegistration);
 		assertEquals(bookRegistration,
 				libraryServiceImpl.requestBook(bookRegistration));
 		verify(libraryDao).requestBook(bookRegistration);
@@ -159,8 +160,8 @@ public class LibraryServiceImplTest {
 				bookRegistration);
 		assertEquals(0, libraryServiceImpl.returnBook(Mockito.anyInt()));
 		verify(libraryDao).updateBookTransaction(bookTransaction);
-		verify(libraryDao)
-		.updateBookQuan(Mockito.anyString(), Mockito.anyInt());
+		verify(libraryDao).updateBookQuantity(Mockito.anyString(),
+				Mockito.anyInt());
 		verify(libraryDao).updateBookRegistration(bookRegistration);
 	}
 
@@ -175,7 +176,7 @@ public class LibraryServiceImplTest {
 		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
 		bookTransaction.setRegistrationId(1234);
 		libraryServiceImpl.issueBook(1234);
-		verify(libraryDao, Mockito.times(1)).updateBookQuan(
+		verify(libraryDao, Mockito.times(1)).updateBookQuantity(
 				Mockito.anyString(), Mockito.anyInt());
 		verify(libraryDao, Mockito.times(1)).updateBookRegistration(
 				bookRegistration);
@@ -191,15 +192,15 @@ public class LibraryServiceImplTest {
 		bookRegistration2.setRegistrationId(321);
 		bookRegistrations.add(bookRegistration1);
 		bookRegistrations.add(bookRegistration2);
-		stub(libraryDao.getAllRequest()).toReturn(bookRegistrations);
+		stub(libraryDao.getAllRequests()).toReturn(bookRegistrations);
 
-		assertEquals(bookRegistrations, libraryServiceImpl.getAllRequest());
-		verify(libraryDao).getAllRequest();
+		assertEquals(bookRegistrations, libraryServiceImpl.getAllRequests());
+		verify(libraryDao).getAllRequests();
 	}
 
 	@Test
 	public void testAddUser() throws Exception {
-		Users users = new Users();
+		User users = new User();
 		String userName = "username";
 		String password = "password";
 		users.setUserName(userName);

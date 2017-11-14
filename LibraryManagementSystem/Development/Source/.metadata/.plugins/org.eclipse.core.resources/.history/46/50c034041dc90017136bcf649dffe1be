@@ -1,0 +1,131 @@
+package com.cg.library.service;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.library.dao.LibraryDao;
+import com.cg.library.entities.BookInventory;
+import com.cg.library.entities.BookRegistration;
+import com.cg.library.entities.BookTransaction;
+import com.cg.library.entities.User;
+
+@Service
+public class LibraryServiceImpl implements LibraryService {
+
+	@Autowired
+	private LibraryDao dao;
+
+	@Override
+	public BookInventory getBookById(String bookId) throws Exception {
+		return dao.getBookById(bookId);
+	}
+
+	@Override
+	public List<BookInventory> getAllBooks() throws Exception {
+		return dao.getAllBooks();
+	}
+
+	@Override
+	public int validateUser(String userName, String password) throws Exception {
+		User user = dao.validateUser(userName, password);
+		if (user.isLibrarian().equals("true")) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	@Override
+	public BookInventory insertBook(BookInventory book) throws Exception {
+		return dao.insertBook(book);
+	}
+
+	@Override
+	public BookInventory deleteBookById(String bookId) throws Exception {
+		return dao.deleteBookById(bookId);
+	}
+
+	@Override
+	public User getUserDetails() throws Exception {
+		return dao.getUserDetails();
+	}
+
+	@Override
+	public BookRegistration requestBook(BookRegistration bookRequest)
+			throws Exception {
+		BookInventory bookInventory = dao.getBookById(bookRequest.getBookId());
+		if (bookInventory == null || bookInventory.getNoOfBooks() == 0) {
+			return null;
+		}
+		return dao.requestBook(bookRequest);
+	}
+
+	@Override
+	public int returnBook(int inputRegistrationId) throws Exception {
+		int fine = -1;
+		BookTransaction tran = dao.returnBookTransaction(inputRegistrationId);
+		fine = 0;
+		BookRegistration reg = dao.getBookRegistration(inputRegistrationId);
+		LocalDate issue = tran.getIssueDate().toLocalDate();
+		LocalDate today = LocalDate.now();
+		LocalDate expReturn = issue.plusDays(15);
+		int chk = Period.between(expReturn, today).getDays();
+		if (chk > 0)
+			fine = chk * 10; // fine is 10rs per day
+		tran.setReturnDate(Date.valueOf(today));
+		tran.setFine(fine);
+		reg.setStatus("returned");
+		dao.updateBookTransaction(tran);
+		dao.updateBookQuantity(reg.getBookId(), 1);
+		dao.updateBookRegistration(reg);
+		return fine;
+	}
+
+	@Override
+	public void issueBook(int registrationId) throws Exception {
+
+		BookRegistration registration = dao.getBookRegistration(registrationId);
+		registration.setStatus("issued");
+		BookTransaction bookTransaction = new BookTransaction();
+		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
+		bookTransaction.setRegistrationId(registrationId);
+		dao.issueBook(bookTransaction);
+		dao.updateBookQuan(registration.getBookId(), -1);
+		dao.updateBookRegistration(registration);
+	}
+
+	@Override
+	public List<BookRegistration> getAllRequest() throws Exception {
+		return dao.getAllRequest();
+	}
+
+	@Override
+	public User addUser(User user) throws Exception {
+
+		return dao.addUser(user);
+	}
+
+	@Override
+	public List<BookRegistration> getRequestByStatus(String status)
+			throws Exception {
+		return dao.getRequestByStatus(status);
+	}
+
+	@Override
+	public List<BookInventory> searchBookByAuthor(String author)
+			throws Exception {
+		return dao.searchBookByAuthor(author);
+
+	}
+
+	@Override
+	public List<BookInventory> searchBookByName(String bookName)
+			throws Exception {
+		return dao.searchBookByName(bookName);
+	}
+}

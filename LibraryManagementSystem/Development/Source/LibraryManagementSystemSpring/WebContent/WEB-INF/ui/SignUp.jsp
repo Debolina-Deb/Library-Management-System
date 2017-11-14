@@ -32,7 +32,7 @@
 
 						</div>
 						<div class="form-group">
-							<form:input id="emailId" path="emailId"
+							<form:input type="email" id="emailId" path="emailId"
 								cssClass="form-control input-lg" placeholder="Enter Email ID"
 								required="true"></form:input>
 							<form:errors path="emailId" cssStyle="color:red" />

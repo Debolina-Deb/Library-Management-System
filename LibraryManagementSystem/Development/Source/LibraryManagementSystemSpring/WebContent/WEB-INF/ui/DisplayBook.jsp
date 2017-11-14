@@ -25,7 +25,7 @@
 				<th>Year of Publication
 				<th>Quantity
 			</tr>
-			<c:forEach items="${allBook }" var="book">
+			<c:forEach items="${books }" var="book">
 				<tr>
 					<td>${book.bookId}
 					<td>${book.bookName}

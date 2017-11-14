@@ -1,0 +1,17 @@
+package com.cg.library.util;
+
+public class RequestPage {
+	
+	static public String AddBook = "AddBook";
+	static public String BookSearch = "BookSearch";
+	static public String DispBook = "DisplayBook";
+	static public String Error = "Error";
+	static public String Issue = "Issue";
+	static public String LibrarianOperation = "LibrarianOperation";
+	static public String Return = "Return";
+	static public String SearchByAuthor = "SearchByAuthor";
+	static public String SignUp = "SignUp";
+	static public String StudentOperation = "StudentOperation";
+	static public String Success = "Success";
+
+}
