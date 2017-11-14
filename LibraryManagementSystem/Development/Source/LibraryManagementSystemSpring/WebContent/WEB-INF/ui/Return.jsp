@@ -11,8 +11,7 @@
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Return
-		Book Issued</h1>
+	<h1 align="center">Welcome to Library Management System - Return Issued Book</h1>
 	<hr>
 	<div id="form" align="center">
 		<c:if test="${reqIList ne null}">

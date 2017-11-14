@@ -11,7 +11,7 @@
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Book Search</h1>
+	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
 	<c:choose>
 		<c:when test="${input ne null}">
