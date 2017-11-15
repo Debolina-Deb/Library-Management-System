@@ -23,6 +23,6 @@ The front end is built on **Bootstrap v3.3.7** , **Javascript**, **CSS3**, **jQu
  + remove some books from the inventory
  + manage return and issue book operations
 
-**Screenshots
+**Screenshots**
 ![](Library.PNG)
 
