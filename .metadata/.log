@@ -1698,3 +1698,12 @@ Binding(CTRL+SHIFT+C,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.jdt.ui.propertiesEditorScope,,,system)
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2017-11-15 17:37:14.702
+!MESSAGE The server "WildFly 8.x" requires a JDK to run properly. The VM used to launch this server is not recognized as a valid JDK. C:\Program Files (x86)\Java\jre1.8.0_25 
+
+!ENTRY org.eclipse.wst.server.core 4 0 2017-11-15 17:38:08.874
+!MESSAGE Server WildFly 8.x failed to stop.
+
+!ENTRY org.eclipse.wst.server.core 4 0 2017-11-15 17:38:08.914
+!MESSAGE The server cannot start because it is already started.
