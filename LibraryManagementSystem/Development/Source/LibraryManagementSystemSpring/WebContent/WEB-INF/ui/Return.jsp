@@ -14,7 +14,7 @@
 	<h1 align="center">Welcome to Library Management System - Return Issued Book</h1>
 	<hr>
 	<div id="form" align="center">
-		<c:if test="${reqIList ne null}">
+		<c:if test="${issuedRequests ne null}">
 			<table align="center">
 				<tr>
 					<th>Registration Id</th>
@@ -23,14 +23,14 @@
 					<th>Registration Date</th>
 					<th>Status
 				</tr>
-				<c:forEach items="${reqIList}" var="req">
+				<c:forEach items="${issuedRequests}" var="request">
 					<tr>
-						<td>${req.registrationId}</td>
-						<td>${req.bookId}</td>
-						<td>${req.userId}</td>
-						<td>${req.registrationDate}</td>
-						<td>${req.status}</td>
-						<td><a href="return.htm?regId=${req.registrationId}">Return</a></td>
+						<td>${request.registrationId}</td>
+						<td>${request.bookId}</td>
+						<td>${request.userId}</td>
+						<td>${request.registrationDate}</td>
+						<td>${request.status}</td>
+						<td><a href="return.htm?registrationId=${request.registrationId}">Return</a></td>
 					</tr>
 				</c:forEach>
 			</table>

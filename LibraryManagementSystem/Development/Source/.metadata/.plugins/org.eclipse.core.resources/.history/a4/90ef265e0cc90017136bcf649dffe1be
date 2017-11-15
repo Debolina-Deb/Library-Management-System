@@ -1,0 +1,25 @@
+package com.cg.library.util;
+
+public class Constants {
+String[] isLibrarianList = { "Please select", "true", "false" };
+ String M1 = "User added with user Id : ";
+ String M2 = "Book updated with BookId: ";
+ String M = "message";
+ String M3 = "Book issued with registration id :";
+ String M4 = "Book Returned!!\nFine is Rs: ";
+ String M5 = "Book deleted with book id:";
+ String M6 = "Book is requested with Registration id : ";
+ String M7 = "User with user ID : ";
+ String M8 = "Book Inserted with BookId : ";
+ String M9 = "Record retreived with Registration ID :";
+ String M10 = "Book returned with registration ID: ";
+ String M11 = "Book registration merged with registration ID: ";
+ String M12 = "BookTransaction detail retrieved by registration Id :";
+ String M13 = "BookRegistration List retrieved ";
+ String M14 = "BookInventory List retrieved";
+ String M15 = "Book retrieved with BookId: ";
+ String userIdV1 = "User Id is Mandatory";
+ String userNameV1 = "User Name is Mandatory";
+ String pending = "pending";
+ String issued = "issued";
+}

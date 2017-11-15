@@ -1,0 +1,14 @@
+package com.cg.library.util;
+
+import com.cg.library.entities.Users;
+
+public interface QueryMapper {
+	Users user = new Users();
+	String validateUser = "SELECT u FROM Users u WHERE u.userName=:puserName AND u.password=:ppassword";
+	String returnBook = "SELECT t FROM BookTransaction t WHERE t.registrationId=";
+	String requestByStatus = "SELECT t FROM BookRegistration t WHERE t.status=:pstatus";
+	String bookByAuthor = "SELECT l FROM BookInventory l WHERE lower(l.author) LIKE :author";
+	String bookByName = "SELECT l FROM BookInventory l WHERE lower(l.bookName) LIKE :bookName";// '%bookName%'
+	String getAllBooks = "getAllBooks";
+	String getAllRequests = "getAllRequests";
+}

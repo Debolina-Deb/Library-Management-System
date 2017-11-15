@@ -15,31 +15,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cg.library.entities.BookInventory;
-import com.cg.library.entities.Users;
-import com.cg.library.service.ILibraryService;
+import com.cg.library.entities.User;
+import com.cg.library.service.LibraryService;
 import com.cg.library.util.Constants;
 import com.cg.library.util.RequestPage;
 
-/**
- * Librarian Controller controls functionalities of librarian
+/***********************************************************************************
+ * File Name: LibrarianController 
+ * Package Name: com.cg.lms.controller
+ * Description: Librarian controller controls the functionalities of librarian
+ * Version: 1.0 
+ * Restrictions: N/A 
+ * Date: 14/11/2017
  * 
- * @author parpatid
- */
+ * @author - parpatid
+ ***********************************************************************************/
 @Controller
 public class LibrarianController {
-
-	/**
-	 * Service layer interface reference
-	 */
 	@Autowired
-	ILibraryService librarianService;
+	LibraryService librarianService;
 
 	/**
-	 * Method used for validating user
+	 * Validates user from the User table whether its a User or Librarian
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @param userName
+	 *            - User name which user used to register
 	 * @param password
+	 *            - Password which user used to register
 	 * @return
 	 */
 	@RequestMapping(value = "/login.htm", method = RequestMethod.POST)
@@ -47,101 +51,111 @@ public class LibrarianController {
 			@RequestParam("password") String password,
 			HttpServletRequest request) {
 		try {
-			int i = librarianService.validateUser(userName, password);
+			int status = librarianService.validateUser(userName, password);
 			model.addAttribute("userName", userName);
-			if (i == 0)
-				return RequestPage.pgStdOp;
-			else
-				return RequestPage.pgLibOp;
+			if (status == 0) {
+				return RequestPage.StudentOperation;
+			}
+			return RequestPage.LibrarianOperation;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
 	}
 
 	/**
-	 * Method redirects request to sign up page
+	 * Redirects request to Sign up page
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("signUp.htm")
 	public String newUser(Model model) {
-		model.addAttribute("user", new Users());
+		model.addAttribute("user", new User());
 		model.addAttribute("librarian", Constants.isLibrarianList);
-		return RequestPage.pgSignUp;
+		return RequestPage.SignUp;
 	}
 
 	/**
 	 * Takes data of new user and persist in table
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @param user
+	 *            - User details to persist in User table
 	 * @return
 	 */
 	@RequestMapping(value = "/signUp.htm", method = RequestMethod.POST)
-	public String signUp(Model model,
-			@ModelAttribute("user") @Valid Users user, BindingResult result) {
+	public String signUp(@ModelAttribute("user") @Valid User user,
+			BindingResult result, Model model) {
 		try {
 			if (result.hasErrors()) {
 				model.addAttribute("librarian", Constants.isLibrarianList);
-				return RequestPage.pgSignUp;
-			} else {
-				user = librarianService.addUser(user);
-				model.addAttribute(Constants.M, Constants.M1 + user.getUserId());
-				return RequestPage.pgSuccess;
+				return RequestPage.SignUp;
 			}
+			user = librarianService.addUser(user);
+			model.addAttribute(Constants.message, Constants.userAddedMessage
+					+ user.getUserId());
+			return RequestPage.Success;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
 	}
 
 	/**
-	 * Method used to display book
+	 * Displays all Books
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @param userName
+	 *            - User name which user used to register
 	 * @return
 	 */
 	@RequestMapping(value = "/display")
-	public String displayBook(Model model,
-			@RequestParam("userName") String userName) {
+	public String displayBook(@RequestParam("userName") String userName,
+			Model model) {
 		try {
-			List<BookInventory> allBook = librarianService.getAllBooks();
-			model.addAttribute("allBook", allBook);
+			List<BookInventory> books = librarianService.getAllBooks();
+			model.addAttribute("books", books);
 			model.addAttribute("userName", userName);
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
-		return RequestPage.pgDispB;
+		return RequestPage.DispBook;
 	}
 
 	/**
-	 * Method used for deleting Book from Inventory
+	 * Deletes Book from BookInventory
 	 * 
 	 * @param bookId
+	 *            - Book Id of Book which user want to delete
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping(value = "/delete.htm")
 	public String deleteBook(@RequestParam("bookId") String bookId, Model model) {
 		try {
 			BookInventory book = librarianService.deleteBookById(bookId);
-			model.addAttribute(Constants.M, Constants.M5 + book.getBookId());
+			model.addAttribute(Constants.message, Constants.bookDeletedMessage
+					+ book.getBookId());
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
-		return RequestPage.pgLibOp;
+		return RequestPage.LibrarianOperation;
 	}
 
 	/**
-	 * Method used to check Whether Book existing
+	 * Checks whether Book exists or not
 	 * 
 	 * @param bookId
+	 *            - Book Id of book which we want to check in Inventory
 	 * @param model
+	 *            - User name which user used to register
 	 * @return
 	 */
 	@RequestMapping(value = "/checkBook", method = RequestMethod.POST)
@@ -151,140 +165,148 @@ public class LibrarianController {
 			if (book == null) {
 				model.addAttribute("bookId", bookId);
 				model.addAttribute("book", new BookInventory());
-				return RequestPage.pgAddBook;
-			} else {
-				model.addAttribute("bookId", bookId);
-				model.addAttribute("book", book);
-				return RequestPage.pgAddBook;
+				return RequestPage.AddBook;
 			}
+			model.addAttribute("bookId", bookId);
+			model.addAttribute("book", book);
+			return RequestPage.AddBook;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
 	}
 
 	/**
-	 * Method redirecting request to AddBook page
+	 * Redirects request to AddBook page
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "addUpdate.htm")
 	public String addUpdateBook() {
-		return RequestPage.pgAddBook;
+		return RequestPage.AddBook;
 	}
 
 	/**
-	 * Method used to insert book in Book Inventory
+	 * Inserts book details in Book Inventory
 	 * 
 	 * @param book
+	 *            - Book Details which user wants to insert into DB
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping(value = "onAdd")
-	public String onAdd(@ModelAttribute("book") @Valid BookInventory book,
+	public String addBook(@ModelAttribute("book") @Valid BookInventory book,
 			BindingResult result, Model model) {
 		try {
 			if (result.hasErrors()) {
 				model.addAttribute("bookId", book.getBookId());
-				return RequestPage.pgAddBook;
-			} else {
-				book = librarianService.insertBook(book);
-				model.addAttribute(Constants.M, Constants.M2 + book.getBookId());
-				return RequestPage.pgSuccess;
+				return RequestPage.AddBook;
 			}
+			book = librarianService.insertBook(book);
+			model.addAttribute(Constants.message,
+					Constants.bookUpdated + book.getBookId());
+			return RequestPage.Success;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
 	}
 
 	/**
-	 * Method used for viewing issue request of student by librarian
+	 * Views issued request of student by librarian
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("/pendingRequest.htm")
-	public String pendingBook(Model model) {
-
+	public String pendingBooks(Model model) {
 		try {
-			model.addAttribute("reqPList",
+			model.addAttribute("pendingRequests",
 					librarianService.getRequestByStatus(Constants.pending));
-			return RequestPage.pgIssue;
+			return RequestPage.Issue;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
 	}
 
 	/**
-	 * Method used for viewing issued books registration details librarian
+	 * Views issued books registration details to librarian
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("/issuedRequest.htm")
-	public String issuedBook(Model model) {
-
+	public String issuedBooks(Model model) {
 		try {
-			model.addAttribute("reqIList",
+			model.addAttribute("issuedRequests",
 					librarianService.getRequestByStatus(Constants.issued));
-			return RequestPage.pgReturn;
+			return RequestPage.Return;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
 	}
 
 	/**
-	 * Method used for issuing books
+	 * Issues book requested by Student
 	 * 
 	 * @param model
-	 * @param regId
+	 *            - Model object used to send attributes
+	 * @param registrationId
+	 *            - Registration Id used to issue book
 	 * @return
 	 */
 	@RequestMapping("/issue.htm")
-	public String issueBook(Model model, @RequestParam("regId") int regId) {
+	public String issueBook(@RequestParam("registrationId") int registrationId,
+			Model model) {
 		try {
-			librarianService.issueBook(regId);
-			model.addAttribute(Constants.M, Constants.M3 + regId);
-			return RequestPage.pgSuccess;
+			librarianService.issueBook(registrationId);
+			model.addAttribute(Constants.message, Constants.bookIssuedMessage
+					+ registrationId);
+			return RequestPage.Success;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
 	}
 
 	/**
-	 * Method used for returning books
+	 * Returning Books issued by Student
 	 * 
 	 * @param model
-	 * @param regId
+	 *            - Model object used to send attributes
+	 * @param registrationId
+	 *            - Registration Id used to return book
 	 * @return
 	 */
 	@RequestMapping("/return.htm")
-	public String returnBook(Model model, @RequestParam("regId") int regId) {
+	public String returnBook(Model model,
+			@RequestParam("registrationId") int registrationId) {
 		try {
-
-			int fine = librarianService.returnBook(regId);
+			int fine = librarianService.returnBook(registrationId);
 			if (fine != -1) {
-				model.addAttribute(Constants.M, Constants.M4 + fine);
+				model.addAttribute(Constants.message,
+						Constants.bookReturnedMessage + fine);
 			}
-			return RequestPage.pgSuccess;
+			return RequestPage.Success;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
 	}
 
 	/**
-	 * Method used to redirect to librarian home page
+	 * Redirects to librarian home page
 	 * 
 	 * @return
 	 */
 	@RequestMapping("/librarianHome.htm")
 	public String librarianHome() {
-		return RequestPage.pgLibOp;
+		return RequestPage.LibrarianOperation;
 	}
 
 }
