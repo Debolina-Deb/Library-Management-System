@@ -1,5 +1,12 @@
 package com.cg.library.util;
-
+/************************************************************************************
+ * File Name: ConstantMessage 
+ * Package Name: com.cg.lms.util
+ * Description: Constant messages which are used in Controller and Data Access Object Layer
+ * Version: 1.0 Restrictions: N/A
+ * @author   
+ * Date: 14/11/2017
+ ***********************************************************************************/
 public interface Constants {
 	String[] isLibrarianList = { "Please select", "true", "false" };
 	String userAddedMessage = "User added with user Id : ";

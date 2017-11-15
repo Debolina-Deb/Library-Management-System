@@ -325,7 +325,7 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * Search book by author name
 	 * 
 	 * Author name is taken as input and the given query matches the authorName
-	 * with the author present in BookInventory table and returns all book with
+	 * with the author present in BookInventory table and returns all books with
 	 * that keyword
 	 * 
 	 * @param authorName

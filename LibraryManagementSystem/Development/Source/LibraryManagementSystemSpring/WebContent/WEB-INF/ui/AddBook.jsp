@@ -14,11 +14,7 @@
 <body>
 	<h1 align="center">Welcome to Library Management System - Add Book</h1>
 	<hr>
-	<h4 align="right">
-		<%-- ${username } --%>
-		Librarian Name
-	</h4>
-
+	<h4 align="right">Welcome ${userName}</h4>
 	<c:if test="${bookId eq null }">
 		<div id="formIndex">
 			<form action="checkBook.htm" method="post">
@@ -27,7 +23,6 @@
 			</form>
 		</div>
 	</c:if>
-
 	<c:if test="${book ne null}">
 		<div id="formIndex">
 			<form:form id="bookForm" action="onAdd.htm" modelAttribute="book"

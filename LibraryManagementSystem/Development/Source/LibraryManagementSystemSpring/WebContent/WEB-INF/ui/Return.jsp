@@ -11,8 +11,10 @@
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Return Issued Book</h1>
+	<h1 align="center">Welcome to Library Management System - Return
+		Issued Book</h1>
 	<hr>
+	<h4 align="right">Welcome ${userName}</h4>
 	<div id="form" align="center">
 		<c:if test="${issuedRequests ne null}">
 			<table align="center">
@@ -30,7 +32,8 @@
 						<td>${request.userId}</td>
 						<td>${request.registrationDate}</td>
 						<td>${request.status}</td>
-						<td><a href="return.htm?registrationId=${request.registrationId}">Return</a></td>
+						<td><a
+							href="return.htm?registrationId=${request.registrationId}">Return</a></td>
 					</tr>
 				</c:forEach>
 			</table>

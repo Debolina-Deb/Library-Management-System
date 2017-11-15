@@ -1,5 +1,12 @@
 package com.cg.library.util;
-
+/************************************************************************************
+ * File Name: RequestPage 
+ * Package Name: com.cg.lms.util
+ * Description: Request Pages which are used in Controller to redirect the request
+ * Version: 1.0 Restrictions: N/A
+ * @author   
+ * Date: 14/11/2017
+ ***********************************************************************************/
 public interface RequestPage {
 	String AddBook = "AddBook";
 	String BookSearch = "BookSearch";

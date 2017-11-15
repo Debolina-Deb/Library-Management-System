@@ -25,7 +25,7 @@
 	</div>
 	<h4>
 		<a id="home" href="studentHome.htm">Home</a>
-		<a id="logout" href="">Logout</a>
+		<a id="logout" href="logout.htm">Logout</a>
 	</h4>
 </body>
 </html>

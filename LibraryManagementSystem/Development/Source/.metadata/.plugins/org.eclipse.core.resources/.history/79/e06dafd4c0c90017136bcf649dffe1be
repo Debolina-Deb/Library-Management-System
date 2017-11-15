@@ -1,0 +1,101 @@
+package com.cg.library.service;
+
+import java.util.List;
+
+import com.cg.library.entities.BookInventory;
+import com.cg.library.entities.BookRegistration;
+import com.cg.library.entities.User;
+/************************************************************************************
+ * File Name: LibraryService 
+ * Package Name: com.cg.lms.service
+ * Description: Interface of Service Layer which interacts
+ *  with the Librarian and Student Controller
+ * Version: 1.0 Restrictions: N/A
+ * @author   
+ * Date: 14/11/2017
+ ***********************************************************************************/
+public interface LibraryService {
+	/**
+	 * Gets book by Book Id
+	 * 
+	 * @param bookId
+	 *            - Book Id used to find Book
+	 * @return book - BookInventory object used to manipulate further
+	 */
+	BookInventory getBookById(String bookId) throws Exception;
+
+	/**
+	 * Gets all books in BookInventory
+	 * 
+	 * @return books - Books in Book Inventory
+	 */
+	List<BookInventory> getAllBooks() throws Exception;
+	
+	/**
+	 * Gets all requests in BookRegistration
+	 * 
+	 * @return requests - All requests from Book Registration
+	 */
+	List<BookRegistration> getAllRequests() throws Exception;
+	
+	/**
+	 * Gets user details
+	 * 
+	 * @return user - User object contains user details
+	 * @throws Exception
+	 */
+	User getUserDetails() throws Exception;
+
+	/**
+	 * Deletes book by book Id
+	 * 
+	 * Takes book id from user and delete the book from BookInventory
+	 * 
+	 * @param bookId
+	 *            - Id which will be used to delete Book
+	 * @return
+	 * @throws Exception
+	 */
+	BookInventory deleteBookById(String bookId) throws Exception;
+
+	/**
+	 * Inserts Book into BookInventory
+	 * 
+	 * Takes book details from user and persist it into BookInventory
+	 * 
+	 * @param book
+	 *            - BookInventory object contains Book Details
+	 * @throws Exception
+	 */
+	BookInventory insertBook(BookInventory book) throws Exception;
+
+	/**
+	 * Validates User
+	 * 
+	 * Validation of User with the userName and password given as input from the
+	 * User table
+	 * 
+	 * @param userName
+	 * @param password
+	 * @throws Exception
+	 */
+	int validateUser(String userName, String password) throws Exception;
+
+	BookRegistration requestBook(BookRegistration bookRequest) throws Exception;
+
+	
+
+	int returnBook(int registrationId) throws Exception;
+
+	void issueBook(int registrationId) throws Exception;
+
+
+
+	User addUser(User user) throws Exception;
+
+	List<BookRegistration> getRequestByStatus(String status) throws Exception;
+
+	List<BookInventory> searchBookByAuthor(String authorName) throws Exception;
+
+	List<BookInventory> searchBookByName(String bookName) throws Exception;
+}

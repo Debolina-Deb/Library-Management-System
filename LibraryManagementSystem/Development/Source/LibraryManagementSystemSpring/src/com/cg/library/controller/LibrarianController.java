@@ -3,6 +3,7 @@ package com.cg.library.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,8 @@ public class LibrarianController {
 			HttpServletRequest request) {
 		try {
 			int status = librarianService.validateUser(userName, password);
-			model.addAttribute("userName", userName);
+			HttpSession session = request.getSession();
+			session.setAttribute("userName", userName);
 			if (status == 0) {
 				return RequestPage.StudentOperation;
 			}
@@ -307,6 +309,12 @@ public class LibrarianController {
 	@RequestMapping("/librarianHome.htm")
 	public String librarianHome() {
 		return RequestPage.LibrarianOperation;
+	}
+	
+	@RequestMapping("/logout.htm")
+	public String logout(Model model,HttpServletRequest request){
+		request.getSession().invalidate();
+		return "../../index";
 	}
 
 }

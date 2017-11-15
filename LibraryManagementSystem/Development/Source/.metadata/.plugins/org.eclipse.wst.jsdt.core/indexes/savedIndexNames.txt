@@ -6,7 +6,6 @@ INDEX VERSION 1.3+D:\lms\LibraryManagementSystem\Development\Source\.metadata\.p
 3589882819.index
 1635158221.index
 1523958557.index
-3589882819.index
 2040168368.index
 2040168368.index
 1792205984.index

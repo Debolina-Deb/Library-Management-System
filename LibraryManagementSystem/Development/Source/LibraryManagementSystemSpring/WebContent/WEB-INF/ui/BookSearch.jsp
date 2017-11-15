@@ -6,12 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Book List</title>
-<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Slabo+27px"
+	rel="stylesheet">
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
+	<h4 align="right">Welcome ${userName}</h4>
 	<div id="form" align="center">
 		<h2 align="center">Book List</h2>
 		<c:if test="${books ne null }">
@@ -42,8 +44,7 @@
 		</c:if>
 	</div>
 	<h4>
-		<a id="home" href="studentHome.htm">Home</a>
-		<a id="logout" href="">Logout</a>
+		<a id="home" href="studentHome.htm">Home</a> <a id="logout" href="">Logout</a>
 	</h4>
 </body>
 </html>

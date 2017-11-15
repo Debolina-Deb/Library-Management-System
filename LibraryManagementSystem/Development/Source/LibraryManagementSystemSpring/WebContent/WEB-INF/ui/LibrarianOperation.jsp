@@ -8,7 +8,8 @@
 <title>LibrarianHome</title>
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Librarian Home</h1>
+	<h1 align="center">Welcome to Library Management System -
+		Librarian Home</h1>
 	<hr>
 	<h4 align="right">Welcome ${userName }</h4>
 	<div id="formOperation" align="center">
@@ -27,8 +28,7 @@
 	</div>
 	<h3>${message }</h3>
 	<h4>
-		<a id="home" href="librarianHome.htm">Home</a>
-		<a id="logout" href="">Logout</a>
+		<a id="home" href="librarianHome.htm">Home</a> <a id="logout" href="">Logout</a>
 	</h4>
 </body>
 </html>

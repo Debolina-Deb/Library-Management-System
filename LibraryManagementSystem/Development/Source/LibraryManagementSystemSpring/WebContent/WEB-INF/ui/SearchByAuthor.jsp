@@ -13,6 +13,9 @@
 <body>
 	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
+		<h4 align="right">
+		Welcome ${userName}
+	</h4>
 	<c:choose>
 		<c:when test="${input ne null}">
 			<div id="form" align="center">
