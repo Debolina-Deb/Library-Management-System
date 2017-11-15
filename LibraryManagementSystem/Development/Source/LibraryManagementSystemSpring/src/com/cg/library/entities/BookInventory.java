@@ -8,7 +8,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
-//import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.sun.istack.internal.NotNull;
 
@@ -18,23 +18,23 @@ import com.sun.istack.internal.NotNull;
 public class BookInventory {
 
 	@Id
-	//@NotEmpty
+	@NotEmpty
 	@Column(name = "book_id")
 	private String bookId;
 
-	//@NotEmpty
+	@NotEmpty
 	@Column(name = "book_name")
 	private String bookName;
 
-	//@NotEmpty
+	@NotEmpty
 	@Column(name = "author")
 	private String author;
 
-	//@NotEmpty
+	@NotEmpty
 	@Column(name = "publisher")
 	private String publisher;
 
-	//@NotEmpty
+	@NotEmpty
 	@Pattern(regexp="[0-9]{4}",message="digits only")
 	@Column(name = "year_of_publication")
 	private String yearOfPublication;

@@ -13,7 +13,7 @@
 	<h1 align="center">Welcome to Library Management System - Issue Book Requests</h1>
 	<hr>
 	<div id="form" align="center">
-	<c:if test="${reqPList ne null}">
+	<c:if test="${pendingRequests ne null}">
 		<table align="center">
 			<tr>
 				<th>Registration Id</th>
@@ -22,14 +22,14 @@
 				<th>Registration Date</th>
 				<th>Status</th>
 			</tr>
-			<c:forEach items="${reqPList}" var="req">
+			<c:forEach items="${pendingRequests }" var="request">
 				<tr>
-					<td>${req.registrationId}</td>
-					<td>${req.bookId}</td>
-					<td>${req.userId}</td>
-					<td>${req.registrationDate}</td>
-					<td>${req.status}</td>
-					<td><a href="issue.htm?regId=${req.registrationId}">Issue</a></td>
+					<td>${request.registrationId}</td>
+					<td>${request.bookId}</td>
+					<td>${request.userId}</td>
+					<td>${request.registrationDate}</td>
+					<td>${request.status}</td>
+					<td><a href="issue.htm?registrationId=${request.registrationId}">Issue</a></td>
 				</tr>
 			</c:forEach>
 		</table>

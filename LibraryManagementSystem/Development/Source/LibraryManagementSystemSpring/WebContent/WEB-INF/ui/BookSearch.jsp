@@ -10,11 +10,11 @@
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Book List</h1>
+	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
 	<div id="form" align="center">
 		<h2 align="center">Book List</h2>
-		<c:if test="${bookList ne null }">
+		<c:if test="${books ne null }">
 			<table align="center" style="text-align: center">
 				<tr>
 					<th>Book ID</th>
@@ -26,7 +26,7 @@
 					<th>
 				</tr>
 
-				<c:forEach items="${bookList}" var="book">
+				<c:forEach items="${books }" var="book">
 					<tr>
 						<td>${book.bookId }
 						<td>${book.bookName }

@@ -11,7 +11,8 @@
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Book List</h1>
+	<h1 align="center">Welcome to Library Management System - Display
+		Books</h1>
 	<hr>
 	<h4 align="right">Welcome ${userName } (Librarian)</h4>
 	<div id="form" align="center">
@@ -24,7 +25,7 @@
 				<th>Year of Publication
 				<th>Quantity
 			</tr>
-			<c:forEach items="${allBook }" var="book">
+			<c:forEach items="${books }" var="book">
 				<tr>
 					<td>${book.bookId}
 					<td>${book.bookName}

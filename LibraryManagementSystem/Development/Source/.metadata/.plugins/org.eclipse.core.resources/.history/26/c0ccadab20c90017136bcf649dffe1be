@@ -1,0 +1,49 @@
+package com.cg.library.dao;
+
+import java.util.List;
+
+import com.cg.library.entities.BookInventory;
+import com.cg.library.entities.BookRegistration;
+import com.cg.library.entities.BookTransaction;
+import com.cg.library.entities.User;
+
+public interface LibraryDao {
+
+	BookInventory getBookById(String id);
+
+	User getUserDetails();
+
+	BookTransaction returnBookTransaction(int inpRegId) throws Exception;
+
+	void issueBook(BookTransaction bookTransaction) throws Exception;
+
+	List<BookInventory> getAllBooks() throws Exception;
+
+	User validateUser(String userName, String password) throws Exception;
+
+	BookRegistration requestBook(BookRegistration bookRequest) throws Exception;
+
+	BookRegistration getBookRegistration(int inpRegId) throws Exception;
+
+	BookInventory updateBookQuantity(String bookId, int updateBy)
+			throws Exception;
+
+	List<BookRegistration> getAllRequests() throws Exception;
+
+	User addUser(User user) throws Exception;
+
+	List<BookRegistration> getRequestByStatus(String status) throws Exception;
+
+	List<BookInventory> searchBookByAuthor(String author) throws Exception;
+
+	List<BookInventory> searchBookByName(String bookName) throws Exception;
+
+	void updateBookTransaction(BookTransaction tran) throws Exception;
+
+	void updateBookRegistration(BookRegistration registration) throws Exception;
+
+	BookInventory deleteBookById(String bookId) throws Exception;
+
+	BookInventory insertBook(BookInventory book) throws Exception;
+
+}

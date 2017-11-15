@@ -13,100 +13,104 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
-import com.cg.library.service.ILibraryService;
+import com.cg.library.service.LibraryService;
 import com.cg.library.util.Constants;
 import com.cg.library.util.RequestPage;
 
-/**
- * Student Controller controls functionalities of student
+/***********************************************************************************
+ * File Name: StudentController 
+ * Package Name: com.cg.lms.controller
+ * Description: Student controller controls the functionalities of Student
+ * Version: 1.0 
+ * Restrictions: N/A 
+ * Date: 14/11/2017
  * 
- * @author parpatid
- */
+ * @author - parpatid
+ ***********************************************************************************/
 @Controller
 public class StudentController {
-
-	/**
-	 * Service layer interface reference
-	 */
 	@Autowired
-	ILibraryService studentService;
+	LibraryService studentService;
 
 	/**
-	 * Method for handling show all book request
+	 * Shows all book requests
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("/showAll.htm")
 	public String showAllBooks(Model model) {
 		try {
-			model.addAttribute("bookList", studentService.getAllBooks());
-			return RequestPage.pgBookS;
+			model.addAttribute("books", studentService.getAllBooks());
+			return RequestPage.BookSearch;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
 	}
 
 	/**
-	 * Method used for requesting book by student
+	 * Book request placed by student
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @param bookId
+	 *            - Book Id for book requested by student
 	 * @return
 	 */
 	@RequestMapping("/requestBook.htm")
 	public String requestBook(Model model, @RequestParam("bookId") String bookId) {
-
 		try {
 			BookRegistration bookRequest = new BookRegistration();
 			bookRequest.setBookId(bookId);
 			bookRequest.setUserId(studentService.getUserDetails().getUserId());
 			bookRequest.setRegistrationDate(Date.valueOf(LocalDate.now()));
 			bookRequest = studentService.requestBook(bookRequest);
-			model.addAttribute(Constants.M,
-					Constants.M6 + bookRequest.getRegistrationId());
-			return RequestPage.pgSuccess;
+			model.addAttribute(Constants.message, Constants.bookRequestMessage
+					+ bookRequest.getRegistrationId());
+			return RequestPage.Success;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
-
 	}
 
 	/**
-	 * Method to redirect page to search by author
+	 * Redirects to page for searching by author
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("/searchByAuthor")
 	public String searchBookByAuthor(Model model) {
 		model.addAttribute("input", "0");
-		return RequestPage.pgSByAuth;
+		return RequestPage.SearchByAuthor;
 	}
 
 	/**
-	 * Method to search book by author name
+	 * Search book by author name
 	 * 
 	 * @param model
-	 * @param author
+	 *            - Model object used to send attributes
+	 * @param authorName
+	 *            - Author name which will be used to search Book
 	 * @return
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/authorSearch", method = RequestMethod.POST)
 	public String searchByAuthor(Model model,
-			@RequestParam("author") String author) {
+			@RequestParam("authorName") String authorName) {
 		try {
 			List<BookInventory> books = studentService
-					.searchBookByAuthor(author);
-			model.addAttribute("bookList", books);
-			return RequestPage.pgBookS;
+					.searchBookByAuthor(authorName);
+			model.addAttribute("books", books);
+			return RequestPage.BookSearch;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
-
 	}
 
 	/**
@@ -116,14 +120,16 @@ public class StudentController {
 	 */
 	@RequestMapping("/searchByName")
 	public String searchBookByName() {
-		return RequestPage.pgSByAuth;
+		return RequestPage.SearchByAuthor;
 	}
 
 	/**
-	 * Method used to search by book name
+	 * Search book by book name
 	 * 
 	 * @param model
+	 *            - Model object used to send attributes
 	 * @param bookName
+	 *            - Book name which will be used to search Book
 	 * @return
 	 * @throws Exception
 	 */
@@ -133,13 +139,12 @@ public class StudentController {
 		try {
 			List<BookInventory> books = studentService
 					.searchBookByName(bookName);
-			model.addAttribute("bookList", books);
-			return RequestPage.pgBookS;
+			model.addAttribute("books", books);
+			return RequestPage.BookSearch;
 		} catch (Exception e) {
-			model.addAttribute(Constants.M, e.getMessage());
-			return RequestPage.pgError;
+			model.addAttribute(Constants.message, e.getMessage());
+			return RequestPage.Error;
 		}
-
 	}
 
 	/**
@@ -149,6 +154,6 @@ public class StudentController {
 	 */
 	@RequestMapping("/studentHome")
 	public String studentHome() {
-		return RequestPage.pgStdOp;
+		return RequestPage.StudentOperation;
 	}
 }

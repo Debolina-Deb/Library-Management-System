@@ -8,33 +8,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.library.dao.ILibraryDao;
+import com.cg.library.dao.LibraryDao;
 import com.cg.library.entities.BookInventory;
 import com.cg.library.entities.BookRegistration;
 import com.cg.library.entities.BookTransaction;
-import com.cg.library.entities.Users;
+import com.cg.library.entities.User;
+import com.cg.library.util.Constants;
 
 @Service
-public class LibraryServiceImpl implements ILibraryService {
+public class LibraryServiceImpl implements LibraryService {
 
 	@Autowired
-	private ILibraryDao dao;
+	private LibraryDao dao;
 
 	@Override
-	public BookInventory getBookById(String id) throws Exception {
-		return dao.getBookById(id);
+	public BookInventory getBookById(String bookId) throws Exception {
+		return dao.getBookById(bookId);
 	}
-	
+
 	@Override
 	public List<BookInventory> getAllBooks() throws Exception {
 		return dao.getAllBooks();
 	}
 
 	@Override
-	public int validateUser(String userName, String password)
-			throws Exception {
-		Users user1 = dao.validateUser(userName, password);
-		if (user1.isLibrarian().equals("true")) {
+	public int validateUser(String userName, String password) throws Exception {
+		User user = dao.validateUser(userName, password);
+		if (user.isLibrarian().equals("true")) {
 			return 1;
 		} else {
 			return 0;
@@ -52,7 +52,7 @@ public class LibraryServiceImpl implements ILibraryService {
 	}
 
 	@Override
-	public Users getUserDetails() throws Exception {
+	public User getUserDetails() throws Exception {
 		return dao.getUserDetails();
 	}
 
@@ -60,55 +60,53 @@ public class LibraryServiceImpl implements ILibraryService {
 	public BookRegistration requestBook(BookRegistration bookRequest)
 			throws Exception {
 		BookInventory bookInventory = dao.getBookById(bookRequest.getBookId());
-		if (bookInventory == null) {
-			return null;
-		} else if (bookInventory.getNoOfBooks() == 0) {
+		if (bookInventory == null || bookInventory.getNoOfBooks() == 0) {
 			return null;
 		}
 		return dao.requestBook(bookRequest);
 	}
 
 	@Override
-	public int returnBook(int inpRegId) throws Exception {
+	public int returnBook(int inputRegistrationId) throws Exception {
 		int fine = -1;
-		BookTransaction tran=dao.returnBookTransaction(inpRegId);
+		BookTransaction tran = dao.returnBookTransaction(inputRegistrationId);
 		fine = 0;
-		BookRegistration reg = dao.getBookRegistration(inpRegId);
+		BookRegistration reg = dao.getBookRegistration(inputRegistrationId);
 		LocalDate issue = tran.getIssueDate().toLocalDate();
 		LocalDate today = LocalDate.now();
 		LocalDate expReturn = issue.plusDays(15);
 		int chk = Period.between(expReturn, today).getDays();
 		if (chk > 0)
-			fine = chk * 10; // fine is 10rs per day
+			fine = chk * 10;
 		tran.setReturnDate(Date.valueOf(today));
 		tran.setFine(fine);
 		reg.setStatus("returned");
 		dao.updateBookTransaction(tran);
-		dao.updateBookQuan(reg.getBookId(), 1);
+		dao.updateBookQuantity(reg.getBookId(), 1);
 		dao.updateBookRegistration(reg);
 		return fine;
 	}
 
 	@Override
 	public void issueBook(int registrationId) throws Exception {
-		
-		BookRegistration registration =dao.getBookRegistration(registrationId);
-		registration.setStatus("issued");
+
+		BookRegistration registration = dao.getBookRegistration(registrationId);
+		registration.setStatus(Constants.issued);
 		BookTransaction bookTransaction = new BookTransaction();
 		bookTransaction.setIssueDate(Date.valueOf(LocalDate.now()));
 		bookTransaction.setRegistrationId(registrationId);
 		dao.issueBook(bookTransaction);
-		dao.updateBookQuan(registration.getBookId(), -1);
+		dao.updateBookQuantity(registration.getBookId(), -1);
 		dao.updateBookRegistration(registration);
 	}
 
 	@Override
-	public List<BookRegistration> getAllRequest() throws Exception {
-		return dao.getAllRequest();
+	public List<BookRegistration> getAllRequests() throws Exception {
+		return dao.getAllRequests();
 	}
 
 	@Override
-	public Users addUser(Users user) throws Exception {
+	public User addUser(User user) throws Exception {
 
 		return dao.addUser(user);
 	}
@@ -120,9 +118,9 @@ public class LibraryServiceImpl implements ILibraryService {
 	}
 
 	@Override
-	public List<BookInventory> searchBookByAuthor(String author)
+	public List<BookInventory> searchBookByAuthor(String authorName)
 			throws Exception {
-		return dao.searchBookByAuthor(author);
+		return dao.searchBookByAuthor(authorName);
 
 	}
 

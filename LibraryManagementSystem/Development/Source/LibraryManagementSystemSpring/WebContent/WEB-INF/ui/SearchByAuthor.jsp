@@ -11,7 +11,7 @@
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Book Search</h1>
+	<h1 align="center">Welcome to Library Management System</h1>
 	<hr>
 	<c:choose>
 		<c:when test="${input ne null}">
@@ -20,7 +20,7 @@
 					<table>
 						<tr>
 							<td>Enter the Author Name -</td>
-							<td><input type="text" name="author" required /></td>
+							<td><input type="text" name="authorName" required /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><input type="submit" name="submit"

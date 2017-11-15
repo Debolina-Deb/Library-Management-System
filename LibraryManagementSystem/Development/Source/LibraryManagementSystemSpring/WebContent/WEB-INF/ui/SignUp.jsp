@@ -1,64 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:include page="/WEB-INF/ui/fragments/header.jsp" />
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Slabo+27px"
+	rel="stylesheet">
 <link href="css/form.css" rel="stylesheet">
 <script type="text/javascript" src="js/userForm.js"></script>
 <title>Sign Up</title>
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - SignUp</h1>
 	<hr>
-	<div id="formIndex" align="center">
-		<form:form id="signUpForm" action="signUp.htm" modelAttribute="user"
-			method="post">
-			<table align="center">
-				<tr>
-					<td><form:label path="userName">User Name : </form:label></td>
-					<td><form:input id="userName" path="userName"
-							placeholder="Enter UserName" required="true"></form:input></td>
-					<td><form:errors path="userName" cssStyle="color:red" /></td>
-				</tr>
-				<tr>
-					<td><form:label path="emailId">Email : </form:label></td>
-					<td><form:input id="emailId" path="emailId"
-							placeholder="Enter Email ID" required="true"></form:input></td>
-					<td><form:errors path="emailId" cssStyle="color:red" /></td>
-				</tr>
-				<tr>
-					<td><form:label path="password">Password : </form:label></td>
-					<td><form:password id="password" path="password"
-							placeholder="Enter Password" required="true"></form:password></td>
-					<td><form:errors path="password" cssStyle="color:red" /><font
-						id="passwordError" style="color: red;">${passwordError} </font></td>
-				</tr>
-				<tr>
-					<td><form:label path="repeatPassword">Repeat Password : </form:label></td>
-					<td><form:password id="repeatPassword" path="repeatPassword"
-							placeholder="Repeat Password" required="true"></form:password></td>
-					<td><font id="confirmPasswordError" style="color: red;"></font></td>
-				</tr>
-				<tr>
-					<td><form:label path="librarian">Librarian(True/False) : </form:label>
-					<td><form:select path="librarian" required="true">
-							<form:options items="${librarian}" />
-						</form:select>
-				</tr>
-				<tr>
-					<td colspan="2">By creating an account you agree to our <a
-						href="">Terms & Privacy</a>.
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="right"><input type="submit"
-						onclick="return validateform()" value="Sign Up" /></td>
-				</tr>
-			</table>
-		</form:form>
+	<div class="container">
+		<div class="row" style="margin-top: 60px">
+			<div
+				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+				<form:form role="form" action="signUp.htm" modelAttribute="user"
+					method="post">
+					<fieldset>
+						<h2>Sign Up</h2>
+						<hr class="colorgraph">
+						<div class="form-group">
+							<form:input path="userName" name="userName" id="userName"
+								cssClass="form-control input-lg" placeholder="Enter Username"
+								required="true"></form:input>
+							<form:errors path="userName" cssStyle="color:red" />
+
+						</div>
+						<div class="form-group">
+							<form:input type="email" id="emailId" path="emailId"
+								cssClass="form-control input-lg" placeholder="Enter Email ID"
+								required="true"></form:input>
+							<form:errors path="emailId" cssStyle="color:red" />
+						</div>
+						<div class="form-group">
+							<form:password path="password" name="password" id="password"
+								cssClass="form-control input-lg" placeholder="Password"
+								required="true"></form:password>
+							<form:errors path="password" cssStyle="color:red" />
+							<font id="passwordError" style="color: red;">${passwordError}
+							</font>
+						</div>
+						<div class="form-group">
+							<form:password path="repeatPassword" name="repeatPassword"
+								id="repeatPassword" cssClass="form-control input-lg"
+								placeholder="Repeat Password" required="true"></form:password>
+							<form:errors path="password" cssStyle="color:red" />
+							<font id="confirmPasswordError" style="color: red;">${passwordError}
+							</font>
+						</div>
+						<div class="form-group">
+							<form:select path="librarian" cssClass="form-control input-lg"
+								required="true">
+								<form:options items="${librarian}" />
+							</form:select>
+						</div>
+						<hr class="colorgraph">
+						<div class="row">
+							<div class="col-xs-6 col-sm-6 col-md-6">
+								<input type="submit" onclick="return validateform()"
+									class="btn btn-lg btn-success btn-block" value="Sign Up">
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6">
+								<a href="index.jsp" class="btn btn-lg btn-primary btn-block">Return
+									To Home</a>
+							</div>
+						</div>
+					</fieldset>
+				</form:form>
+			</div>
+		</div>
+
 	</div>
 </body>
 </html>

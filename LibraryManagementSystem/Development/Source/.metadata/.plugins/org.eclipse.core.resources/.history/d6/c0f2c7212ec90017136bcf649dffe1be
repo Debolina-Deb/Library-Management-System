@@ -1,0 +1,97 @@
+package com.cg.library.dao;
+
+import java.util.List;
+
+import com.cg.library.entities.BookInventory;
+import com.cg.library.entities.BookRegistration;
+import com.cg.library.entities.BookTransaction;
+import com.cg.library.entities.User;
+
+/*****************************************************************************************************************************
+ * File Name: LibraryDao 
+ * Package Name: com.
+ * 
+ * Description: Implementation class of data access layer which interacts with the database
+ * and performs the appropriate operations. Version: 1.0 Restrictions: N/A
+ * 
+ * @author aa815803,mk815850,ss815801,ns815843,bv815844,nm815851,kp815871 
+ * Date: 14/11/2017
+ ********************************************************************************************************************************/
+public interface LibraryDao {
+
+	/**
+	 * Gets book by Book Id
+	 * 
+	 * @param bookId
+	 *            - Book Id used to find Book
+	 * @return book - BookInventory object used to manipulate further
+	 */
+	BookInventory getBookById(String id);
+
+	/**
+	 * Gets all books in BookInventory
+	 * 
+	 * @return books - Books in Book Inventory
+	 */
+	List<BookInventory> getAllBooks() throws Exception;
+
+	/**
+	 * Gets all requests in BookRegistration
+	 * 
+	 * @return requests - All requests from Book Registration
+	 */
+	List<BookRegistration> getAllRequests() throws Exception;
+
+	/**
+	 * Validates User
+	 * 
+	 * Validation of User with the userName and password given as input from the
+	 * User table
+	 * 
+	 * @param userName
+	 * @param password
+	 * @throws Exception
+	 */
+	User validateUser(String userName, String password) throws Exception;
+
+	BookTransaction returnBookTransaction(int inpRegId) throws Exception;
+
+	void issueBook(BookTransaction bookTransaction) throws Exception;
+
+	User getUserDetails();
+
+	BookRegistration requestBook(BookRegistration bookRequest) throws Exception;
+
+	BookRegistration getBookRegistration(int inpRegId) throws Exception;
+
+	BookInventory updateBookQuantity(String bookId, int updateBy)
+			throws Exception;
+
+	User addUser(User user) throws Exception;
+
+	List<BookRegistration> getRequestByStatus(String status) throws Exception;
+
+	List<BookInventory> searchBookByAuthor(String author) throws Exception;
+
+	/**
+	 * Search book by Book Name
+	 * 
+	 * Book Name is given as input and the query matched the given name with the
+	 * book name from the BookInventory table from database
+	 * 
+	 * @param bookName
+	 *            - name of book to be searched
+	 * @return books - all books with the given keyword as bookName
+	 * @throws Exception
+	 */
+	List<BookInventory> searchBookByName(String bookName) throws Exception;
+
+	void updateBookTransaction(BookTransaction tran) throws Exception;
+
+	void updateBookRegistration(BookRegistration registration) throws Exception;
+
+	BookInventory deleteBookById(String bookId) throws Exception;
+
+	BookInventory insertBook(BookInventory book) throws Exception;
+
+}
