@@ -21,7 +21,7 @@ public interface LibraryDao {
 	 * Gets book by Book Id
 	 * 
 	 * @param bookId
-	 *            - Book Id used to find Book
+	 *            Book Id used to find Book
 	 * @return book - BookInventory object used to manipulate further
 	 */
 	BookInventory getBookById(String id);
@@ -29,14 +29,14 @@ public interface LibraryDao {
 	/**
 	 * Gets all books in BookInventory
 	 * 
-	 * @return books - Books in Book Inventory
+	 * @return books Books in Book Inventory
 	 */
 	List<BookInventory> getAllBooks() throws Exception;
 
 	/**
 	 * Gets all requests in BookRegistration
 	 * 
-	 * @return requests - All requests from Book Registration
+	 * @return requests All requests from Book Registration
 	 */
 	List<BookRegistration> getAllRequests() throws Exception;
 
@@ -58,7 +58,7 @@ public interface LibraryDao {
 	 * Takes book details from user and persist it into BookInventory
 	 * 
 	 * @param book
-	 *            - BookInventory object contains Book Details
+	 *            BookInventory object contains Book Details
 	 * @throws Exception
 	 */
 	BookInventory insertBook(BookInventory book) throws Exception;
@@ -66,7 +66,7 @@ public interface LibraryDao {
 	/**
 	 * Gets user details
 	 * 
-	 * @return user - User object contains user details
+	 * @return user User object contains user details
 	 * @throws Exception
 	 */
 	User getUserDetails();
@@ -75,7 +75,7 @@ public interface LibraryDao {
 	 * Validates registration Id
 	 * 
 	 * @param inputRegistrationId
-	 *            - Request registration id and validates it from Book
+	 *            Request registration id and validates it from Book
 	 *            Registration table
 	 * @return
 	 * @throws Exception
@@ -88,7 +88,7 @@ public interface LibraryDao {
 	 * Takes book id from user and delete the book from BookInventory
 	 * 
 	 * @param bookId
-	 *            - Id which will be used to delete Book
+	 *            Id which will be used to delete Book
 	 * @return
 	 * @throws Exception
 	 */
@@ -101,9 +101,9 @@ public interface LibraryDao {
 	 * by librarian
 	 * 
 	 * @param bookId
-	 *            - Book Id used to find Book in BookInventory
+	 *            Book Id used to find Book in BookInventory
 	 * @param updateBy
-	 *            - Number of Books to be updated
+	 *            Number of Books to be updated
 	 * @return
 	 * @throws Exception
 	 */
@@ -113,7 +113,7 @@ public interface LibraryDao {
 	/**
 	 * Inserts transaction details while book is issued
 	 * 
-	 * @param bookTransaction - BookTransaction object contains Transaction details 
+	 * @param bookTransaction BookTransaction object contains Transaction details 
 	 * @throws Exception
 	 */
 	void issueBook(BookTransaction bookTransaction) throws Exception;
@@ -122,7 +122,7 @@ public interface LibraryDao {
 	 * Retrieves transaction details after returning book
 	 * 
 	 * @param inputRegistrationId
-	 *            - Registration id used to get transaction details
+	 *            Registration id used to get transaction details
 	 * @return
 	 * @throws Exception
 	 */
@@ -134,7 +134,7 @@ public interface LibraryDao {
 	 * Book requests details are persisted in Book Registration table
 	 * 
 	 * @param bookRequest
-	 *            - Book Request details for book requested by Student
+	 *            Book Request details for book requested by Student
 	 * @return
 	 * @throws Exception
 	 */
@@ -145,9 +145,8 @@ public interface LibraryDao {
 	 * 
 	 * User's data are persisted in User table
 	 * 
-	 * @param user
-	 *            - User object to persist in database
-	 * @return user - User object returned for further manipulation
+	 * @param user User object to persist in database
+	 * @return user User object returned for further manipulation
 	 * @throws Exception
 	 */
 	User addUser(User user) throws Exception;
@@ -158,9 +157,8 @@ public interface LibraryDao {
 	 * Status given as input is the state of the transaction which can be
 	 * pending or issued and w.r.t status the list of requests are retrieved
 	 * 
-	 * @param status
-	 *            - State of transaction i.e. pending or issued
-	 * @return requests - List of requests according to status
+	 * @param status State of transaction i.e. pending or issued
+	 * @return requests List of requests according to status
 	 * @throws Exception
 	 */
 	List<BookRegistration> getRequestByStatus(String status) throws Exception;
@@ -173,8 +171,8 @@ public interface LibraryDao {
 	 * that keyword
 	 * 
 	 * @param authorName
-	 *            - Author name used to compare with the table column author
-	 * @return books - List of books with the given author name
+	 *            Author name used to compare with the table column author
+	 * @return books List of books with the given author name
 	 * @throws Exception
 	 */
 	List<BookInventory> searchBookByAuthor(String author) throws Exception;
@@ -186,8 +184,8 @@ public interface LibraryDao {
 	 * book name from the BookInventory table from database
 	 * 
 	 * @param bookName
-	 *            - name of book to be searched
-	 * @return books - all books with the given keyword as bookName
+	 *            Name of book to be searched
+	 * @return books All books with the given keyword as bookName
 	 * @throws Exception
 	 */
 	List<BookInventory> searchBookByName(String bookName) throws Exception;
@@ -198,7 +196,7 @@ public interface LibraryDao {
 	 * Updates quantity of Book after the transaction is done i.e Book is issued
 	 * or returned.
 	 * 
-	 * @param bookTransaction - BookTransaction object that stores transaction details
+	 * @param bookTransaction BookTransaction object that stores transaction details
 	 * @throws Exception
 	 */
 	void updateBookTransaction(BookTransaction tran) throws Exception;
@@ -209,7 +207,7 @@ public interface LibraryDao {
 	 * After the transaction i.e issuing or returning book the BookRegistration
 	 * table is updated with current status
 	 * 
-	 * @param bookRegistration - BookRegistration object that stores registration details          -
+	 * @param bookRegistration BookRegistration object that stores registration details          -
 	 * @throws Exception
 	 */
 	void updateBookRegistration(BookRegistration registration) throws Exception;

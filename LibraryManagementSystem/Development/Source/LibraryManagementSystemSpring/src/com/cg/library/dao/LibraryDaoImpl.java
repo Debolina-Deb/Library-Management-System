@@ -43,9 +43,8 @@ public class LibraryDaoImpl implements LibraryDao {
 	/**
 	 * Gets book by Book Id
 	 * 
-	 * @param bookId
-	 *            - Book Id used to find Book
-	 * @return book - BookInventory object used to manipulate further
+	 * @param bookId Book Id used to find Book
+	 * @return book BookInventory object used to manipulate further
 	 */
 	@Override
 	public BookInventory getBookById(String bookId) {
@@ -57,7 +56,7 @@ public class LibraryDaoImpl implements LibraryDao {
 	/**
 	 * Gets all books in BookInventory
 	 * 
-	 * @return books - Books in Book Inventory
+	 * @return books Books in Book Inventory
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -70,7 +69,7 @@ public class LibraryDaoImpl implements LibraryDao {
 	/**
 	 * Gets all requests in BookRegistration
 	 * 
-	 * @return requests - All requests from Book Registration
+	 * @return requests All requests from Book Registration
 	 */
 	@Override
 	public List<BookRegistration> getAllRequests() {
@@ -88,8 +87,9 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * Validation of User with the userName and password given as input from the
 	 * User table
 	 * 
-	 * @param userName
-	 * @param password
+	 * @param userName User name used by user to register
+	 * @param password Password used by user to register
+	 * @return user User object which contains the status as Librarian or Student
 	 * @throws Exception
 	 */
 	@Override
@@ -109,8 +109,8 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * 
 	 * Takes book details from user and persist it into BookInventory
 	 * 
-	 * @param book
-	 *            - BookInventory object contains Book Details
+	 * @param book BookInventory object contains Book Details
+	 * @return book Details of Book which is inserted in Database
 	 * @throws Exception
 	 */
 	@Override
@@ -129,7 +129,7 @@ public class LibraryDaoImpl implements LibraryDao {
 	/**
 	 * Gets user details
 	 * 
-	 * @return user - User object contains user details
+	 * @return user User object contains user details
 	 * @throws Exception
 	 */
 	public User getUserDetails() {
@@ -139,10 +139,9 @@ public class LibraryDaoImpl implements LibraryDao {
 	/**
 	 * Validates registration Id
 	 * 
-	 * @param inputRegistrationId
-	 *            - Request registration id and validates it from Book
+	 * @param inputRegistrationId Request registration id and validates it from Book
 	 *            Registration table
-	 * @return
+	 * @return registration Details of Book Registration object
 	 * @throws Exception
 	 */
 	@Override
@@ -159,9 +158,8 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * 
 	 * Takes book id from user and delete the book from BookInventory
 	 * 
-	 * @param bookId
-	 *            - Id which will be used to delete Book
-	 * @return
+	 * @param bookId Id which will be used to delete Book
+	 * @return book Deatails of book which is deleted
 	 * @throws Exception
 	 */
 	@Override
@@ -179,10 +177,10 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * by librarian
 	 * 
 	 * @param bookId
-	 *            - Book Id used to find Book in BookInventory
+	 *            Book Id used to find Book in BookInventory
 	 * @param updateBy
-	 *            - Number of Books to be updated
-	 * @return
+	 *            Number of Books to be updated
+	 * @return book Details of book which is updated
 	 * @throws Exception
 	 */
 	@Override
@@ -199,7 +197,7 @@ public class LibraryDaoImpl implements LibraryDao {
 	/**
 	 * Inserts transaction details while book is issued
 	 * 
-	 * @param bookTransaction - BookTransaction object contains Transaction details 
+	 * @param bookTransaction BookTransaction object contains Transaction details 
 	 * @throws Exception
 	 */
 	@Override
@@ -213,8 +211,8 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * Retrieves transaction details after returning book
 	 * 
 	 * @param inputRegistrationId
-	 *            - Registration id used to get transaction details
-	 * @return
+	 *            Registration id used to get transaction details
+	 * @return transaction Transaction details after returning book
 	 * @throws Exception
 	 */
 	@Override
@@ -235,7 +233,7 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * Updates quantity of Book after the transaction is done i.e Book is issued
 	 * or returned.
 	 * 
-	 * @param bookTransaction - BookTransaction object that stores transaction details
+	 * @param bookTransaction BookTransaction object that stores transaction details
 	 * @throws Exception
 	 */
 	@Override
@@ -252,7 +250,7 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * After the transaction i.e issuing or returning book the BookRegistration
 	 * table is updated with current status
 	 * 
-	 * @param bookRegistration - BookRegistration object that stores registration details          -
+	 * @param bookRegistration BookRegistration object that stores registration details          -
 	 * @throws Exception
 	 */
 	@Override
@@ -269,8 +267,8 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * Book requests details are persisted in Book Registration table
 	 * 
 	 * @param bookRequest
-	 *            - Book Request details for book requested by Student
-	 * @return
+	 *            Book Request details for book requested by Student
+	 * @return bookRequest Request details of Book request made by student
 	 * @throws Exception
 	 */
 	@Override
@@ -288,8 +286,8 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * User's data are persisted in User table
 	 * 
 	 * @param user
-	 *            - User object to persist in database
-	 * @return user - User object returned for further manipulation
+	 *            User object to persist in database
+	 * @return user User object returned for further manipulation
 	 * @throws Exception
 	 */
 	@Override
@@ -306,8 +304,8 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * pending or issued and w.r.t status the list of requests are retrieved
 	 * 
 	 * @param status
-	 *            - State of transaction i.e. pending or issued
-	 * @return requests - List of requests according to status
+	 *            State of transaction i.e. pending or issued
+	 * @return requests List of requests according to status
 	 * @throws Exception
 	 */
 	@Override
@@ -329,8 +327,8 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * that keyword
 	 * 
 	 * @param authorName
-	 *            - Author name used to compare with the table column author
-	 * @return books - List of books with the given author name
+	 *            Author name used to compare with the table column author
+	 * @return books List of books with the given author name
 	 * @throws Exception
 	 */
 	@Override
@@ -351,8 +349,8 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * book name from the BookInventory table from database
 	 * 
 	 * @param bookName
-	 *            - name of book to be searched
-	 * @return books - all books with the given keyword as bookName
+	 *            Name of book to be searched
+	 * @return books All books with the given keyword as bookName
 	 * @throws Exception
 	 */
 	@Override

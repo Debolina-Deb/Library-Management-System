@@ -36,7 +36,7 @@ public class StudentController {
 	 * Shows all book requests
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("/showAll.htm")
@@ -54,9 +54,9 @@ public class StudentController {
 	 * Book request placed by student
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @param bookId
-	 *            - Book Id for book requested by student
+	 *            Book Id for book requested by student
 	 * @return
 	 */
 	@RequestMapping("/requestBook.htm")
@@ -80,7 +80,7 @@ public class StudentController {
 	 * Redirects to page for searching by author
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("/searchByAuthor")
@@ -93,9 +93,9 @@ public class StudentController {
 	 * Search book by author name
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @param authorName
-	 *            - Author name which will be used to search Book
+	 *            Author name which will be used to search Book
 	 * @return
 	 * @throws Exception
 	 */
@@ -127,9 +127,9 @@ public class StudentController {
 	 * Search book by book name
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @param bookName
-	 *            - Book name which will be used to search Book
+	 *            Book name which will be used to search Book
 	 * @return
 	 * @throws Exception
 	 */

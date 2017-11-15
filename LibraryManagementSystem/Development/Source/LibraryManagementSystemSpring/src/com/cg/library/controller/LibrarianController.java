@@ -40,11 +40,11 @@ public class LibrarianController {
 	 * Validates user from the User table whether its a User or Librarian
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @param userName
-	 *            - User name which user used to register
+	 *            User name which user used to register
 	 * @param password
-	 *            - Password which user used to register
+	 *            Password which user used to register
 	 * @return
 	 */
 	@RequestMapping(value = "/login.htm", method = RequestMethod.POST)
@@ -69,7 +69,7 @@ public class LibrarianController {
 	 * Redirects request to Sign up page
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("signUp.htm")
@@ -83,9 +83,9 @@ public class LibrarianController {
 	 * Takes data of new user and persist in table
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @param user
-	 *            - User details to persist in User table
+	 *            User details to persist in User table
 	 * @return
 	 */
 	@RequestMapping(value = "/signUp.htm", method = RequestMethod.POST)
@@ -110,9 +110,9 @@ public class LibrarianController {
 	 * Displays all Books
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @param userName
-	 *            - User name which user used to register
+	 *            User name which user used to register
 	 * @return
 	 */
 	@RequestMapping(value = "/display")
@@ -133,9 +133,9 @@ public class LibrarianController {
 	 * Deletes Book from BookInventory
 	 * 
 	 * @param bookId
-	 *            - Book Id of Book which user want to delete
+	 *            Book Id of Book which user want to delete
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping(value = "/delete.htm")
@@ -155,9 +155,9 @@ public class LibrarianController {
 	 * Checks whether Book exists or not
 	 * 
 	 * @param bookId
-	 *            - Book Id of book which we want to check in Inventory
+	 *            Book Id of book which we want to check in Inventory
 	 * @param model
-	 *            - User name which user used to register
+	 *            User name which user used to register
 	 * @return
 	 */
 	@RequestMapping(value = "/checkBook", method = RequestMethod.POST)
@@ -192,9 +192,9 @@ public class LibrarianController {
 	 * Inserts book details in Book Inventory
 	 * 
 	 * @param book
-	 *            - Book Details which user wants to insert into DB
+	 *            Book Details which user wants to insert into DB
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping(value = "onAdd")
@@ -219,7 +219,7 @@ public class LibrarianController {
 	 * Views issued request of student by librarian
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("/pendingRequest.htm")
@@ -238,7 +238,7 @@ public class LibrarianController {
 	 * Views issued books registration details to librarian
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @return
 	 */
 	@RequestMapping("/issuedRequest.htm")
@@ -257,9 +257,9 @@ public class LibrarianController {
 	 * Issues book requested by Student
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @param registrationId
-	 *            - Registration Id used to issue book
+	 *            Registration Id used to issue book
 	 * @return
 	 */
 	@RequestMapping("/issue.htm")
@@ -280,9 +280,9 @@ public class LibrarianController {
 	 * Returning Books issued by Student
 	 * 
 	 * @param model
-	 *            - Model object used to send attributes
+	 *            Model object used to send attributes
 	 * @param registrationId
-	 *            - Registration Id used to return book
+	 *            Registration Id used to return book
 	 * @return
 	 */
 	@RequestMapping("/return.htm")
@@ -310,9 +310,9 @@ public class LibrarianController {
 	public String librarianHome() {
 		return RequestPage.LibrarianOperation;
 	}
-	
+
 	@RequestMapping("/logout.htm")
-	public String logout(Model model,HttpServletRequest request){
+	public String logout(Model model, HttpServletRequest request) {
 		request.getSession().invalidate();
 		return "../../index";
 	}

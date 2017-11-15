@@ -1,0 +1,364 @@
+package com.cg.library.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cg.library.entities.BookInventory;
+import com.cg.library.entities.BookRegistration;
+import com.cg.library.entities.BookTransaction;
+import com.cg.library.entities.User;
+import com.cg.library.util.Constants;
+import com.cg.library.util.QueryMapper;
+
+/*****************************************************************************************************************************
+ * File Name: LibraryDaoImpl 
+ * Package Name: com.cg.lms.dao 
+ * Description:
+ * Implementation class of data access layer which interacts with the database
+ * and performs the appropriate operations. 
+ * Version: 1.0 
+ * Restrictions: N/A
+ * @author 
+ * Date: 14/11/2017
+ ********************************************************************************************************************************/
+@Repository
+@Transactional
+public class LibraryDaoImpl implements LibraryDao {
+	private static Logger logger = Logger
+			.getLogger(com.cg.library.dao.LibraryDaoImpl.class);
+	private static User user = new User();
+	private String percent = "%";
+
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	/**
+	 * Gets book by Book Id
+	 * 
+	 * @param bookId Book Id used to find Book
+	 * @return book BookInventory object used to manipulate further
+	 */
+	@Override
+	public BookInventory getBookById(String bookId) {
+		BookInventory book = entityManager.find(BookInventory.class, bookId);
+		logger.info(Constants.bookRetrievedLog + bookId);
+		return book;
+	}
+
+	/**
+	 * Gets all books in BookInventory
+	 * 
+	 * @return books Books in Book Inventory
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BookInventory> getAllBooks() {
+		Query query = entityManager.createNamedQuery(QueryMapper.getAllBooks);
+		logger.info(Constants.bookInventoryListLog);
+		return query.getResultList();
+	}
+
+	/**
+	 * Gets all requests in BookRegistration
+	 * 
+	 * @return requests All requests from Book Registration
+	 */
+	@Override
+	public List<BookRegistration> getAllRequests() {
+		Query query = entityManager
+				.createNamedQuery(QueryMapper.getAllRequests);
+		@SuppressWarnings("unchecked")
+		List<BookRegistration> requestList = query.getResultList();
+		logger.info(Constants.bookRequestListLog);
+		return requestList;
+	}
+
+	/**
+	 * Validates User
+	 * 
+	 * Validation of User with the userName and password given as input from the
+	 * User table
+	 * 
+	 * @param userName User name used by user to register
+	 * @param password Password used by user to register
+	 * @throws Exception
+	 */
+	@Override
+	public User validateUser(String userName, String password) throws Exception {
+		TypedQuery<User> query = entityManager.createQuery(
+				QueryMapper.validateUser, User.class);
+		query.setParameter("userName", userName);
+		query.setParameter("password", password);
+		User user1 = query.getSingleResult();
+		user = user1;
+		logger.info(Constants.userIdMessage + user1.getUserId());
+		return user1;
+	}
+
+	/**
+	 * Inserts Book into BookInventory
+	 * 
+	 * Takes book details from user and persist it into BookInventory
+	 * 
+	 * @param book BookInventory object contains Book Details
+	 * @throws Exception
+	 */
+	@Override
+	public BookInventory insertBook(BookInventory book) throws Exception {
+		BookInventory bookNew = this.getBookById(book.getBookId());
+		if (bookNew == null) {
+			entityManager.persist(book);
+			logger.info(Constants.bookInserted + book.getBookId());
+		} else {
+			entityManager.merge(book);
+			logger.info(Constants.bookUpdated + book.getBookId());
+		}
+		return book;
+	}
+
+	/**
+	 * Gets user details
+	 * 
+	 * @return user User object contains user details
+	 * @throws Exception
+	 */
+	public User getUserDetails() {
+		return user;
+	}
+
+	/**
+	 * Validates registration Id
+	 * 
+	 * @param inputRegistrationId Request registration id and validates it from Book
+	 *            Registration table
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public BookRegistration getBookRegistration(int inputRegistrationId)
+			throws Exception {
+		BookRegistration registration = entityManager.find(
+				BookRegistration.class, inputRegistrationId);
+		logger.info(Constants.bookRegiteredLog + inputRegistrationId);
+		return registration;
+	}
+
+	/**
+	 * Deletes book by book Id
+	 * 
+	 * Takes book id from user and delete the book from BookInventory
+	 * 
+	 * @param bookId Id which will be used to delete Book
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public BookInventory deleteBookById(String bookId) throws Exception {
+		BookInventory book = entityManager.find(BookInventory.class, bookId);
+		entityManager.remove(book);
+		logger.info(Constants.bookDeletedMessage + bookId);
+		return book;
+	}
+
+	/**
+	 * Updates quantity of book in BookInventory
+	 * 
+	 * Updates book quantity in BookInventory whenever the transaction is done
+	 * by librarian
+	 * 
+	 * @param bookId
+	 *            Book Id used to find Book in BookInventory
+	 * @param updateBy
+	 *            Number of Books to be updated
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public BookInventory updateBookQuantity(String bookId, int updateBy)
+			throws Exception {
+		BookInventory book = this.getBookById(bookId);
+		book.setNoOfBooks(book.getNoOfBooks() + updateBy);
+		entityManager.merge(book);
+		entityManager.flush();
+		logger.info(Constants.bookUpdated + book.getBookId());
+		return book;
+	}
+
+	/**
+	 * Inserts transaction details while book is issued
+	 * 
+	 * @param bookTransaction BookTransaction object contains Transaction details 
+	 * @throws Exception
+	 */
+	@Override
+	public void issueBook(BookTransaction bookTransaction) throws Exception {
+		entityManager.persist(bookTransaction);
+		logger.info(Constants.bookIssuedMessage
+				+ bookTransaction.getRegistrationId());
+	}
+
+	/**
+	 * Retrieves transaction details after returning book
+	 * 
+	 * @param inputRegistrationId
+	 *            Registration id used to get transaction details
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public BookTransaction returnBookTransaction(int inputRegistrationId)
+			throws Exception {
+		BookTransaction transaction;
+		TypedQuery<BookTransaction> query = entityManager.createQuery(
+				QueryMapper.returnBook + inputRegistrationId,
+				BookTransaction.class);
+		transaction = query.getSingleResult();
+		logger.info(Constants.bookTransactionLog + inputRegistrationId);
+		return transaction;
+	}
+
+	/**
+	 * Updates status after transaction
+	 * 
+	 * Updates quantity of Book after the transaction is done i.e Book is issued
+	 * or returned.
+	 * 
+	 * @param bookTransaction BookTransaction object that stores transaction details
+	 * @throws Exception
+	 */
+	@Override
+	public void updateBookTransaction(BookTransaction bookTransaction)
+			throws Exception {
+		entityManager.merge(bookTransaction);
+		logger.info(Constants.bookTransactionLog
+				+ bookTransaction.getRegistrationId());
+	}
+
+	/**
+	 * Updates BookRegistration table after transaction
+	 * 
+	 * After the transaction i.e issuing or returning book the BookRegistration
+	 * table is updated with current status
+	 * 
+	 * @param bookRegistration BookRegistration object that stores registration details          -
+	 * @throws Exception
+	 */
+	@Override
+	public void updateBookRegistration(BookRegistration bookRegistration)
+			throws Exception {
+		entityManager.merge(bookRegistration);
+		logger.info(Constants.bookRegiteredLog
+				+ bookRegistration.getRegistrationId());
+	}
+
+	/**
+	 * Requests book from librarian
+	 * 
+	 * Book requests details are persisted in Book Registration table
+	 * 
+	 * @param bookRequest
+	 *            Book Request details for book requested by Student
+	 * @return
+	 * @throws Exception
+	 */
+	@Override
+	public BookRegistration requestBook(BookRegistration bookRequest)
+			throws Exception {
+		entityManager.persist(bookRequest);
+		logger.info(Constants.bookRequestMessage
+				+ bookRequest.getRegistrationId());
+		return bookRequest;
+	}
+
+	/**
+	 * Adds user to User table
+	 * 
+	 * User's data are persisted in User table
+	 * 
+	 * @param user
+	 *            User object to persist in database
+	 * @return user User object returned for further manipulation
+	 * @throws Exception
+	 */
+	@Override
+	public User addUser(User user) throws Exception {
+		entityManager.persist(user);
+		logger.info(Constants.userAddedMessage + user.getUserId());
+		return user;
+	}
+
+	/**
+	 * Gets requests by status
+	 * 
+	 * Status given as input is the state of the transaction which can be
+	 * pending or issued and w.r.t status the list of requests are retrieved
+	 * 
+	 * @param status
+	 *            State of transaction i.e. pending or issued
+	 * @return requests List of requests according to status
+	 * @throws Exception
+	 */
+	@Override
+	public List<BookRegistration> getRequestByStatus(String status)
+			throws Exception {
+		TypedQuery<BookRegistration> query = entityManager.createQuery(
+				QueryMapper.requestByStatus, BookRegistration.class);
+		query.setParameter("status", status);
+		List<BookRegistration> requests = query.getResultList();
+		logger.info(Constants.bookRequestListLog);
+		return requests;
+	}
+
+	/**
+	 * Search book by author name
+	 * 
+	 * Author name is taken as input and the given query matches the authorName
+	 * with the author present in BookInventory table and returns all books with
+	 * that keyword
+	 * 
+	 * @param authorName
+	 *            Author name used to compare with the table column author
+	 * @return books List of books with the given author name
+	 * @throws Exception
+	 */
+	@Override
+	public List<BookInventory> searchBookByAuthor(String authorName)
+			throws Exception {
+		TypedQuery<BookInventory> query = entityManager.createQuery(
+				QueryMapper.bookByAuthor, BookInventory.class);
+		query.setParameter("authorName", percent + authorName + percent);
+		List<BookInventory> books = query.getResultList();
+		logger.info(Constants.bookRetrievedLog);
+		return books;
+	}
+
+	/**
+	 * Search book by Book Name
+	 * 
+	 * Book Name is given as input and the query matched the given name with the
+	 * book name from the BookInventory table from database
+	 * 
+	 * @param bookName
+	 *            Name of book to be searched
+	 * @return books All books with the given keyword as bookName
+	 * @throws Exception
+	 */
+	@Override
+	public List<BookInventory> searchBookByName(String bookName)
+			throws Exception {
+		TypedQuery<BookInventory> query = entityManager.createQuery(
+				QueryMapper.bookByName, BookInventory.class);
+		query.setParameter("bookName", percent + bookName + percent);
+		List<BookInventory> books = query.getResultList();
+		logger.info(Constants.bookRetrievedLog);
+		return books;
+	}
+}
