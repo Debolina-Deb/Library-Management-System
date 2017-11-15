@@ -69,7 +69,7 @@ public class StudentController {
 			bookRequest = studentService.requestBook(bookRequest);
 			model.addAttribute(Constants.message, Constants.bookRequestMessage
 					+ bookRequest.getRegistrationId());
-			return RequestPage.Success;
+			return RequestPage.RequestSuccess;
 		} catch (Exception e) {
 			model.addAttribute(Constants.message, e.getMessage());
 			return RequestPage.Error;
@@ -140,6 +140,7 @@ public class StudentController {
 			List<BookInventory> books = studentService
 					.searchBookByName(bookName);
 			model.addAttribute("books", books);
+			System.out.println(books);
 			return RequestPage.BookSearch;
 		} catch (Exception e) {
 			model.addAttribute(Constants.message, e.getMessage());

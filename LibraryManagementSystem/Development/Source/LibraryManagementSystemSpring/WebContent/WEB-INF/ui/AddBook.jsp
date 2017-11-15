@@ -2,81 +2,108 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:include page="/WEB-INF/ui/fragments/loggedInHeader.jsp" />
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Add/Update Book</title>
-<link href="https://fonts.googleapis.com/css?family=Slabo+27px"
-	rel="stylesheet">
-<link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Add Book</h1>
-	<hr>
-	<h4 align="right">Welcome ${userName}</h4>
 	<c:if test="${bookId eq null }">
-		<div id="formIndex">
-			<form action="checkBook.htm" method="post">
-				Enter book Id:<input type="text" name="bookId" /> <input
-					type="submit" value="Add/update" />
-			</form>
+		<div class="container">
+			<div class="row" style="margin-top: 60px">
+				<div
+					class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+					<form role="form" action="checkBook.htm" method="post">
+						<fieldset>
+							<h2 style="color: grey;">ADD OR UPDATE BOOK</h2>
+							<hr class="colorgraph">
+							<div class="form-group">
+								<input type="text" name="bookId" id="bookId"
+									class="form-control input-lg" placeholder="Book ID"
+									required="required">
+							</div>
+							<hr class="colorgraph">
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<input class="btn btn-lg btn-success btn-block" type="submit"
+										value="Add" />
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+
 		</div>
 	</c:if>
+
 	<c:if test="${book ne null}">
-		<div id="formIndex">
-			<form:form id="bookForm" action="onAdd.htm" modelAttribute="book"
-				method="post">
-				<table align="center">
-					<tr>
-						<td><form:label path="bookId">Book Id:</form:label>
-						<td><form:input path="bookId" pattern="[0-9]{4}"
-								title="Book Id should be of 4 digits (1111 or 9999)"
-								value="${bookId}" required="true" />
-						<td><form:errors path="bookId" cssStyle="color:red" />
-					</tr>
-					<tr>
-						<td><form:label path="bookName">Book Name:</form:label>
-						<td><form:input path="bookName" value="${book.bookName}"
-								required="true" />
-						<td><form:errors path="bookName" cssStyle="color:red" />
-					</tr>
-					<tr>
-						<td><form:label path="author">Author:</form:label>
-						<td><form:input path="author" value="${book.author}"
-								required="true" />
-						<td><form:errors path="author" cssStyle="color:red" />
-					</tr>
-					<tr>
-						<td><form:label path="publisher">Publisher:</form:label>
-						<td><form:input path="publisher" value="${book.publisher}"
-								required="true" />
-						<td><form:errors path="publisher" cssStyle="color:red" />
-					</tr>
-					<tr>
-						<td><form:label path="yearOfPublication">Year of Publication:</form:label>
-						<td><form:input path="yearOfPublication" pattern="[0-9]{4}"
-								title="YOP should be in format YYYY"
-								value="${book.yearOfPublication}" required="true" />
-						<td><form:errors path="yearOfPublication"
-								cssStyle="color:red" />
-					</tr>
-					<tr>
-						<td><form:label path="noOfBooks">No. Of Books:</form:label>
-						<td><form:input path="noOfBooks" value="${book.noOfBooks}"
-								required="true" />
-						<td><form:errors path="noOfBooks" cssStyle="color:red" />
-					</tr>
-					<tr>
-						<td colspan="2"><button type="submit">Add Book</button></td>
-					</tr>
-				</table>
-			</form:form>
+		<div class="container">
+			<div class="row" style="margin-top: 60px">
+				<div
+					class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+					<form:form id="bookForm" action="onAdd.htm" modelAttribute="book"
+						method="post">
+						<fieldset>
+							<h2>UPDATE BOOK</h2>
+							<hr class="colorgraph">
+							<div class="form-group">
+								<form:input path="bookId" pattern="[0-9]{4}"
+									title="Book Id should be of 4 digits (1111 or 9999)"
+									value="${bookId}" required="true" placeholder="Enter Book Id"
+									cssClass="form-control input-lg" />
+								<form:errors path="bookId" cssStyle="color:red" />
+							</div>
+							<div class="form-group">
+								<form:input path="bookName" cssClass="form-control input-lg"
+									value="${book.bookName}" required="true"
+									placeholder="Enter Book Name" />
+								<form:errors path="bookName" cssStyle="color:red" />
+							</div>
+							<div class="form-group">
+								<form:input path="author" value="${book.author}" required="true"
+									cssClass="form-control input-lg"
+									placeholder="Enter Author Name" />
+								<form:errors path="author" cssStyle="color:red" />
+							</div>
+							<div class="form-group">
+								<form:input path="publisher" value="${book.publisher}"
+									required="true" cssClass="form-control input-lg"
+									placeholder="Enter Publisher Name" />
+								<form:errors path="publisher" cssStyle="color:red" />
+							</div>
+							<div class="form-group">
+								<form:input path="yearOfPublication" pattern="[0-9]{4}"
+									title="YOP should be in format YYYY"
+									value="${book.yearOfPublication}" required="true"
+									cssClass="form-control input-lg"
+									placeholder="Enter year of Publication" />
+								<form:errors path="yearOfPublication" cssStyle="color:red" />
+							</div>
+
+							<div class="form-group">
+								<form:input path="noOfBooks" value="${book.noOfBooks}"
+									required="true" cssClass="form-control input-lg"
+									placeholder="Enter Number Of Books" />
+								<form:errors path="noOfBooks" cssStyle="color:red" />
+							</div>
+							<hr class="colorgraph">
+							<div class="row">
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<input type="submit" class="btn btn-lg btn-success btn-block"
+										value="Update Book">
+								</div>
+
+							</div>
+						</fieldset>
+					</form:form>
+				</div>
+			</div>
 		</div>
 	</c:if>
-	<h4>
-		<a id="home" href="librarianHome.htm">Home</a> <a id="logout" href="">Logout</a>
-	</h4>
+	<jsp:include page="/WEB-INF/ui/fragments/footer.jsp" />
 
 </body>
 </html>

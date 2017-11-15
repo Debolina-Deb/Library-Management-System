@@ -18,15 +18,17 @@
 				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 				<form role="form" action="login.htm" method="post">
 					<fieldset>
-						<h2>Please Sign In</h2>
+						<h2 style="color: grey;">Please Sign In</h2>
 						<hr class="colorgraph">
 						<div class="form-group">
 							<input type="text" name="userName" id="userName"
-								class="form-control input-lg" placeholder="Username" required="required">
+								class="form-control input-lg" placeholder="Username"
+								required="required">
 						</div>
 						<div class="form-group">
 							<input type="password" name="password" id="password"
-								class="form-control input-lg" placeholder="Password" required="required">
+								class="form-control input-lg" placeholder="Password"
+								required="required">
 						</div>
 						<span class="button-checkbox">
 							<button type="button" class="btn" data-color="info">Remember
@@ -51,6 +53,9 @@
 
 	</div>
 	<h3>${message }</h3>
+	<jsp:include page="/WEB-INF/ui/fragments/footer.jsp" />
+
 </body>
 </body>
+
 </html>

@@ -335,7 +335,7 @@ public class LibraryDaoImpl implements LibraryDao {
 			throws Exception {
 		TypedQuery<BookInventory> query = entityManager.createQuery(
 				QueryMapper.bookByAuthor, BookInventory.class);
-		query.setParameter("authorName", percent + authorName + percent);
+		query.setParameter("authorName", "%" + authorName.toLowerCase() + "%");
 		List<BookInventory> books = query.getResultList();
 		logger.info(Constants.bookRetrievedLog);
 		return books;
@@ -357,7 +357,7 @@ public class LibraryDaoImpl implements LibraryDao {
 			throws Exception {
 		TypedQuery<BookInventory> query = entityManager.createQuery(
 				QueryMapper.bookByName, BookInventory.class);
-		query.setParameter("bookName", percent + bookName + percent);
+		query.setParameter("bookName", percent + bookName.toLowerCase() + percent);
 		List<BookInventory> books = query.getResultList();
 		logger.info(Constants.bookRetrievedLog);
 		return books;
