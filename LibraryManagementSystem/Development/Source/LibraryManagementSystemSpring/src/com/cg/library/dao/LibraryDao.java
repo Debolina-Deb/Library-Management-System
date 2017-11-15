@@ -24,7 +24,7 @@ public interface LibraryDao {
 	 *            Book Id used to find Book
 	 * @return book - BookInventory object used to manipulate further
 	 */
-	BookInventory getBookById(String id);
+	BookInventory getBookById(String bookId);
 
 	/**
 	 * Gets all books in BookInventory
@@ -67,7 +67,6 @@ public interface LibraryDao {
 	 * Gets user details
 	 * 
 	 * @return user User object contains user details
-	 * @throws Exception
 	 */
 	User getUserDetails();
 	
@@ -175,7 +174,7 @@ public interface LibraryDao {
 	 * @return books List of books with the given author name
 	 * @throws Exception
 	 */
-	List<BookInventory> searchBookByAuthor(String author) throws Exception;
+	List<BookInventory> searchBookByAuthor(String authorName) throws Exception;
 
 	/**
 	 * Search book by Book Name

@@ -130,7 +130,6 @@ public class LibraryDaoImpl implements LibraryDao {
 	 * Gets user details
 	 * 
 	 * @return user User object contains user details
-	 * @throws Exception
 	 */
 	public User getUserDetails() {
 		return user;
