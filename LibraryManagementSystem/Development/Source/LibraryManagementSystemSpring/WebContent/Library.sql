@@ -32,7 +32,7 @@ CREATE TABLE BooksRegistration
 	book_id VARCHAR2(4), 
 	user_id VARCHAR2(4), 
 	registration_date DATE default sysdate,
-	status VARCHAR2()
+	status VARCHAR2(10)
 );
 
 CREATE TABLE BooksTransaction
@@ -45,15 +45,13 @@ CREATE TABLE BooksTransaction
 );
 
 
-INSERT INTO USERS values (100,'parag','parag','par@gmail.com','true');
+INSERT INTO USERS values (100,'parag','parag','parag','par@gmail.com','true');
 
-INSERT INTO USERS values (101,'nisha','nisha','nis@gmail.com','true');
+INSERT INTO USERS values (101,'nisha','nisha','nisha','nis@gmail.com','true');
 
-INSERT INTO USERS values (102,'akash','akash','akash@gmail.com','false');
+INSERT INTO USERS values (102,'akash','akash','akash','akash@gmail.com','false');
 
-INSERT INTO USERS values (103,'himan','himan','himan@gmail.com','false');
-
-TRUNCATE table BooksInventory;
+INSERT INTO USERS values (103,'himan','himan','himan','himan@gmail.com','false');
 
 INSERT INTO BOOKSINVENTORY values ('1001','Let Us C','Yashwant Kanetkar','TMH','2014',3);
 

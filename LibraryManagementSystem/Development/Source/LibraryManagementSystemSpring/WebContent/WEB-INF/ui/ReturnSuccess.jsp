@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville"
 	rel="stylesheet">
 <link href="css/form.css" rel="stylesheet">
-<title>Error</title>
+<title>Success</title>
 </head>
 <body>
 	<div class="container">
@@ -19,13 +19,12 @@
 				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 				<form:form role="form">
 					<fieldset>
-						<h1 style="color: red">Error</h1>
 						<h2>${message }</h2>
 						<hr class="colorgraph">
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6">
-								<a href="librarianHome.htm"
-									class="btn btn-lg btn-primary btn-block">Return To Home</a>
+								<a href="librarianHome.htm" class="btn btn-lg btn-primary btn-block">Return
+									To Home</a>
 							</div>
 						</div>
 					</fieldset>

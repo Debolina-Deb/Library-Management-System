@@ -10,7 +10,7 @@ package com.cg.lms.util;
 public interface RequestPage {
 	String AddBook = "AddBook";
 	String BookSearch = "BookSearch";
-	String DispBook = "DisplayBook";
+	String DisplayBook = "DisplayBook";
 	String Error = "Error";
 	String Issue = "Issue";
 	String LibrarianOperation = "LibrarianOperation";
@@ -19,4 +19,10 @@ public interface RequestPage {
 	String SignUp = "SignUp";
 	String StudentOperation = "StudentOperation";
 	String Success = "Success";
+	String IssueSuccess = "IssueSuccess";
+	String RequestSuccess = "RequestSuccess";
+	String ReturnSuccess = "ReturnSuccess";
+	String BookAddOrUpdatedSuccess = "BookAddedOrUpdatedSuccess";
+	String DeleteSuccess = "DeleteSuccess";
+
 }

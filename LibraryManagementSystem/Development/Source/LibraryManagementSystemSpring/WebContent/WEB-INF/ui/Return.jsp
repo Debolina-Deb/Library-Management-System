@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:include page="/WEB-INF/ui/fragments/loggedInHeader.jsp" />
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -11,36 +13,32 @@
 <link href="css/form.css" rel="stylesheet">
 </head>
 <body>
-	<h1 align="center">Welcome to Library Management System - Return
-		Issued Book</h1>
-	<hr>
-	<h4 align="right">Welcome ${userName}</h4>
-	<div id="form" align="center">
+	<div id="form" align="center" class="table-responsive"
+		style="width: 95%; margin-top: 100px; margin-bottom: 100px; margin-right: 100px; margin-left: 30px;">
 		<c:if test="${issuedRequests ne null}">
-			<table align="center">
-				<tr>
+			<table class="table table-bordered table-hover"
+				style="text-align: center">
+				<tr class="info">
 					<th>Registration Id</th>
 					<th>Book Id</th>
 					<th>User Id</th>
 					<th>Registration Date</th>
 					<th>Status
+					<th>Action
 				</tr>
-				<c:forEach items="${issuedRequests}" var="request">
-					<tr>
-						<td>${request.registrationId}</td>
-						<td>${request.bookId}</td>
-						<td>${request.userId}</td>
-						<td>${request.registrationDate}</td>
-						<td>${request.status}</td>
-						<td><a
-							href="return.htm?registrationId=${request.registrationId}">Return</a></td>
+				<c:forEach items="${issuedRequests}" var="req">
+					<tr class="success">
+						<td>${req.registrationId}</td>
+						<td>${req.bookId}</td>
+						<td>${req.userId}</td>
+						<td>${req.registrationDate}</td>
+						<td>${req.status}</td>
+						<td><a href="return.htm?registrationId=${req.registrationId}">Return</a></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</c:if>
 	</div>
-	<h4>
-		<a id="home" href="librarianHome.htm">Home</a> <a id="logout" href="">Logout</a>
-	</h4>
+	<jsp:include page="/WEB-INF/ui/fragments/footer.jsp" />
 </body>
 </html>

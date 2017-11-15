@@ -13,9 +13,6 @@
 <title>Success</title>
 </head>
 <body>
-	<div id="form">
-		<h3></h3>
-	</div>
 	<div class="container">
 		<div class="row" style="margin-top: 60px">
 			<div
@@ -23,8 +20,7 @@
 				<form:form role="form">
 					<fieldset>
 						<h2>REGISTRATION SUCCESSFUL</h2>
-						<br>
-						<h3>${message}</h3>
+						<h3>${message }</h3>
 						<hr class="colorgraph">
 						<div class="row">
 							<div class="col-xs-6 col-sm-6 col-md-6">
@@ -41,5 +37,7 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/ui/fragments/footer.jsp" />
+
 </body>
 </html>

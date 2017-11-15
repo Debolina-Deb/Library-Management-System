@@ -56,6 +56,7 @@ public class LibrarianController {
 			HttpSession session = request.getSession();
 			session.setAttribute("userName", userName);
 			if (status == 0) {
+				session.setAttribute("status", 0);
 				return RequestPage.StudentOperation;
 			}
 			return RequestPage.LibrarianOperation;
@@ -72,7 +73,7 @@ public class LibrarianController {
 	 *            Model object used to send attributes
 	 * @return
 	 */
-	@RequestMapping("signUp.htm")
+	@RequestMapping("/signUp.htm")
 	public String newUser(Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("librarian", Constants.isLibrarianList);
@@ -126,7 +127,7 @@ public class LibrarianController {
 			model.addAttribute(Constants.message, e.getMessage());
 			return RequestPage.Error;
 		}
-		return RequestPage.DispBook;
+		return RequestPage.DisplayBook;
 	}
 
 	/**
@@ -148,7 +149,7 @@ public class LibrarianController {
 			model.addAttribute(Constants.message, e.getMessage());
 			return RequestPage.Error;
 		}
-		return RequestPage.LibrarianOperation;
+		return RequestPage.DeleteSuccess;
 	}
 
 	/**
@@ -208,7 +209,7 @@ public class LibrarianController {
 			book = librarianService.insertBook(book);
 			model.addAttribute(Constants.message,
 					Constants.bookUpdated + book.getBookId());
-			return RequestPage.Success;
+			return RequestPage.BookAddOrUpdatedSuccess;
 		} catch (Exception e) {
 			model.addAttribute(Constants.message, e.getMessage());
 			return RequestPage.Error;
@@ -269,7 +270,7 @@ public class LibrarianController {
 			librarianService.issueBook(registrationId);
 			model.addAttribute(Constants.message, Constants.bookIssuedMessage
 					+ registrationId);
-			return RequestPage.Success;
+			return RequestPage.IssueSuccess;
 		} catch (Exception e) {
 			model.addAttribute(Constants.message, e.getMessage());
 			return RequestPage.Error;
@@ -294,7 +295,7 @@ public class LibrarianController {
 				model.addAttribute(Constants.message,
 						Constants.bookReturnedMessage + fine);
 			}
-			return RequestPage.Success;
+			return RequestPage.ReturnSuccess;
 		} catch (Exception e) {
 			model.addAttribute(Constants.message, e.getMessage());
 			return RequestPage.Error;
@@ -313,7 +314,8 @@ public class LibrarianController {
 
 	@RequestMapping("/logout.htm")
 	public String logout(Model model, HttpServletRequest request) {
-		request.getSession().invalidate();
+		HttpSession session=request.getSession(false);
+		session.invalidate();
 		return "../../index";
 	}
 
