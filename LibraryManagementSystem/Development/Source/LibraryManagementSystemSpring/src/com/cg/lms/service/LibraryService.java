@@ -1,0 +1,166 @@
+package com.cg.lms.service;
+
+import java.util.List;
+
+import com.cg.lms.entities.BookInventory;
+import com.cg.lms.entities.BookRegistration;
+import com.cg.lms.entities.User;
+/************************************************************************************
+ * File Name: LibraryService 
+ * Package Name: com.cg.lms.service
+ * Description: Interface of Service Layer which interacts
+ *  with the Librarian and Student Controller
+ * Version: 1.0 Restrictions: N/A
+ * @author   
+ * Date: 14/11/2017
+ ***********************************************************************************/
+public interface LibraryService {
+	
+	/**
+	 * Gets book by Book Id
+	 * 
+	 * @param bookId
+	 *            - Book Id used to find Book
+	 * @return book - BookInventory object used to manipulate further
+	 */
+	BookInventory getBookById(String bookId) throws Exception;
+
+	/**
+	 * Gets all books in BookInventory
+	 * 
+	 * @return books - Books in Book Inventory
+	 */
+	List<BookInventory> getAllBooks() throws Exception;
+	
+	/**
+	 * Gets all requests in BookRegistration
+	 * 
+	 * @return requests - All requests from Book Registration
+	 */
+	List<BookRegistration> getAllRequests() throws Exception;
+	
+	/**
+	 * Gets user details
+	 * 
+	 * @return user - User object contains user details
+	 * @throws Exception
+	 */
+	User getUserDetails() throws Exception;
+
+	/**
+	 * Deletes book by book Id
+	 * 
+	 * Takes book id from user and delete the book from BookInventory
+	 * 
+	 * @param bookId
+	 *            - Id which will be used to delete Book
+	 * @return
+	 * @throws Exception
+	 */
+	BookInventory deleteBookById(String bookId) throws Exception;
+
+	/**
+	 * Inserts Book into BookInventory
+	 * 
+	 * Takes book details from user and persist it into BookInventory
+	 * 
+	 * @param book
+	 *            - BookInventory object contains Book Details
+	 * @throws Exception
+	 */
+	BookInventory insertBook(BookInventory book) throws Exception;
+
+	/**
+	 * Validates User
+	 * 
+	 * Validation of User with the userName and password given as input from the
+	 * User table
+	 * 
+	 * @param userName
+	 * @param password
+	 * @throws Exception
+	 */
+	int validateUser(String userName, String password) throws Exception;
+
+	/**
+	 * Requests book from librarian
+	 * 
+	 * Book requests details are persisted in Book Registration table
+	 * 
+	 * @param bookRequest
+	 *            - Book Request details for book requested by Student
+	 * @return
+	 * @throws Exception
+	 */
+	BookRegistration requestBook(BookRegistration bookRequest) throws Exception;
+
+	/**
+	 * Retrieves transaction details after returning book
+	 * 
+	 * @param inputRegistrationId
+	 *            - Registration id used to get transaction details
+	 * @return
+	 * @throws Exception
+	 */
+	int returnBook(int registrationId) throws Exception;
+
+	/**
+	 * Inserts transaction details while book is issued
+	 * 
+	 * @param bookTransaction - BookTransaction object contains Transaction details 
+	 * @throws Exception
+	 */
+	void issueBook(int registrationId) throws Exception;
+
+	/**
+	 * Adds user to User table
+	 * 
+	 * User's data are persisted in User table
+	 * 
+	 * @param user
+	 *            - User object to persist in database
+	 * @return user - User object returned for further manipulation
+	 * @throws Exception
+	 */
+	User addUser(User user) throws Exception;
+
+	/**
+	 * Gets requests by status
+	 * 
+	 * Status given as input is the state of the transaction which can be
+	 * pending or issued and w.r.t status the list of requests are retrieved
+	 * 
+	 * @param status
+	 *            - State of transaction i.e. pending or issued
+	 * @return requests - List of requests according to status
+	 * @throws Exception
+	 */
+	List<BookRegistration> getRequestByStatus(String status) throws Exception;
+
+	/**
+	 * Search book by author name
+	 * 
+	 * Author name is taken as input and the given query matches the authorName
+	 * with the author present in BookInventory table and returns all book with
+	 * that keyword
+	 * 
+	 * @param authorName
+	 *            - Author name used to compare with the table column author
+	 * @return books - List of books with the given author name
+	 * @throws Exception
+	 */
+	List<BookInventory> searchBookByAuthor(String authorName) throws Exception;
+
+	/**
+	 * Search book by Book Name
+	 * 
+	 * Book Name is given as input and the query matched the given name with the
+	 * book name from the BookInventory table from database
+	 * 
+	 * @param bookName
+	 *            - name of book to be searched
+	 * @return books - all books with the given keyword as bookName
+	 * @throws Exception
+	 */
+	List<BookInventory> searchBookByName(String bookName) throws Exception;
+}

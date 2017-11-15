@@ -1,1 +1,9 @@
 1510547133913	Move compilation unit
+1510730995463	Delete element
+1510731198213	Rename package 'com.cg.library.controller'
+1510731206566	Delete element
+1510731220557	Rename package 'com.cg.library.dao'
+1510731246454	Rename package 'com.cg.library.util'
+1510731258758	Rename package 'com.cg.library.tests'
+1510731268656	Rename package 'com.cg.library.service'
+1510731278975	Rename package 'com.cg.library.entities'

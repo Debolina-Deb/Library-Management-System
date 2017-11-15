@@ -1,0 +1,98 @@
+package com.cg.lms.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name="users")
+public class User {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="user_id")
+	@NotNull(message="User Id is Mandatory")
+	private int userId;
+	@Column(name="user_name")
+	@NotNull(message="User Name is Mandatory")
+	@Pattern(regexp="[a-zA-Z]{5,10}",message="User Name maximum length can be of 10 characters")
+	private String userName;
+	@Column(name="password")
+	@NotNull(message="Password is Mandatory")
+	@Size(min=4,max=8,message="Minimum 5 and Maximum 8 characters required")
+	private String password;	
+	@Column(name="repeat_password")
+	private String repeatPassword;
+	@Column(name="email_id")
+	@NotNull(message="Email Id  is Mandatory")
+	@Pattern(regexp="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,6}$",message="Please enter valid Email ID (abc@xyz.com)")
+	private String emailId;
+	@Column(name="librarian")
+	private String librarian;
+	
+	public int getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getEmailId() {
+		return emailId;
+	}
+	
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	
+	public String isLibrarian() {
+		return librarian;
+	}
+	
+	public void setLibrarian(String librarian) {
+		this.librarian = librarian;
+	}
+	
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
+	}
+
+	public String getLibrarian(){
+		return librarian;
+	}
+	
+	@Override
+	public String toString() {
+		return "Users [userId=" + userId + ", userName=" + userName
+				+ ", password=" + password + ", emailId=" + emailId
+				+ ", librarian=" + librarian + "]";
+	}
+	
+}
