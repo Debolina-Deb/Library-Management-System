@@ -15,6 +15,8 @@
 <body>
 	<div id="form" align="center" class="table-responsive"
 		style="width: 95%; margin-top: 100px; margin-bottom: 100px; margin-right: 100px; margin-left: 30px;">
+		<h2 style="color: grey;" align="center">ISSUED BOOKS</h2>
+		<hr class="colorgraph">
 		<c:if test="${issuedRequests ne null}">
 			<table class="table table-bordered table-hover"
 				style="text-align: center">
