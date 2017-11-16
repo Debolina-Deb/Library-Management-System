@@ -37,7 +37,7 @@ public class LibraryServiceImpl implements LibraryService {
 	 * @return book - BookInventory object used to manipulate further
 	 */
 	@Override
-	public BookInventory getBookById(String bookId) throws Exception {
+	public BookInventory getBookById(String bookId)  {
 		return dao.getBookById(bookId);
 	}
 

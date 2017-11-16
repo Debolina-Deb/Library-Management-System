@@ -22,12 +22,9 @@ import com.cg.lms.util.Constants;
 import com.cg.lms.util.RequestPage;
 
 /***********************************************************************************
- * File Name: LibrarianController 
- * Package Name: com.cg.lms.controller
+ * File Name: LibrarianController Package Name: com.cg.lms.controller
  * Description: Librarian controller controls the functionalities of librarian
- * Version: 1.0 
- * Restrictions: N/A 
- * Date: 14/11/2017
+ * Version: 1.0 Restrictions: N/A Date: 14/11/2017
  * 
  * @author - parpatid
  ***********************************************************************************/
@@ -291,10 +288,8 @@ public class LibrarianController {
 			@RequestParam("registrationId") int registrationId) {
 		try {
 			int fine = librarianService.returnBook(registrationId);
-			if (fine != -1) {
-				model.addAttribute(Constants.message,
-						Constants.bookReturnedMessage + fine);
-			}
+			model.addAttribute(Constants.message, Constants.bookReturnedMessage
+					+ fine);
 			return RequestPage.ReturnSuccess;
 		} catch (Exception e) {
 			model.addAttribute(Constants.message, e.getMessage());
@@ -314,7 +309,7 @@ public class LibrarianController {
 
 	@RequestMapping("/logout.htm")
 	public String logout(Model model, HttpServletRequest request) {
-		HttpSession session=request.getSession(false);
+		HttpSession session = request.getSession(false);
 		session.invalidate();
 		return "../../index";
 	}

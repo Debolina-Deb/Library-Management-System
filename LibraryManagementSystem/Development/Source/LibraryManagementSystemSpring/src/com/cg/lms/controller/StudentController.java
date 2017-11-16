@@ -114,7 +114,7 @@ public class StudentController {
 	}
 
 	/**
-	 * Method used to redirect page to searchBook
+	 * Redirects to searchBook page
 	 * 
 	 * @return
 	 */
@@ -140,7 +140,6 @@ public class StudentController {
 			List<BookInventory> books = studentService
 					.searchBookByName(bookName);
 			model.addAttribute("books", books);
-			System.out.println(books);
 			return RequestPage.BookSearch;
 		} catch (Exception e) {
 			model.addAttribute(Constants.message, e.getMessage());
@@ -149,7 +148,7 @@ public class StudentController {
 	}
 
 	/**
-	 * Method used to redirect to Student operation page
+	 * Redirects to Student operation page
 	 * 
 	 * @return
 	 */
