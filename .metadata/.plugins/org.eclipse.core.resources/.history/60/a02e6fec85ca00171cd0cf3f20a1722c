@@ -17,7 +17,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>LMSServlet</servlet-name>
+		<servlet-name>EMSServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -26,7 +26,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>LMSServlet</servlet-name>
+		<servlet-name>EMSServlet</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
 </web-app>

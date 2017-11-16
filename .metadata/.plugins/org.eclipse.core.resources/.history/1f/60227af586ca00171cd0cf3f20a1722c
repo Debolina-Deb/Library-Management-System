@@ -114,7 +114,7 @@ public class StudentController {
 	}
 
 	/**
-	 * Redirects to searchBook page
+	 * Method used to redirect page to searchBook
 	 * 
 	 * @return
 	 */
@@ -148,7 +148,7 @@ public class StudentController {
 	}
 
 	/**
-	 * Redirects to Student operation page
+	 * Method used to redirect to Student operation page
 	 * 
 	 * @return
 	 */

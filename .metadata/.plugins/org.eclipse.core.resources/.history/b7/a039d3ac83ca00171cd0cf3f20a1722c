@@ -26,17 +26,13 @@ import com.cg.lms.entities.User;
 import com.cg.lms.service.LibraryService;
 import com.cg.lms.service.LibraryServiceImpl;
 import com.cg.lms.util.Constants;
-/**
- * Test class for Service Layer
- * 
- * @author 
- *
- */
+
 @RunWith(MockitoJUnitRunner.class)
 public class LibraryServiceImplTest {
 
 	@Mock
 	private LibraryDao libraryDao;
+
 	@InjectMocks
 	private LibraryService libraryServiceImpl = new LibraryServiceImpl();
 
@@ -47,9 +43,6 @@ public class LibraryServiceImplTest {
 
 	/**
 	 * Tests the getBookById method
-	 * 
-	 * getBookById method returns the Book Inventory object after 
-	 * searching in the BookInventory Table. 
 	 * 
 	 * @throws Exception
 	 */
@@ -64,13 +57,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).getBookById(bookId);
 	}
 
-	/**
-	 * Tests the getAllBooks method
-	 * 
-	 * getAllBooks method returns list of books from BookInventory table 
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testGetAllBooks() throws Exception {
 		List<BookInventory> bookInventories = this.getBookInventories();
@@ -80,14 +66,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).getAllBooks();
 	}
 
-	/**
-	 * Tests validateUser method
-	 * 
-	 * validateUser method takes userName and password as input and checks 
-	 * whether the user exists and is it librarian or student
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testValidateUser() throws Exception {
 		User users = new User();
@@ -101,14 +79,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).validateUser(userName, password);
 	}
 
-	/**
-	 * Tests insertBook method 
-	 * 
-	 * insertBook method takes BookInventory object as input 
-	 * and persist it in BookInventory table
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testInsertBook() throws Exception {
 		BookInventory bookInventory = new BookInventory();
@@ -119,16 +89,7 @@ public class LibraryServiceImplTest {
 				libraryServiceImpl.insertBook(bookInventory));
 		verify(libraryDao).insertBook(bookInventory);
 	}
-	
-	/**
-	 * Tests deleteBookById method
-	 * 
-	 * deleteBookById method takes BookInventory object as input and 
-	 * find the book from bookId in BookInventory table and remove it 
-	 * if it exists
-	 * 
-	 * @throws Exception
-	 */
+
 	@Test
 	public void testDeleteBookById() throws Exception {
 		BookInventory bookInventory = new BookInventory();
@@ -139,11 +100,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).deleteBookById(bookId);
 	}
 
-	/**
-	 * Tests getUserDetails method 
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testGetUserDetails() throws Exception {
 		User users = new User();
@@ -157,14 +113,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).getUserDetails();
 	}
 
-	/**
-	 * Tests requestBook method 
-	 * 
-	 * requestBook method takes BookRegistration object as input
-	 * persist the request made by user 
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testRequestBook() throws Exception {
 		BookRegistration bookRegistration = new BookRegistration();
@@ -186,14 +134,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).getBookById(Mockito.anyString());
 	}
 
-	/**
-	 * Tests returnBook method 
-	 * 
-	 * returnBook method takes BookRegistration object as input and 
-	 * insert the transaction for returning the book
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testReturnBook() throws Exception {
 		BookTransaction bookTransaction = new BookTransaction();
@@ -212,14 +152,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).updateBookRegistration(bookRegistration);
 	}
 
-	/**
-	 * Tests issueBook method 
-	 * 
-	 * testBook method takes BookRegistration object and insert transaction 
-	 * with the status issued in registration table
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testIssueBook() throws Exception {
 		BookRegistration bookRegistration = new BookRegistration();
@@ -236,14 +168,6 @@ public class LibraryServiceImplTest {
 				bookRegistration);
 	}
 
-	/**
-	 * Tests getAllRequests method
-	 * 
-	 * getAllRequests method retrieves all the request from BookRegistration 
-	 * table
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testGetAllRequest() throws Exception {
 		List<BookRegistration> bookRegistrations = new ArrayList<BookRegistration>();
@@ -258,14 +182,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).getAllRequests();
 	}
 
-	/**
-	 * Tests addUser method 
-	 * 
-	 *  addUser method takes User details as input and persists it into
-	 *  Users table
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testAddUser() throws Exception {
 		User users = new User();
@@ -279,14 +195,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).addUser(users);
 	}
 
-	/**
-	 * Tests getRequestByStatus method
-	 * 
-	 * getRequestByStatus method takes transaction status i.e issued or pending 
-	 * and according return the BookRegistration object
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testGetRequestByStatus() throws Exception {
 		List<BookRegistration> bookRegistrations = new ArrayList<BookRegistration>();
@@ -305,14 +213,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).getRequestByStatus(Mockito.anyString());
 	}
 
-	/**
-	 * Tests searchBookByAuthor method 
-	 * 
-	 * searchBookByAuthor method takes authorName as input and search for 
-	 * author name in BookInventory table and returns the BookList 
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testSearchBookByAuthor() throws Exception {
 		List<BookInventory> bookInventories = this.getBookInventories();
@@ -323,14 +223,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).searchBookByAuthor(Mockito.anyString());
 	}
 
-	/**
-	 * Test searchBookByName method
-	 * 
-	 * searchBookByName method takes bookName as input and return the 
-	 * Book list of books whose name include the given bookName
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testSearchBookByName() throws Exception {
 		List<BookInventory> bookInventories = this.getBookInventories();
@@ -341,13 +233,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).searchBookByName(Mockito.anyString());
 	}
 
-	/**
-	 * Gets list of books from BookInventory
-	 * 
-	 * 
-	 * 
-	 * @return
-	 */
 	private List<BookInventory> getBookInventories() {
 		List<BookInventory> bookInventories = new ArrayList<BookInventory>();
 		BookInventory book1 = new BookInventory();

@@ -26,17 +26,13 @@ import com.cg.lms.entities.User;
 import com.cg.lms.service.LibraryService;
 import com.cg.lms.service.LibraryServiceImpl;
 import com.cg.lms.util.Constants;
-/**
- * Test class for Service Layer
- * 
- * @author 
- *
- */
+
 @RunWith(MockitoJUnitRunner.class)
 public class LibraryServiceImplTest {
 
 	@Mock
 	private LibraryDao libraryDao;
+
 	@InjectMocks
 	private LibraryService libraryServiceImpl = new LibraryServiceImpl();
 
@@ -305,14 +301,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).getRequestByStatus(Mockito.anyString());
 	}
 
-	/**
-	 * Tests searchBookByAuthor method 
-	 * 
-	 * searchBookByAuthor method takes authorName as input and search for 
-	 * author name in BookInventory table and returns the BookList 
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testSearchBookByAuthor() throws Exception {
 		List<BookInventory> bookInventories = this.getBookInventories();
@@ -323,14 +311,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).searchBookByAuthor(Mockito.anyString());
 	}
 
-	/**
-	 * Test searchBookByName method
-	 * 
-	 * searchBookByName method takes bookName as input and return the 
-	 * Book list of books whose name include the given bookName
-	 * 
-	 * @throws Exception
-	 */
 	@Test
 	public void testSearchBookByName() throws Exception {
 		List<BookInventory> bookInventories = this.getBookInventories();
@@ -341,13 +321,6 @@ public class LibraryServiceImplTest {
 		verify(libraryDao).searchBookByName(Mockito.anyString());
 	}
 
-	/**
-	 * Gets list of books from BookInventory
-	 * 
-	 * 
-	 * 
-	 * @return
-	 */
 	private List<BookInventory> getBookInventories() {
 		List<BookInventory> bookInventories = new ArrayList<BookInventory>();
 		BookInventory book1 = new BookInventory();
