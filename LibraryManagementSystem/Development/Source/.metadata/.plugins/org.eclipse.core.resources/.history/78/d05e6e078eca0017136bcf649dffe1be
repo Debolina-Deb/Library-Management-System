@@ -13,10 +13,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "booksTransaction")
 public class BookTransaction implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4303302848696159257L;
 	@Id
 	@Column(name="transaction_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)

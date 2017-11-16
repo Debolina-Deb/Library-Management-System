@@ -26,14 +26,12 @@ import com.cg.lms.entities.User;
 import com.cg.lms.service.LibraryService;
 import com.cg.lms.service.LibraryServiceImpl;
 import com.cg.lms.util.Constants;
-/************************************************************************************
- * File Name: LibraryServiceImplTest 
- * Package Name: com.cg.lms.tests
- * Description: Test the method of Service layer
- * Version: 1.0 Restrictions: N/A
- * @author   
- * Date: 14/11/2017
- ***********************************************************************************/
+/**
+ * Test class for Service Layer
+ * 
+ * @author 
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class LibraryServiceImplTest {
 

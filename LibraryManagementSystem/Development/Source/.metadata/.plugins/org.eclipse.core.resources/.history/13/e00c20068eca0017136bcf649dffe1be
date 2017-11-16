@@ -1,7 +1,7 @@
 package com.cg.lms.entities;
 
-import java.io.Serializable;
 import java.sql.Date;
+import java.util.Comparator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "booksTransaction")
-public class BookTransaction implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4303302848696159257L;
+public class BookTransaction implements Comparator<BookTransaction>{
 	@Id
 	@Column(name="transaction_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -80,6 +76,14 @@ public class BookTransaction implements Serializable{
 				+ issueDate + ", returnDate=" + returnDate + ", fine=" + fine
 				+ "]";
 	}
+
+	@Override
+	public int compare(BookTransaction o1, BookTransaction o2) {
+		if(o1.getTransactionId() == o2.getTransactionId())
+			return 1;
+		return 0;
+	}
+	
 }
 
 

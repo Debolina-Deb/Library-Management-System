@@ -1,6 +1,7 @@
 package com.cg.lms.entities;
 
 
+import java.awt.SecondaryLoop;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -18,10 +19,6 @@ import javax.persistence.Table;
 @NamedQueries(@NamedQuery(name = "getAllRequests", query = "SELECT request FROM BookRegistration request"))
 public class BookRegistration implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7129120020697642205L;
 	@Id
 	@Column(name="registration_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)

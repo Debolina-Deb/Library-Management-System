@@ -19,10 +19,6 @@ import com.sun.istack.internal.NotNull;
 @NamedQueries(@NamedQuery(name = "getAllBooks", query = "SELECT bookInventory FROM BookInventory bookInventory"))
 public class BookInventory implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1629892883246063273L;
 	@Id
 	@NotEmpty
 	@Column(name = "book_id")

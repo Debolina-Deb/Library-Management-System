@@ -1,7 +1,6 @@
 package com.cg.lms.entities;
 
 
-import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -16,12 +15,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="booksRegistration")
 @NamedQueries(@NamedQuery(name = "getAllRequests", query = "SELECT request FROM BookRegistration request"))
-public class BookRegistration implements Serializable {
+public class BookRegistration {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7129120020697642205L;
 	@Id
 	@Column(name="registration_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)

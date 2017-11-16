@@ -16,10 +16,6 @@ import javax.validation.constraints.Size;
 @Table(name="users")
 public class User implements Serializable {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6579658450674999262L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")
